@@ -1,0 +1,57 @@
+Acetylation Damage Sequencing Analysis
+
+## Section 1: Resource Preparation
+- **Reference Genome Acquisition**
+  - Downloaded Drosophila melanogaster genome (version BDGP6) and human genome (version GRCh38) from Ensembl.
+
+- **Reference Genome Indexing**
+  - Built Bowtie2 indexes for both Drosophila (BDGP6) and human (GRCh38) genomes using `bowtie2-build`.
+  - Created BLAST nucleotide databases from both genomes using `makeblastdb`.
+
+## Section 2: Quality Control and Preprocessing
+- **FASTQ Quality Check**
+  - Used FastQC to assess the quality of raw sequencing reads.
+  - Identified minor adapter contamination and quality issues.
+
+- **Adapter Trimming and Quality Filtering**
+  - Trimmed adapters and filtered low-quality reads with Trim Galore.
+  - Generated trimmed FASTQ files for subsequent analyses.
+
+## Section 3: Preliminary Alignment
+- **Bowtie2 Alignment to Drosophila Genome**
+  - Attempted initial alignment of trimmed reads to the Drosophila genome using Bowtie2.
+  - Observed extremely low alignment rates (<1.3%).
+
+- **Bowtie2 Alignment to Alternative Drosophila Genome**
+  - Repeated alignment with an alternative Drosophila genome (Ensembl).
+  - Low alignment rates persisted, indicating an underlying issue beyond genome version.
+
+## Section 4: Diagnostic BLAST Analysis
+- **Subset FASTA Generation**
+  - Sampled subsets (100-1000 reads) from FASTQ files using `seqtk`.
+  - Converted sampled subsets into FASTA format for BLAST querying.
+
+- **BLAST Queries against Human and Drosophila Genomes**
+  - Queried subset FASTA files against human and Drosophila BLAST databases.
+  - Evaluated alignment rates, total hits, average % identity, and mismatches.
+  - Identified substantial alignment to the human genome (2.8%-70.3%) and negligible alignment to Drosophila (<1%).
+
+## Section 5: Comprehensive Alignment to Confirm Findings
+- **Bowtie2 Alignment to Human Genome**
+  - Conducted full-read alignment of all trimmed FASTQ files to the human genome using Bowtie2.
+  - High alignment rates observed (up to ~63.86%), with substantial numbers of properly paired reads.
+
+- **Bowtie2 Alignment to Drosophila Genome**
+  - Performed final verification alignment to Drosophila genome for comparison.
+  - Confirmed extremely low alignment rates (<1.27%) with minimal properly paired reads.
+
+## Section 6: Summarizing and Visualization of Results
+- **Alignment Metrics Compilation**
+  - Collected and summarized metrics: QC-passed reads, percentage of reads mapped (Bowtie2), BLAST alignment rates, total hits, and average % identity.
+  - Visualized metrics using comparative graphs to illustrate discrepancies clearly between human and Drosophila alignments.
+
+## Section 7: Interpretation of Results
+- **Identification of Contamination Issue**
+  - Interpreted the results clearly indicating significant human DNA contamination or potential mislabeling of samples.
+  - Considered potential reasons: sample contamination, sample mislabeling, sequencing facility handling issues, or reagent contamination.
+
