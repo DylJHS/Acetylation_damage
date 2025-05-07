@@ -1,8 +1,12 @@
 data/
 figures/
 results/
+logs/
+references/
+info/
 
-
+# Ignore files
+.gitignore
 
 # Ignore image files
 *.png
