@@ -1,7 +1,13 @@
 data/
 figures/
 results/
+logs/
 
+
+#ignore other files
+.ignore
+*.err
+*.out
 
 
 # Ignore image files

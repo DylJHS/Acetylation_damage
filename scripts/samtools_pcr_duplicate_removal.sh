@@ -10,9 +10,9 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load Conda environment
-export PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin:$PATH"
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
+eval "$(/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin/conda shell.bash hook)"
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
+
 
 # Define base name and output directory
 BASE="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/SCC-bulkChIC-UMC-JAN-003"
