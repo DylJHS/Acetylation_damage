@@ -43,4 +43,4 @@ for file in ${RESULTS_DIR}/*.bam; do
     fi
 done
 
-echo "Alignment stats saved to: $OUTPUT_FILE"
+echo "Alignment stats saved to: $OUTPUT_FILE"7

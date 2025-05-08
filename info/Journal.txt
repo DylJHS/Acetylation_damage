@@ -26,4 +26,5 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 08/05/25:
 - Ran the script 
 - Debugged the script (mainly conda env issues)
--
+- Got the resulting de-duplicated files but issue with the looping
+- modified script to only loop over the original JAN-00?.bam files
