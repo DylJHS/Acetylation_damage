@@ -1,6 +1,0 @@
-
-The chromatin states of ISC cells in young drosophila have been mapped to the genome. The researcher that i am working with would like to evaluate the expression of the genes at the different chromatin state locations in 7 young, 3 midage, 3 old and 3 very old individuals and compare the young condition to each of the others. Only looking at the number of genes that are over or under-expressed between conditions.  
-
-I have the following things: 
-- ISC_chromatin_states.updt.bed (the chromatin state bed file with their regions in the genome) 
-- the expression tsv files for the 16 samples 

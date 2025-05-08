@@ -1,3 +1,4 @@
+Prior:
 - Collected sample folders containing raw FASTQ files for analysis.
 - Assessed sequence quality using FastQC, revealing manageable overall quality, though slight trimming was required due to minor quality issues identified.
 - Trimmed adapter sequences and low-quality reads using Trim Galore, resulting in improved overall read quality.
@@ -14,3 +15,16 @@
 
 Summary Interpretation:
 The data strongly indicates contamination of the Drosophila sequencing samples with human genomic material, explaining the initially poor alignment rates to the Drosophila reference genome. High human alignment percentages, with substantial average identity scores (~89%-98%) and lower mismatch rates, confirm human DNA as the predominant component in the sequencing data. 
+
+07/05/25:
+- Validating the experiment was not run on the human (mostly) samples
+- Need to assess the level of acetylation across the samples
+- Using the bam files that were generated during the initial analysis 
+- removing the duplicates from the files using markdup in Samtools
+- "samtools_pcr_duplicate_removal_loop.sh" is the hpc script which loops over the bam fiels and performs the removal
+
+08/05/25:
+- Ran the script 
+- Debugged the script (mainly conda env issues)
+- Got the resulting de-duplicated files but issue with the looping
+- modified script to only loop over the original JAN-00?.bam files
