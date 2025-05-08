@@ -9,17 +9,14 @@
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
-set -euo pipefail
-
 # Load Conda environment
-eval "$(/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin/conda shell.bash hook)"
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 
 # Define the paths
 DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments"
 
 # Loop over the BAM files in the directory
-for INPUT_BAM in "$DIR"/*.bam; do
+for INPUT_BAM in "$DIR"/*JAN-00?.bam; do
     if [[ -f "$INPUT_BAM" ]]; then
         echo "Processing: $INPUT_BAM"
 
