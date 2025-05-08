@@ -15,8 +15,8 @@ conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 
 # Define the paths
 DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments"
-INPUT_DIR="${DIR}/orig"
-OUTPUT_FILE="${DIR}/bam_flagstats.txt"
+INPUT_DIR="${DIR}/dedup"
+OUTPUT_FILE="${DIR}/dedup2_flagstats.txt"
 
 
 # Loop through BAM files and save stats
