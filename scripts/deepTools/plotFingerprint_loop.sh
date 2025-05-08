@@ -18,12 +18,21 @@ DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/res
 OUTPUT_DIR="${DIR}/fingerprints"
 mkdir -p "$OUTPUT_DIR"
 
+# Loop over the BAM files in the directory
+for INPUT_BAM in "$DIR"/dedup/*JAN-00?_dedup.bam; do
+    if [[ -f "$INPUT_BAM" ]]; then
+        echo "Processing: $INPUT_BAM"
 
-OUTPUT_PNG="${DIR}/fingerprints/fingerprint.png"
+        BASE=$(basename "$INPUT_BAM" .bam)
 
-echo "Generating fingerprint plot..."
-plotFingerprint -b /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/*.bam \
-    --labels "control" "control" "H3K9ac" "H3K9ac" "H3K9ac" \
-    --minMappingQuality 30 \
-    --outRawCounts "${DIR}/fingerprints/out_fingerprint.txt" \
-    --plotFile "$OUTPUT_PNG" 
+        OUTPUT_PNG="${DIR}/fingerprints/${BASE}_fingerprint.png"
+
+        echo "Generating fingerprint plot..."
+        plotFingerprint -b "$INPUT_BAM" \
+            --labels "H3K9ac" \
+            --minMappingQuality 30 \
+            --outRawCounts "${DIR}/fingerprints/${BASE}_fingerprint.txt" \
+            --plotFile "$OUTPUT_PNG" \
+            --plotTitle "Fingerprint for $BASE" 
+    fi
+done
