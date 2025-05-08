@@ -1,0 +1,65 @@
+## Extended Acetylation Damage Analysis Protocol (Human Data)
+
+### STEP 1: Preparation and Alignment to Human Genome (GRCh38)
+
+1. Obtain Reference Genome and Index
+	- Download the human genome version GRCh38 from a reliable database such as Ensembl.
+	- Create an index for this genome suitable for read alignment.
+
+2. Align Reads to Human Genome  
+	- Align the quality-controlled sequencing reads to the human reference genome using a sensitive alignment strategy optimized for accuracy.
+
+3. Convert and Sort Alignments
+	- Convert alignment results into a suitable format for downstream analyses, then sort and index these results for efficient access.
+
+4. Deduplication of Reads
+	- Remove duplicate reads to ensure accurate assessment of genuine genomic signals, and re-index the deduplicated alignment files.
+
+5. Perform Basic Quality Checks  
+	- Run standard checks to assess the quality of the alignment and obtain metrics such as overall alignment rate and insert size distributions.
+
+6. Generate Coverage Tracks  
+	- Produce genome-wide coverage tracks normalized to allow comparisons across samples, facilitating visualization and comparison of read distributions.
+
+7. Peak Identification  
+	- Identify regions of significant enrichment (peaks) of acetylation signals, adjusting parameters to detect broad peak patterns typical of acetylation marks.
+
+
+### STEP 2: Quality Assurance of Replicates
+
+1. Consistency Checks Across Replicates  
+	- Use clustering or principal component analyses (PCA) to ensure samples labeled as controls and damaged treatments cluster according to expectations.
+	- Identify potential sample labeling issues or unexpected variability.
+
+
+### STEP 3: Differential Analysis of Acetylation Signals
+
+1. Create a Consensus Peak Set  
+	- Generate a combined set of peaks detected across all samples to define a unified set of genomic regions for comparison.
+
+2. Quantify Reads per Region  
+	- Count the number of reads aligning to each consensus region across all samples to prepare data for differential analysis.
+
+3. Perform Differential Acetylation Analysis  
+	- Analyze the read counts statistically to identify genomic regions showing significant differences in acetylation between damaged and control groups.
+
+
+### STEP 4: Targeted Examination of Integration Site
+
+1. Investigate Specific Region  
+	- Specifically examine the genomic region on chromosome 2L around position 22,245,311, the identified site of interest.
+	- Identify differential peaks near or overlapping this locus to determine the impact of damage on acetylation.
+
+2. Visualize Acetylation Patterns  
+	- Generate clear visualizations comparing acetylation coverage between control and damaged samples at and near the integration site.
+
+3. Interpret Results  
+	- Clearly assess whether there is an increase in acetylation marks at the integration site in the damaged samples and document the extent and boundaries of enrichment.
+
+
+### STEP 5: Reporting and Documentation
+
+  Summarize all analysis steps clearly, including quality control, alignment statistics, consistency checks, and differential analyses.
+  Provide clear visual summaries and documentation.
+  Discuss the implications regarding sample integrity, potential mislabeling, and contamination, based on the differential acetylation patterns observed.
+
