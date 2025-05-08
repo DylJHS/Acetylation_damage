@@ -1,0 +1,114 @@
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-003.bam:
+765765 + 0 in total (QC-passed reads + QC-failed reads)
+765765 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+378018 + 0 mapped (49.36% : N/A)
+378018 + 0 primary mapped (49.36% : N/A)
+765765 + 0 paired in sequencing
+382883 + 0 read1
+382882 + 0 read2
+350527 + 0 properly paired (45.77% : N/A)
+364101 + 0 with itself and mate mapped
+13917 + 0 singletons (1.82% : N/A)
+2908 + 0 with mate mapped to a different chr
+1026 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-004.bam:
+0 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+0 + 0 mapped (N/A : N/A)
+0 + 0 primary mapped (N/A : N/A)
+0 + 0 paired in sequencing
+0 + 0 read1
+0 + 0 read2
+0 + 0 properly paired (N/A : N/A)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (N/A : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-005.bam:
+16488054 + 0 in total (QC-passed reads + QC-failed reads)
+16488054 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+10408317 + 0 mapped (63.13% : N/A)
+10408317 + 0 primary mapped (63.13% : N/A)
+16488054 + 0 paired in sequencing
+8244027 + 0 read1
+8244027 + 0 read2
+9686420 + 0 properly paired (58.75% : N/A)
+10100872 + 0 with itself and mate mapped
+307445 + 0 singletons (1.86% : N/A)
+64980 + 0 with mate mapped to a different chr
+22624 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-006.bam:
+17619952 + 0 in total (QC-passed reads + QC-failed reads)
+17619952 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+11252714 + 0 mapped (63.86% : N/A)
+11252714 + 0 primary mapped (63.86% : N/A)
+17619952 + 0 paired in sequencing
+8809976 + 0 read1
+8809976 + 0 read2
+10340606 + 0 properly paired (58.69% : N/A)
+10834052 + 0 with itself and mate mapped
+418662 + 0 singletons (2.38% : N/A)
+97424 + 0 with mate mapped to a different chr
+36298 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-007.bam:
+16222300 + 0 in total (QC-passed reads + QC-failed reads)
+16222300 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+9108400 + 0 mapped (56.15% : N/A)
+9108400 + 0 primary mapped (56.15% : N/A)
+16222300 + 0 paired in sequencing
+8111150 + 0 read1
+8111150 + 0 read2
+8408736 + 0 properly paired (51.83% : N/A)
+8763528 + 0 with itself and mate mapped
+344872 + 0 singletons (2.13% : N/A)
+74490 + 0 with mate mapped to a different chr
+27495 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/orig/SCC-bulkChIC-UMC-JAN-008.bam:
+16761598 + 0 in total (QC-passed reads + QC-failed reads)
+16761598 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+9929108 + 0 mapped (59.24% : N/A)
+9929108 + 0 primary mapped (59.24% : N/A)
+16761598 + 0 paired in sequencing
+8380799 + 0 read1
+8380799 + 0 read2
+9222136 + 0 properly paired (55.02% : N/A)
+9596270 + 0 with itself and mate mapped
+332838 + 0 singletons (1.99% : N/A)
+69678 + 0 with mate mapped to a different chr
+22872 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+

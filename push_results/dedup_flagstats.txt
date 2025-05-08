@@ -1,0 +1,132 @@
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-003_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-004_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-005_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-006_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-007_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-008_dedup.bam:
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-003_dedup.bam:
+7 + 0 in total (QC-passed reads + QC-failed reads)
+7 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+7 + 0 mapped (100.00% : N/A)
+7 + 0 primary mapped (100.00% : N/A)
+7 + 0 paired in sequencing
+3 + 0 read1
+4 + 0 read2
+4 + 0 properly paired (57.14% : N/A)
+7 + 0 with itself and mate mapped
+0 + 0 singletons (0.00% : N/A)
+1 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-004_dedup.bam:
+0 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+0 + 0 mapped (N/A : N/A)
+0 + 0 primary mapped (N/A : N/A)
+0 + 0 paired in sequencing
+0 + 0 read1
+0 + 0 read2
+0 + 0 properly paired (N/A : N/A)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (N/A : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-005_dedup.bam:
+33 + 0 in total (QC-passed reads + QC-failed reads)
+33 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+29 + 0 mapped (87.88% : N/A)
+29 + 0 primary mapped (87.88% : N/A)
+33 + 0 paired in sequencing
+15 + 0 read1
+18 + 0 read2
+26 + 0 properly paired (78.79% : N/A)
+27 + 0 with itself and mate mapped
+2 + 0 singletons (6.06% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-006_dedup.bam:
+0 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+0 + 0 mapped (N/A : N/A)
+0 + 0 primary mapped (N/A : N/A)
+0 + 0 paired in sequencing
+0 + 0 read1
+0 + 0 read2
+0 + 0 properly paired (N/A : N/A)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (N/A : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-007_dedup.bam:
+49 + 0 in total (QC-passed reads + QC-failed reads)
+49 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+39 + 0 mapped (79.59% : N/A)
+39 + 0 primary mapped (79.59% : N/A)
+49 + 0 paired in sequencing
+22 + 0 read1
+27 + 0 read2
+34 + 0 properly paired (69.39% : N/A)
+36 + 0 with itself and mate mapped
+3 + 0 singletons (6.12% : N/A)
+2 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
+Stats for /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments/dedup/SCC-bulkChIC-UMC-JAN-008_dedup.bam:
+0 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+0 + 0 mapped (N/A : N/A)
+0 + 0 primary mapped (N/A : N/A)
+0 + 0 paired in sequencing
+0 + 0 read1
+0 + 0 read2
+0 + 0 properly paired (N/A : N/A)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (N/A : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+--------------------------------------
+
