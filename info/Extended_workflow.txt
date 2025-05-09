@@ -32,7 +32,7 @@
 	- Identify potential sample labeling issues or unexpected variability.
 
 
-### STEP 3: Differential Analysis of Acetylation Signals
+### STEP 3: Differential Analysis of Acetylation Signalsz
 
 1. Create a Consensus Peak Set  
 	- Generate a combined set of peaks detected across all samples to define a unified set of genomic regions for comparison.
