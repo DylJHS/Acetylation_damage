@@ -35,3 +35,9 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Looking at the resutls from the plotFingerprint from deepTools shows that the controls and the induced samples seem to have the same level of enrichment for the human alignment
 - This should not be the case
 - the control line and the induced "input" lines should deviate with the induced ones showing increased enrichment (more of an elbow in the plot)
+- But not seeing a difference between the induced and control is not indicative of there being an issue 
+- It could just mean that the null hypothesis is true and there is no acetylation difference 
+- But would still expect a higher curve due to the marks being a broad mark
+- Ran the scrtips on the "tagged" bam files which show better results but not sure where they come from and how they were produced
+- Will continue the analysis on tagged and untagged and assess the differences
+
