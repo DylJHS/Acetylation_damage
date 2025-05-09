@@ -18,7 +18,6 @@ references/
 >>>>>>> f3c6a53098993ffab76628e49ebb536cc36cf45c
 
 # Ignore image files
-*.png
 *.jpg
 *.jpeg
 *.tiff
