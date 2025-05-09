@@ -14,10 +14,10 @@ source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/con
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 
 # Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments"
+DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments"
 
 # Loop over the BAM files in the directory
-for INPUT_BAM in "$DIR"/orig/*JAN-00?.bam; do
+for INPUT_BAM in "$DIR"/*JAN-00?.bam; do
     if [[ -f "$INPUT_BAM" ]]; then
         echo "Processing: $INPUT_BAM"
 
@@ -28,6 +28,11 @@ for INPUT_BAM in "$DIR"/orig/*JAN-00?.bam; do
         POS_SORTED_BAM="${DIR}/sortd/${BASE}_pos_sorted.bam"
         DEDUP_BAM="${DIR}/dedup/${BASE}_dedup.bam"
         DEDUP_INDEX="${DIR}/dedup/${BASE}_dedup.bam.bai"
+
+        # Create directories if they do not exist
+        mkdir -p "${DIR}/sortd"
+        mkdir -p "${DIR}/fixmate"
+        mkdir -p "${DIR}/dedup"
 
         echo "Sorting the input BAM by read name..."
         samtools collate -@ 8 -o "$NAME_SORTED_BAM" "$INPUT_BAM"
