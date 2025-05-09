@@ -14,10 +14,10 @@ source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/con
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 
 # Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments"
+DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
 
 # Loop over the BAM files in the directory
-for INPUT_BAM in "$DIR"/*JAN-00?.bam; do
+for INPUT_BAM in "$DIR"/*00?_tagged.bam; do
     if [[ -f "$INPUT_BAM" ]]; then
         echo "Processing: $INPUT_BAM"
 

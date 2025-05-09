@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=flagstat_human_dedup
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat_human_dedup-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat_human_dedup-%j.err
+#SBATCH --job-name=tagged_flagstats
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/tagged_flagstats-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/tagged_flagstats-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=5G
+#SBATCH --mem=10G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -14,7 +14,7 @@ source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/con
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 
 # Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/human_alignments"
+DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
 INPUT_DIR="${DIR}/dedup"
 OUTPUT_FILE="${DIR}/dedup2_flagstats.txt"
 
