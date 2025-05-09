@@ -30,3 +30,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - modified script to only loop over the original JAN-00?.bam files
 - the dedup script removed most of the reads 
 - reran with proper fixmate args and get better results
+
+09/05/25: 
+- Looking at the resutls from the plotFingerprint from deepTools shows that the controls and the induced samples seem to have the same level of enrichment for the human alignment
+- This should not be the case
+- the control line and the induced "input" lines should deviate with the induced ones showing increased enrichment (more of an elbow in the plot)
