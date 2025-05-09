@@ -40,4 +40,4 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - But would still expect a higher curve due to the marks being a broad mark
 - Ran the scrtips on the "tagged" bam files which show better results but not sure where they come from and how they were produced
 - Will continue the analysis on tagged and untagged and assess the differences
-
+- Generating the bamCoverages for the data
