@@ -40,12 +40,14 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - But would still expect a higher curve due to the marks being a broad mark
 - Ran the scrtips on the "tagged" bam files which show better results but not sure where they come from and how they were produced
 - Will continue the analysis on tagged and untagged and assess the differences
-<<<<<<< HEAD
 - Generating the bamCoverages for the data
 
 13/05/25
 - generating the bigwig files for the fly data
 - Checking the coverages in IGV 
-=======
-- Generating the bamCoverages for the data
->>>>>>> 77ff64d29879b3ee7244d73e4d5e2b5e730ced04
+
+14/05/25
+- Running the integration_site_test scripts 
+- Generating the RPKM bigwig files for better comparison between samples 
+- Generating the counts.txt file for the quantitative data in order to test between the samples at the integration int_site
+- Need to perform a comparitive test betweent the counts "integration_counts.txt"
