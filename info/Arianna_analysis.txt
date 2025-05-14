@@ -10,4 +10,4 @@ SCC-bulkChIC-UMC-JAN-007: Hsp 1:500
 SCC-bulkChIC-UMC-JAN-008: Hsp 1:1000
 
 Integration site:  
-2L (40F6) - 22245311
+2L (40F6) - 22,245,311

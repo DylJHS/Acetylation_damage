@@ -50,3 +50,4 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Running the integration_site_test scripts 
 - Generating the RPKM bigwig files for better comparison between samples 
 - Generating the counts.txt file for the quantitative data in order to test between the samples at the integration int_site
+- Need to perform a comparitive test betweent the counts "integration_counts.txt"

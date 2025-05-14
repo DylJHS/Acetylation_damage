@@ -16,29 +16,34 @@ conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/deep
 # Define the paths
 DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
 
-
 # Define integration window (dm6 coordinates) 600bp wide window
-echo -e "chr2L\t22245011\t22245611\tint_site" > integration.bed    
+echo -e "2L\t22245250\t22245310\tint_site" > integration.bed
+    
+# Open output file for writing
+OUTFILE="$DIR/integration_counts.txt"
+> "$OUTFILE"  # Clear if it exists
 
-# total mapped fly fragments in each BAM (QC-pass)
+# Loop through BAM files
 for bam in "$DIR"/dedup/003_tagged_dedup.bam "$DIR"/dedup/005_tagged_dedup.bam \
-            "$DIR"/dedup/006_tagged_dedup.bam "$DIR"/dedup/007_tagged_dedup.bam; do
-    total=$(samtools view -c -F 0x904 $bam)               # paired, primary, non-supplementary
-    inSite=$(bedtools coverage -a integration.bed -b $bam -counts \
-             | awk '{print $4}')
-    echo -e "$bam\t$total\t$inSite"
+           "$DIR"/dedup/006_tagged_dedup.bam "$DIR"/dedup/007_tagged_dedup.bam; do
 
-done > /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged/integration_counts.txt
+    # Step 1: Fragment stats
+    # Sample name without path or extension
+    sample=$(basename "$bam" .bam)
 
+    # Step 1: count total primary, paired, non-supplementary alignments
+    total=$(samtools view -c -F 0x904 "$bam")
 
-# Create scaled bigwig for each BAM
-for bam in "$DIR"/dedup/003_tagged_dedup.bam "$DIR"/dedup/005_tagged_dedup.bam \
-            "$DIR"/dedup/006_tagged_dedup.bam "$DIR"/dedup/007_tagged_dedup.bam; do
-    bamCoverage -b $bam \
+    # Step 2: count reads overlapping the integration region
+    count=$(bedtools coverage -a integration.bed -b "$bam" -counts | awk '{print $NF}')
+
+    echo -e "$sample\t$total\t$count" >> "$OUTFILE"
+
+    # Step 2: Normalised coverage
+    bamCoverage -b "$bam" \
         --outFileName "$DIR/$(basename "$bam" .bam)_RPKM_integration.bw" \
         --outFileFormat bigwig \
         --binSize 50 \
         --normalizeUsing RPKM \
-        --effectiveGenomeSize 142573017 
-    
+        --effectiveGenomeSize 142573017
 done
