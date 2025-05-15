@@ -17,7 +17,7 @@ conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/deep
 DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
 
 # Define integration window (dm6 coordinates) 600bp wide window
-echo -e "2L\t22245250\t22245310\tint_site" > integration.bed
+echo -e "2L\t22245250\t22245350\tint_site" > integration.bed
     
 # Open output file for writing
 OUTFILE="$DIR/integration_counts.txt"
