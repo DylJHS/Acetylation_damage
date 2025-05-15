@@ -54,4 +54,5 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Will perform a Fisher's exact test 
 
 15/05/25
-- 
+- Ran the Fisher exact test for the coverage from 22245250 to 22245350 (100bp) 
+- The test did not reveal anything significant likely due to the high degree of background reads
