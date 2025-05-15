@@ -35,7 +35,7 @@ for bam in "$DIR"/dedup/003_tagged_dedup.bam "$DIR"/dedup/005_tagged_dedup.bam \
     total=$(samtools view -c -F 0x904 "$bam")
 
     # Step 2: count reads overlapping the integration region
-    count=$(bedtools coverage -a integration.bed -b "$bam" -counts | awk '{print $NF}')
+    count=$(bedtools coverage -a integration.bed -b "$bam" )
 
     echo -e "$sample\t$total\t$count" >> "$OUTFILE"
 
