@@ -4,7 +4,7 @@ RESULTS_DIR="/home/djhs/fly_acetylation_damage/results"
 # Number of sample reads used in each BLAST query (adjust if needed)
 SAMPLE_SIZE=1000
 # Path to the Python summary script
-PY_SCRIPT="/home/djhs/fly_acetylation_damage/scripts/BLAST_res_summary.py"
+PY_SCRIPT="/home/djhs/fly_acetylation_damage/scripts/summarise_blast_output.py"
 # Master summary output file
 OUTPUT_SUMMARY="$RESULTS_DIR/master_blast_summary.txt"
 

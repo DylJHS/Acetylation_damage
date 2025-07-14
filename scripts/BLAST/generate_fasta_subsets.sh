@@ -1,6 +1,6 @@
 #!/bin/bash
 # Directory containing the SCC folders
-DATA_DIR="/home/djhs/fly_acetylation_damage/data"
+DATA_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/data/SCC-bulkChIC-2"
 # Directory where FASTA subset files will be saved
 FASTA_DIR="$DATA_DIR/FASTA"
 # Create FASTA directory if it doesn't exist
