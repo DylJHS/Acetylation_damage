@@ -39,6 +39,8 @@ df_2 <- df %>%
 contingency_table <- as.matrix(df_2[, c("overlap_reads", "nnoverlap_reads")])
 rownames(contingency_table) <- df_2$group
 
+print(contingency_table)
+
 
 # Perform fishers exact test
 fisher.test(contingency_table)

@@ -56,3 +56,19 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 15/05/25
 - Ran the Fisher exact test for the coverage from 22245250 to 22245350 (100bp) 
 - The test did not reveal anything significant likely due to the high degree of background reads
+- Emailed Arianna with some of the findings and the IGV tracks 
+
+25/05/25
+- Trying to find out the source of the issue with SCC
+- Need to give a recommendation for the sequencing depth 
+
+10/07/25
+- Downloaded the newly run data from SCC 
+- stored in: P:\Janssen\chet_repair\dhaynessimmons\raw_data\fly_acetylation_damage\SCC-bulkChIC-UMC-JULY.tar.gz
+
+11/07/25
+- Unzipping the folders in the Projects dir 
+
+12/07/25
+- Sending the new SCC files ot the HPC server to run the analyses
+- Need to check the data
