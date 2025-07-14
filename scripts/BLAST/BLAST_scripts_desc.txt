@@ -1,0 +1,93 @@
+
+NAME: generate_fasta_subsets.sh
+
+Script Description:
+This script automates the creation of random FASTA subsets from paired-end 
+sequencing data across multiple experimental sample folders. 
+It scans through directories matching the pattern SCC-bulkChIC-UMC-JAN-* 
+within a specified data directory, and for each .fastq.gz file corresponding 
+to Read 1 or Read 2, it extracts a random sample of "SAMPLE_SIZE" reads using seqtk. 
+These reads are then immediately converted to FASTA format and saved into a 
+centralized output directory.
+
+This is particularly useful for downstream tasks like BLAST analysis, where 
+a representative subset of reads is sufficient and more efficient 
+than processing the entire dataset.
+
+
+
+NAME: run_blast_subsets.sh
+
+Script Description:
+This SLURM submission script performs high-throughput nucleotide BLAST (BLASTn) 
+searches on a collection of sampled FASTA reads. It processes each subset 
+file generated from experimental sequencing data by comparing it against 
+nucleotide reference genomes for human (GRCh38) and Drosophila melanogaster (BDGP6.46).
+
+For each reference genome, it first checks whether a BLAST database exists 
+and creates one if missing. It then iterates through each subset FASTA file 
+and performs a BLASTn alignment against both species databases, saving the 
+results to a designated output directory.
+
+This script is useful for identifying the organism of origin for reads in a 
+large-scale sequencing experiment, particularly when contamination or 
+species mixing is suspected.
+
+It is configured for a SLURM-managed HPC environment and includes 
+resource requests, logging, and email notifications.
+
+
+
+NAME: summarise_blast_output.py
+
+Script Description:
+This Python script parses a BLAST tabular output file (format 6) 
+to compute summary statistics for a sampled set of query sequences. 
+It calculates and reports:
+
+Alignment Rate: The percentage of unique query reads (from the sampled total) 
+that had at least one successful BLAST hit.
+
+Total Number of Hits: The cumulative number of BLAST hits reported.
+
+Average % Identity: Mean sequence identity across all hits.
+
+Average Mismatches: Mean number of mismatches per alignment.
+
+Average Gap Openings: Mean number of gap openings across alignments.
+
+Average Bit Score: Mean bit score, indicating alignment confidence.
+
+The script expects two command-line arguments:
+
+The name of the BLAST result file (without full path).
+
+The total number of reads originally sampled (e.g., 1000).
+
+It outputs the summary to standard output and writes it to a results file:
+/home/djhs/fly_acetylation_damage/results/blast_summary_results.txt
+
+This tool is designed for quick diagnostics and species origin 
+inference in large-scale sequencing projects involving multiple organisms. 
+
+
+
+NAME:batch_summarise_blast.sh
+
+Script Description:
+This bash script automates the summarisation of multiple BLAST result files by 
+calling a custom Python script (BLAST_res_summary.py) for each result file 
+located in a specified results directory. It assumes each BLAST output file 
+corresponds to a subset of 1000 sampled reads.
+
+For every file matching the pattern *_blast_results.txt, the script:
+
+Passes the filename and sample size to the Python summarisation script.
+
+Appends the summary output to a single master report file (master_blast_summary.txt).
+
+This is particularly useful for condensing dozens of BLAST outputs across samples 
+and reference species into a single readable summary for comparative analysis.
+
+The script is designed to be rerunnable and safe — it clears the existing 
+master summary file at the start.

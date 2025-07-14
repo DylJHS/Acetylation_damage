@@ -72,3 +72,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 12/07/25
 - Sending the new SCC files ot the HPC server to run the analyses
 - Need to check the data
+
+14/07/25
+- Going over the fly_acetylation_damage scripts and noticed that they need better descriptions and titles (comments are good though)
+- Looking first at the BLAST scripts since those are the ones that will be used first
