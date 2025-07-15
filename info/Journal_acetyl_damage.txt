@@ -84,4 +84,6 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Re-extracting the SCC folder since only 4 samples were perviously in the decompressed folder
 - All samples are present in the new decompression
 - Combining the BLAST scripts all in one
-- Runnign the full script on all 6 samples
+- Running the full script on all 6 samples
+- the BLAST results seem to show the same kind of relation to the human genome instead of the drosophila ones
+- run again with more stringent evalue 1e-10

@@ -2,7 +2,7 @@
 import sys
 import os
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 4:
     print("Usage: {} blast_output.txt total_sample_reads".format(sys.argv[0]))
     sys.exit(1)
 
@@ -62,8 +62,3 @@ output = (
 )
 
 print(output)
-
-# Write the output to a file:
-output_file = f"{output_path}/blast_summary_results.txt"
-with open(output_file, "w") as outf:
-    outf.write(output)
