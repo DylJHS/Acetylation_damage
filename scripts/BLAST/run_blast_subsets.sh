@@ -24,9 +24,14 @@ DATA_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damag
 FASTA_DIR="$DATA_DIR/FASTA_subsets"
 # Create FASTA directory if it doesn't exist
 mkdir -p "$FASTA_DIR"
+
 # Directory where result files will be saved
-RES_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results"
-mkdir -p "$RES_DIR"
+RES_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/BLAST_results"
+mkdir -p "$RES_DIR/human"
+mkdir -p "$RES_DIR/drosophila"
+
+# Path to the Python summary script
+PY_SCRIPT="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/summarise_blast_output.py"
 
 # Number of reads to sample from each file
 SAMPLE_SIZE=1000
@@ -83,8 +88,31 @@ for subset in "$FASTA_DIR"/*_subset.fasta; do
         elif [ "$species" = "drosophila" ]; then
             db_name="${DROS_REF%.*}_db"
         fi
-        output_file="${RES_DIR}/${base}_${species}_blast_results.txt"
-        echo "Running BLAST for $subset against $species database..."
+        output_file="${RES_DIR}/${species}/${base}_${species}_blast_results.txt"
+        echo "Running BLAST for $base against $species database..."
         blastn -query "$subset" -db "$db_name" -num_threads 4 -out "$output_file" -evalue 1e-5 -outfmt 6
     done
 done
+
+# Summarise the BLAST results using the Python script
+for folder in "$RES_DIR"; do 
+
+    folder_base = "$(basename "$folder")"
+    OUTPUT_PATH = "$RES_DIR/$folder_base"
+    OUTPUT_SUMMARY = "$OUTPUT_PATH/${folder_base}_summary_blast_results.txt"
+
+    # Empty or create the master summary file
+    > "$OUTPUT_SUMMARY"
+
+    # Loop over each BLAST result file ending with *_blast_results.txt in the RES_DIR
+    for file in "$RES_DIR"/*_blast_results.txt; do
+        # Extract the base filename (e.g., SCC-bulkChIC-UMC-JAN-003_R1_drosophila_blast_results.txt)
+        base=$(basename "$file")
+        echo "Processing $base ..." | tee -a "$OUTPUT_SUMMARY"
+        # Call the Python script, passing the file name (the Python script expects the file to be in RES_DIR)
+        python3 "$PY_SCRIPT" "$file" "$SAMPLE_SIZE" "$OUTPUT_PATH">> "$OUTPUT_SUMMARY"
+        echo "----------------------------------------" >> "$OUTPUT_SUMMARY"
+    done
+
+    echo "All summaries written to $OUTPUT_SUMMARY"
+done 

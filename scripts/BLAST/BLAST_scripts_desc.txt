@@ -16,28 +16,6 @@ than processing the entire dataset.
 
 
 
-NAME: run_blast_subsets.sh
-
-Script Description:
-This SLURM submission script performs high-throughput nucleotide BLAST (BLASTn) 
-searches on a collection of sampled FASTA reads. It processes each subset 
-file generated from experimental sequencing data by comparing it against 
-nucleotide reference genomes for human (GRCh38) and Drosophila melanogaster (BDGP6.46).
-
-For each reference genome, it first checks whether a BLAST database exists 
-and creates one if missing. It then iterates through each subset FASTA file 
-and performs a BLASTn alignment against both species databases, saving the 
-results to a designated output directory.
-
-This script is useful for identifying the organism of origin for reads in a 
-large-scale sequencing experiment, particularly when contamination or 
-species mixing is suspected.
-
-It is configured for a SLURM-managed HPC environment and includes 
-resource requests, logging, and email notifications.
-
-
-
 NAME: summarise_blast_output.py
 
 Script Description:
@@ -91,3 +69,25 @@ and reference species into a single readable summary for comparative analysis.
 
 The script is designed to be rerunnable and safe — it clears the existing 
 master summary file at the start.
+
+
+
+NAME: run_blast_subsets.sh
+
+Script Description:
+This SLURM submission script performs high-throughput nucleotide BLAST (BLASTn) 
+searches on a collection of sampled FASTA reads. It processes each subset 
+file generated from experimental sequencing data by comparing it against 
+nucleotide reference genomes for human (GRCh38) and Drosophila melanogaster (BDGP6.46).
+
+For each reference genome, it first checks whether a BLAST database exists 
+and creates one if missing. It then iterates through each subset FASTA file 
+and performs a BLASTn alignment against both species databases, saving the 
+results to a designated output directory.
+
+This script is useful for identifying the organism of origin for reads in a 
+large-scale sequencing experiment, particularly when contamination or 
+species mixing is suspected.
+
+It is configured for a SLURM-managed HPC environment and includes 
+resource requests, logging, and email notifications.

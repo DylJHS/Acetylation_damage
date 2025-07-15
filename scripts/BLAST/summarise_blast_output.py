@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 
 if len(sys.argv) != 3:
     print("Usage: {} blast_output.txt total_sample_reads".format(sys.argv[0]))
@@ -13,6 +14,8 @@ except ValueError:
     print("Error: total_sample_reads must be a number")
     sys.exit(1)
 
+output_path = sys.argv[3]
+
 unique_queries = set()
 total_hits = 0
 sum_identity = 0.0
@@ -20,7 +23,7 @@ sum_mismatches = 0.0
 sum_gap_openings = 0.0
 sum_bit_score = 0.0
 
-with open(f'/home/djhs/fly_acetylation_damage/results/{blast_file}', "r") as f:
+with open(blast_file, "r") as f:
     for line in f:
         if not line.strip():
             continue
@@ -61,5 +64,6 @@ output = (
 print(output)
 
 # Write the output to a file:
-with open("/home/djhs/fly_acetylation_damage/results/blast_summary_results.txt", "w") as outf:
+output_file = f"{output_path}/blast_summary_results.txt"
+with open(output_file, "w") as outf:
     outf.write(output)
