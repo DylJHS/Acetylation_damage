@@ -10,20 +10,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load Conda environment
-export PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin:$PATH"
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
-export LD_LIBRARY_PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env/lib:$LD_LIBRARY_PATH"
-
-
-# Directory where result files will be saved
-RES_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/BLAST_results"
-
-# Path to the Python summary script
-PY_SCRIPT="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/summarise_blast_output.py"
-
-# Number of reads to sample from each file
-SAMPLE_SIZE=1000
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
 
 # Summarise the BLAST results using the Python script
 for folder in "$RES_DIR"/*; do 
