@@ -25,7 +25,7 @@ mkdir -p "$FASTA_DIR"
 
 # SCC folders
 SCC_FOLDERS=("$DATA_DIR"/bulkChIC-UMC-JAN-*)
-SCC_FOLDER= "${SCC_FOLDERS[$SLURM_ARRAY_TASK_ID]}"
+SCC_FOLDER="${SCC_FOLDERS[$SLURM_ARRAY_TASK_ID]}"
 
 # Check
 if [ ! -d "$SCC_FOLDER" ]; then
@@ -45,9 +45,7 @@ if [ -d "$SCC_FOLDER" ]; then
         # Check if file exists (in case pattern doesn't match any files)
         [ -e "$file" ] || continue
         echo "  Processing file: $file"
-        # Get the folder's base name (e.g., SCC-bulkChIC-UMC-JAN-003)
-        SCC_FOLDER=$(basename "$SCC_FOLDER")
-
+        
         # Extract FASTQ short ID
         fastq_base=$(basename "$file" .fastq.gz)
         short_id=$(echo "$fastq_base" | sed -E 's/^.*(JAN-[0-9]+)_.*(L[0-9]+)_R([12])_.*/\1_\2_R\3/')

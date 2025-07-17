@@ -99,19 +99,19 @@ done
 for folder in "$RES_DIR"/*; do 
     folder_base="$(basename "$folder")"
     echo "Processing folder: $folder_base"
-    OUTPUT_PATH="$RES_DIR/$folder_base"
-    OUTPUT_SUMMARY="$OUTPUT_PATH/${folder_base}_summary_blast_results.txt"
+    BLAST_PATH="$RES_DIR/$folder_base"
+    OUTPUT_SUMMARY="$RES_DIR/${folder_base}_summary_blast_results.txt"
 
     # Empty or create the master summary file
     > "$OUTPUT_SUMMARY"
 
     # Loop over each BLAST result file ending with *_blast_results.txt in the RES_DIR
-    for file in "$OUTPUT_PATH"/JAN*_blast_results.txt; do
+    for file in "$BLAST_PATH"/JAN*_blast_results.txt; do
         # Extract the base filename (e.g., SCC-bulkChIC-UMC-JAN-003_R1_drosophila_blast_results.txt)
         base=$(basename "$file")
         echo "Processing file $base ..." | tee -a "$OUTPUT_SUMMARY"
         # Call the Python script, passing the file name (the Python script expects the file to be in RES_DIR)
-        python3 "$PY_SCRIPT" "$file" "$SAMPLE_SIZE" "$OUTPUT_PATH" >> "$OUTPUT_SUMMARY"
+        python3 "$PY_SCRIPT" "$file" "$SAMPLE_SIZE" >> "$OUTPUT_SUMMARY"
         echo "----------------------------------------" >> "$OUTPUT_SUMMARY"
     done
 

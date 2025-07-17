@@ -2,7 +2,7 @@
 import sys
 import os
 
-if len(sys.argv) != 4:
+if len(sys.argv) != 3:
     print("Usage: {} blast_output.txt total_sample_reads".format(sys.argv[0]))
     sys.exit(1)
 
@@ -13,8 +13,6 @@ try:
 except ValueError:
     print("Error: total_sample_reads must be a number")
     sys.exit(1)
-
-output_path = sys.argv[3]
 
 unique_queries = set()
 total_hits = 0

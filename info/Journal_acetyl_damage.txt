@@ -98,3 +98,5 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Converting the BLASTn query and the FASTA_generation scripts to handle array jobs for faster runtime
 - Still need to create a single launch script (FASTA gen + BLASTn query + results summary file gen)
 
+17/07/25
+- 
