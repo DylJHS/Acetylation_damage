@@ -87,3 +87,14 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Running the full script on all 6 samples
 - the BLAST results seem to show the same kind of relation to the human genome instead of the drosophila ones
 - run again with more stringent evalue 1e-10
+
+16/07/25
+- The results from the previous run were better but still showed better correlation with the human genome than the drosophila
+- Restricted the parameters more for more stringent query: 
+    - task megablast
+    - perc_identity = 95
+    - ungapped
+    - evalue = 1e-20
+- Converting the BLASTn query and the FASTA_generation scripts to handle array jobs for faster runtime
+- Still need to create a single launch script (FASTA gen + BLASTn query + results summary file gen)
+

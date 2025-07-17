@@ -36,6 +36,7 @@ PY_SCRIPT="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_dama
 # Number of reads to sample from each file
 SAMPLE_SIZE=1000
 
+## Create subsets of FASTQ files and convert to FASTA format
 # # Loop through each SCC folder (assumed to have names like SCC-bulkChIC-UMC-JAN-*)
 # for folder in "$DATA_DIR"/bulkChIC-UMC-JAN-*; do
 #     if [ -d "$folder" ]; then
@@ -79,20 +80,20 @@ for ref in "$HUMAN_REF" "$DROS_REF"; do
 done
 
 # Loop through each subset FASTA file in the FASTA directory and run BLAST against each database.
-for subset in "$FASTA_DIR"/*_subset.fasta; do
-    base=$(basename "$subset" _subset.fasta)
-    for species in human drosophila; do
-        # Select the appropriate database for each species.
-        if [ "$species" = "human" ]; then
-            db_name="${HUMAN_REF%.*}_db"
-        elif [ "$species" = "drosophila" ]; then
-            db_name="${DROS_REF%.*}_db"
-        fi
-        output_file="${RES_DIR}/${species}/${base}_${species}_blast_results.txt"
-        echo "Running BLAST for $base against $species database..."
-        blastn -query "$subset" -db "$db_name" -num_threads 4 -out "$output_file" -evalue 1e-10 -outfmt 6
-    done
-done
+# for subset in "$FASTA_DIR"/*_subset.fasta; do
+#     base=$(basename "$subset" _subset.fasta)
+#     for species in human drosophila; do
+#         # Select the appropriate database for each species.
+#         if [ "$species" = "human" ]; then
+#             db_name="${HUMAN_REF%.*}_db"
+#         elif [ "$species" = "drosophila" ]; then
+#             db_name="${DROS_REF%.*}_db"
+#         fi
+#         output_file="${RES_DIR}/${species}/${base}_${species}_blast_results.txt"
+#         echo "Running BLAST for $base against $species database..."
+#         blastn -query "$subset" -db "$db_name" -num_threads 4 -out "$output_file" -evalue 1e-10 -outfmt 6
+#     done
+# done
 
 # Summarise the BLAST results using the Python script
 for folder in "$RES_DIR"/*; do 
