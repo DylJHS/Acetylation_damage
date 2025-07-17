@@ -23,7 +23,7 @@ HUMAN_REF="$DB_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.t
 DROS_REF="$DB_DIR/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa"
 
 # Sample size
-SAMPLE_SIZE=1000
+SAMPLE_SIZE=5000
 
 # Python script for summary
 PY_SCRIPT="$PROJ_DIR/scripts/BLAST/summarise_blast_output.py"

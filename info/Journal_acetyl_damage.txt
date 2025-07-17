@@ -108,3 +108,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
     -max_hsps 1 \
     -ungapped \
     -evalue 1e-20 \
+- Still showing better results for the human BLAST query than the fly despite the stricter settings
+- Going to trim, qc, align and then see the data
+- Ran the multiqc
+- High duplication rate means that high pcr bias or oversequencing due to low complexity (common in ChIC seq) 
+- Need to deduplicate 
+- Higher R1 read duplication than R2 for all fastq files
+

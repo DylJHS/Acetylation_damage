@@ -34,7 +34,8 @@ for species in human drosophila; do
         db_name="${DROS_REF%.*}_db"
     fi
     output_file="${RES_DIR}/${species}/${base}_${species}_blast_results.txt"
-    echo "Running BLAST for $base against $species database..."
+    echo "Running BLAST for $base against $species database:"
+    echo "Using database: $db_name"
     blastn -query "$FASTA_FILE" \
         -task megablast \
         -perc_identity 95 \
