@@ -14,7 +14,13 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 
 # Summarise the BLAST results using the Python script
 for folder in "$RES_DIR"/*; do 
+    # Check if the item is a directory
+    if [ ! -d "$folder" ]; then
+        echo "Skipping $folder, not a directory."
+        continue
+    fi
     folder_base="$(basename "$folder")"
+    echo " ----------------------------------------"
     echo "Processing folder: $folder_base"
     BLAST_PATH="$RES_DIR/$folder_base"
     OUTPUT_SUMMARY="$RES_DIR/${folder_base}_summary_blast_results.txt"

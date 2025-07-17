@@ -99,4 +99,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Still need to create a single launch script (FASTA gen + BLASTn query + results summary file gen)
 
 17/07/25
-- 
+- Creation of BLAST config file to reference for all the inner jobs
+- Creation of BLAST workflow script to run the full pipeline with all 3 jobs (fasta creation, BLASTn query & BLAST result summarisation)
+- Rerun the BLASTn query using the following stringent args: 
+    -task megablast \
+    -perc_identity 95 \
+    -max_target_seqs 1 \
+    -max_hsps 1 \
+    -ungapped \
+    -evalue 1e-20 \
