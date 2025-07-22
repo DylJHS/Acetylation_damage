@@ -13,6 +13,7 @@ PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damag
 DATA_DIR="$PROJ_DIR/data/SCC-bulkChIC-2"
 FASTA_DIR="$DATA_DIR/FASTA_subsets"
 DB_DIR="$PROJ_DIR/data/ref_genomes"
+TRIMMED_DIR="$DATA_DIR/trimmed_fastq"
 
 # Results
 RES_DIR="$PROJ_DIR/results/BLAST_results"

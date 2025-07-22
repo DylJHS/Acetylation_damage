@@ -95,12 +95,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
     - perc_identity = 95
     - ungapped
     - evalue = 1e-20
-- Converting the BLASTn query and the FASTA_generation scripts to handle array jobs for faster runtime
+- Converting the BLASTn query and the FASTA_generation scripts to handle array jobs for faster runtime "BLASTn_arr.sh"
 - Still need to create a single launch script (FASTA gen + BLASTn query + results summary file gen)
 
 17/07/25
-- Creation of BLAST config file to reference for all the inner jobs
-- Creation of BLAST workflow script to run the full pipeline with all 3 jobs (fasta creation, BLASTn query & BLAST result summarisation)
+- Creation of BLAST config file "BLAST_wkflw_config.sh" to reference for all the inner jobs
+- Creation of BLAST workflow script to run the full pipeline with all 3 jobs (gen_fasta_subsets_arr.sh, BLASTn_arr.sh & gen_blast_summary.sh) => "run_blast_wkflw.sh"
 - Rerun the BLASTn query using the following stringent args: 
     -task megablast \
     -perc_identity 95 \
@@ -118,3 +118,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 
 22/07/25
+- Trimming the reads
+- Trimmed reads added to the trimmed_fastq folder in the data dir 
+- Also added to the config file
+- Built the drosophila bowtie2 index using the "fly_build_bowtie2_index.sh" script
+- Concatenating the trimmed reads across lanes into single files for each sample
+- Need to run MultiQC on the trimmed reads to assess the quality
+- Issues running trim galore due to bug when using multiple cores 
+- Removing cores to see if it resolves the issue
+- Coudl also be due to how the script runs. Once in single mode and then in paired mode

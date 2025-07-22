@@ -9,14 +9,10 @@
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
-# Conda environment
-export PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin:$PATH"
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/qc_env
+# Load configuration (defines $DATA_DIR , etc.)
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
 
-DATA_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/data/SCC-bulkChIC-2"
-
-cd "$DATA_DIR" 
+cd "$TRIMMED_DIR" 
 
 # run the multiqc command
 multiqc . 
