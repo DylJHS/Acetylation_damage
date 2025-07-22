@@ -113,5 +113,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Ran the multiqc
 - High duplication rate means that high pcr bias or oversequencing due to low complexity (common in ChIC seq) 
 - Need to deduplicate 
-- Higher R1 read duplication than R2 for all fastq files
+- Higher R1 read duplication than R2 for all fastq files; might be normal due to the cutting process of the Mnase
+- MultiQC report duplicate rates are likely higher than the actual duplicate rates due to how they only assess the first 50 bp of the reads 
 
+
+22/07/25
