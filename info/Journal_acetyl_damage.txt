@@ -133,3 +133,6 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Need to build new script that then concatenates the trimmed reads across lanes into single files for each sample
 - running the fastqc & multiqc commands on the trimmed reads
 - Concatenating the trimmed reads across lanes into merged files using concat_fastq.sh script
+- results from the trimming and subsequent qc did not show significant improvements
+- Rerunning the trim galore script with clip argument on the first 6bp 
+- stringnecy set to 3 for better trimming

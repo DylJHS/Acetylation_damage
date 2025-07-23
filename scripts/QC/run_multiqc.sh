@@ -12,11 +12,14 @@
 # Load configuration (defines $DATA_DIR , etc.)
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
 
-cd "$TRIMMED_DIR" 
+# Define the folder
+FOLDER="$TRIMMED_MERG_DIR"
+
+cd "$FOLDER" 
 
 echo "Running fastqc in directory: $PWD"
 # run the fastqc command
-fastqc -t 5 -o "$TRIMMED_DIR" *.fq.gz
+fastqc -t 6 -o "$FOLDER" *.fq.gz
 echo "FastQC completed in directory: $PWD"
 
 echo "-----------------------------------------------------"

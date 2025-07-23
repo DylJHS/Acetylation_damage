@@ -50,6 +50,9 @@ for R1 in "$SCC_FOLDER"/*_R1_*.fastq.gz; do
         --illumina \
         --output_dir "$TRIMMED_DIR" \
         --no_report_file \
+        --clip_R1 6 \
+        --clip_R2 6 \
+        --stringency 3 \
         --paired $R1 $R2
 done
 
