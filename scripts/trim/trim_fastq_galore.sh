@@ -5,7 +5,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
@@ -24,20 +24,7 @@ if [ ! -d "$SCC_FOLDER" ]; then
 fi
 
 echo "Processing folder: $SCC_FOLDER"
-
-# Define the TRIMMED_FLDR
-TRIMMED_FLDR="$SCC_FOLDER/trimmed_lane_fastq"
-# Clear the directory if it already exists
-if [ "$(ls -A "$TRIMMED_FLDR")" ]; then
-    echo "Clearing existing files in $TRIMMED_FLDR"
-    rm -rf "$TRIMMED_FLDR"/*
-else
-    echo "Creating new directory: $TRIMMED_FLDR"
-    mkdir -p "$TRIMMED_FLDR"
-fi
-
 echo " -------------------------------------------------------------------"
-
 
 # Find all R1 files and match them with R2
 for R1 in "$SCC_FOLDER"/*_R1_*.fastq.gz; do
@@ -61,45 +48,9 @@ for R1 in "$SCC_FOLDER"/*_R1_*.fastq.gz; do
     
     trim_galore \
         --illumina \
-        --output_dir "$TRIMMED_FLDR" \
+        --output_dir "$TRIMMED_DIR" \
         --no_report_file \
         --paired $R1 $R2
 done
 
-
-# Concatenate trimmed reads across lanes into single files for each sample
-
-echo "Concatenating trimmed lanes for each sample..."
-
-# Find all unique base sample names (without lane and read info)
-trimmed_files=("$TRIMMED_FLDR"/*_R1_001_val_1.fq.gz)
-sample_prefixes=()
-
-for f in "${trimmed_files[@]}"; do
-    name=$(basename "$f" | sed -E 's/_S[0-9]+_L00[0-9]_R1_001_val_1\.fq\.gz//')
-    sample_prefixes+=("$name")
-done
-
-# Deduplicate sample names
-unique_samples=($(printf "%s\n" "${sample_prefixes[@]}" | sort -u))
-
-for sample in "${unique_samples[@]}"; do
-    # Define patterns to match all lanes for this sample
-    R1_files=("$TRIMMED_FLDR"/${sample}_S*_L00*_R1_001_val_1.fq.gz)
-    R2_files=("$TRIMMED_FLDR"/${sample}_S*_L00*_R2_001_val_2.fq.gz)
-
-    # Output filenames
-    merged_R1="$TRIMMED_FLDR/${sample}_merged_R1.fq.gz"
-    merged_R2="$TRIMMED_FLDR/${sample}_merged_R2.fq.gz"
-
-    echo "  Merging lanes for sample: $sample"
-    cat "${R1_files[@]}" > "$merged_R1"
-    cat "${R2_files[@]}" > "$merged_R2"
-
-    # Save the merged files to the TRIMMED_DIR
-    echo "  Moving merged files to $TRIMMED_DIR"
-    mv "$merged_R1" "$TRIMMED_DIR/${sample}_R1.fastq.gz"
-    mv "$merged_R2" "$TRIMMED_DIR/${sample}_R2.fastq.gz"
-done
-
-echo "Concatenation complete."
+echo "Trimming complete for folder: $SCC_FOLDER"

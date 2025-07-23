@@ -126,4 +126,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Need to run MultiQC on the trimmed reads to assess the quality
 - Issues running trim galore due to bug when using multiple cores 
 - Removing cores to see if it resolves the issue
-- Coudl also be due to how the script runs. Once in single mode and then in paired mode
+- Could also be due to how the script runs. Once in single mode and then in paired mode
+
+23/07/25
+- Changing the trim_fastq_galore.sh script to only run the trim command 
+- Need to build new script that then concatenates the trimmed reads across lanes into single files for each sample
+- running the fastqc & multiqc commands on the trimmed reads
+- Concatenating the trimmed reads across lanes into merged files using concat_fastq.sh script

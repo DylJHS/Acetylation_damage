@@ -13,11 +13,12 @@ PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damag
 DATA_DIR="$PROJ_DIR/data/SCC-bulkChIC-2"
 FASTA_DIR="$DATA_DIR/FASTA_subsets"
 DB_DIR="$PROJ_DIR/data/ref_genomes"
-TRIMMED_DIR="$DATA_DIR/trimmed_fastq"
+TRIMMED_MERG_DIR="$DATA_DIR/trimmed_merged_fastq"
+TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
 
 # Results
 RES_DIR="$PROJ_DIR/results/BLAST_results"
-mkdir -p "$FASTA_DIR" "$RES_DIR/human" "$RES_DIR/drosophila"
+mkdir -p "$FASTA_DIR" "$RES_DIR/human" "$RES_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR"
 
 # Reference genomes
 HUMAN_REF="$DB_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
