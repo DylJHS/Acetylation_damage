@@ -47,11 +47,10 @@ for R1 in "$SCC_FOLDER"/*_R1_*.fastq.gz; do
     echo "  Trimming: $base_name"
     
     trim_galore \
-        --illumina \
         --output_dir "$TRIMMED_DIR" \
         --no_report_file \
-        --clip_R1 6 \
-        --clip_R2 6 \
+        --clip_R1 10 \
+        --clip_R2 10 \
         --stringency 3 \
         --paired $R1 $R2
 done

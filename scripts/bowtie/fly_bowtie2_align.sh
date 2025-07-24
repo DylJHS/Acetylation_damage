@@ -4,58 +4,54 @@
 #SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/logs/fly_bowtie2-align-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
+#SBATCH --array=0-5
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G  # Adjusted for better efficiency
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
-# Load Conda environment
-export PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin:$PATH"
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
+# Load configuration (defines $DATA_DIR , etc.)
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
 
-# Fix missing libcrypto issue for samtools
-export LD_LIBRARY_PATH=/hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env/lib:$LD_LIBRARY_PATH
+FILE_SET=$(ls $TRIMMED_MERG_DIR/*_merged_R1.fq.gz)
+FQ_FILE= "${FILE_SET[$SLURM_ARRAY_TASK_ID]}"
 
-# Define paths
-REFERENCE_DIR="/hpc/shared/onco_janssen/dhaynessimmons/data/fly_acetylation_damage"
-INDEX_PREFIX="${REFERENCE_DIR}/BDGP6/BDGP6"
-OUTPUT_DIR="/hpc/shared/onco_janssen/dhaynessimmons/results/fly_acetylation_damage/fly_alignments"
-
-# Create output directory if it doesn't exist
-mkdir -p $OUTPUT_DIR
-
-# Loop through all SCC folders
-for SCC_DIR in ${REFERENCE_DIR}/SCC-bulkChIC-UMC-JAN-*; do
-    if [[ -d $SCC_DIR ]]; then
-        SAMPLE_ID=$(basename $SCC_DIR)
-
-        # Identify R1 and R2 files
-        R1=$(ls ${SCC_DIR}/*_R1_001.fastq.gz 2>/dev/null | head -n 1)
-        R2=$(ls ${SCC_DIR}/*_R2_001.fastq.gz 2>/dev/null | head -n 1)
-
-        # Ensure both files exist before proceeding
-        if [[ -z "$R1" || -z "$R2" ]]; then
-            echo "Error: Missing R1 or R2 for ${SAMPLE_ID}" >> "${OUTPUT_DIR}/alignment_errors.log"
-            continue
-        fi
-
-        # Define output file paths
-        OUTPUT_BAM="${OUTPUT_DIR}/${SAMPLE_ID}.bam"
-        OUTPUT_SAM="${OUTPUT_DIR}/${SAMPLE_ID}.sam"
-
-        echo "Processing: ${SAMPLE_ID}"
-
-        # Run Bowtie2 alignment
-        bowtie2 -x $INDEX_PREFIX -1 $R1 -2 $R2 --threads 8 -S $OUTPUT_SAM
-
-        # Convert SAM to sorted BAM
-        samtools view -@ 8 -bS $OUTPUT_SAM | samtools sort -@ 8 -o $OUTPUT_BAM
-        samtools index $OUTPUT_BAM
+# For each sample 
+# Check if the sample exists
+if [[ ! -e "$FQ_FILE" ]]; then
+    echo "No FASTQ file found for array index $SLURM_ARRAY_TASK_ID"
+    exit 1
+fi
 
 
-        echo "Finished aligning ${SAMPLE_ID}"
-    fi
-done
+# if [[ -d $SCC_DIR ]]; then
+#     SAMPLE_ID=$(basename $SCC_DIR)
 
-echo "All alignments completed at $(date)"
+#     # Identify R1 and R2 files
+#     R1=$(ls ${SCC_DIR}/*_R1_001.fastq.gz 2>/dev/null | head -n 1)
+#     R2=$(ls ${SCC_DIR}/*_R2_001.fastq.gz 2>/dev/null | head -n 1)
+
+#     # Ensure both files exist before proceeding
+#     if [[ -z "$R1" || -z "$R2" ]]; then
+#         echo "Error: Missing R1 or R2 for ${SAMPLE_ID}" >> "${OUTPUT_DIR}/alignment_errors.log"
+#         continue
+#     fi
+
+#     # Define output file paths
+#     OUTPUT_BAM="${OUTPUT_DIR}/${SAMPLE_ID}.bam"
+#     OUTPUT_SAM="${OUTPUT_DIR}/${SAMPLE_ID}.sam"
+
+#     echo "Processing: ${SAMPLE_ID}"
+
+#     # Run Bowtie2 alignment
+#     bowtie2 -x $INDEX_PREFIX -1 $R1 -2 $R2 --threads 8 -S $OUTPUT_SAM
+
+#     # Convert SAM to sorted BAM
+#     samtools view -@ 8 -bS $OUTPUT_SAM | samtools sort -@ 8 -o $OUTPUT_BAM
+#     samtools index $OUTPUT_BAM
+
+
+#     echo "Finished aligning ${SAMPLE_ID}"
+# fi
+
+# echo "All alignments completed at $(date)"

@@ -12,17 +12,24 @@ PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damag
 # Data
 DATA_DIR="$PROJ_DIR/data/SCC-bulkChIC-2"
 FASTA_DIR="$DATA_DIR/FASTA_subsets"
-DB_DIR="$PROJ_DIR/data/ref_genomes"
+REF_DIR="$PROJ_DIR/data/ref_genomes"
 TRIMMED_MERG_DIR="$DATA_DIR/trimmed_merged_fastq"
 TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
 
 # Results
-RES_DIR="$PROJ_DIR/results/BLAST_results"
-mkdir -p "$FASTA_DIR" "$RES_DIR/human" "$RES_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR"
+RES_DIR="$PROJ_DIR/results"
+BLAST_DIR="$RES_DIR/blast_results"
+DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
+HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
 
 # Reference genomes
-HUMAN_REF="$DB_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
-DROS_REF="$DB_DIR/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa"
+HUMAN_REF="$REF_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
+DROS_REF="$REF_DIR/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa"
+DROS_INDEX="$REF_DIR/BDGP6"
+HUMAN_DIR="$REF_DIR/GRCh38"
+
+# Create necessary directories
+mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR"
 
 # Sample size
 SAMPLE_SIZE=5000

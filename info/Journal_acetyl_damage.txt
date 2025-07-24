@@ -136,3 +136,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - results from the trimming and subsequent qc did not show significant improvements
 - Rerunning the trim galore script with clip argument on the first 6bp 
 - stringency set to 3 for better trimming
+
+
+24/07/25
+- PA-MNase has a bias for A/T rich regions of the genome
+- Adds an A base to the start and T to the end
+- Re-running the trim galore script with the clip argument set to 10bp and removed the --illumina flag for automatic adapter detection
+- Need to trim -> align -> deduplicate -> assess the alignment rates
+- Editting the bowtie2 align script to use the new trimmed reads and to run in array mode
+
