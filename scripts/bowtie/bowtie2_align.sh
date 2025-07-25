@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=fly_bowtie2-align
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/fly_bowtie2-align-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/fly_bowtie2-align-%j.err
+#SBATCH --job-name=bowtie2-align
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bowtie2-align-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bowtie2-align-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5
@@ -13,22 +13,29 @@ echo "-----------------------------------------------------------------------"
 echo "Starting Bowtie2 alignment at $(date)"
 
 # Load configuration (defines $DATA_DIR , etc.)
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
 
 # Define the files and directories
 FILE_SET=("$TRIMMED_MERG_DIR"/*_merged_R1.fq.gz)
-FQ_FILE= "${FILE_SET[$SLURM_ARRAY_TASK_ID]}"
-RES_PATH=${DROS_ALIGN_DIR}     # Change for species alignment results path
-INDEX_PREFIX="${DROS_INDEX}"   # Change for species genome index build
-OUTPUT_DIR="${RES_PATH}/bowtie2_alignments"
+echo "Processing file set: ${FILE_SET[*]}"
+FQ_FILE="${FILE_SET[$SLURM_ARRAY_TASK_ID]}"
+echo "Selected FASTQ file: $FQ_FILE"
 SAMPLE_ID=$(basename "$FQ_FILE" _merged_R1.fq.gz)
+
+# Set the species
+SPECIES="human"  # Change to "drosophila" for Drosophila melanogaster
+
+if [[ "$SPECIES" == "drosophila" ]]; then
+    INDEX_PREFIX="${DROS_INDEX}/BDGP6"  # Change for species genome index
+    OUTPUT_DIR="${DROS_ALIGN_DIR}"  # Change for species output directory
+else
+    INDEX_PREFIX="${HUMAN_INDEX}/GRCh38"  # Change for species genome index
+    OUTPUT_DIR="${HUMAN_ALIGN_DIR}"  # Change for species output directory
+fi
 
 # Define output file paths
 OUTPUT_BAM="${OUTPUT_DIR}/${SAMPLE_ID}.bam"
 OUTPUT_SAM="${OUTPUT_DIR}/${SAMPLE_ID}.sam"
-
-# Create output directory if it doesn't exist
-mkdir -p $OUTPUT_DIR
 
 # Check if the sample exists
 if [[ ! -e "$FQ_FILE" ]]; then

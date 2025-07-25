@@ -1,4 +1,5 @@
 #!/bin/bash
+# This is the workflow configuration script for the Fly Acetylation Damage project.
 
 # Conda environment
 export PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/bin:$PATH"
@@ -18,20 +19,22 @@ TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
 
 # Results
 RES_DIR="$PROJ_DIR/results"
-BLAST_DIR="$RES_DIR/blast_results"
+BLAST_DIR="$RES_DIR/BLAST_results"
 DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
+DROS_ALIGN_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
+HUMAN_ALIGN_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
 
 # Reference genomes
 HUMAN_REF="$REF_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
 DROS_REF="$REF_DIR/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa"
 DROS_INDEX="$REF_DIR/BDGP6"
-HUMAN_DIR="$REF_DIR/GRCh38"
+HUMAN_INDEX="$REF_DIR/GRCh38"
 
 # Create necessary directories
-mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR"
+mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" "$HUMAN_ALIGN_DIR"
 
-# Sample size
+# BLAST read subsample #
 SAMPLE_SIZE=5000
 
 # Python script for summary

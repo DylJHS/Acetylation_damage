@@ -10,17 +10,19 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load configuration (defines $DATA_DIR , etc.)
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
 
 # Define the folder
-FOLDER="$TRIMMED_MERG_DIR"
+FOLDER="$DROS_ALIGN_DIR"  # Change to HUMAN_ALIGN_DIR for human alignments
 
 cd "$FOLDER" 
 
-echo "Running fastqc in directory: $PWD"
-# run the fastqc command
-fastqc -t 6 -o "$FOLDER" *.fq.gz
-echo "FastQC completed in directory: $PWD"
+
+# Uncomment the following lines if you want to run FastQC before MultiQC
+# echo "Running fastqc in directory: $PWD"
+# # run the fastqc command
+# fastqc -t 6 -o "$FOLDER" *.fq.gz
+# echo "FastQC completed in directory: $PWD"
 
 echo "-----------------------------------------------------"
 
