@@ -150,3 +150,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Finished generating the multiqc for the merged 10bp clipped reads; the results are similar to the previous runs
 - the A/T bias as well as the non-random binding of proteins leads to a non-uniform distribution of bases in the reads
 - Running the bowtie2 alignment script on the HPC server
+- The drosophila alignement is done 
+- Running the human alignment now
+- Need to assess the alignment rates usign the samtools flagstat command
+- Updated the alignment assessment flagstat script to use the new config file and to run in array mode
