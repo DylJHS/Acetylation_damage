@@ -145,3 +145,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Need to trim -> align -> deduplicate -> assess the alignment rates
 - Editting the bowtie2 align script to use the new trimmed reads and to run in array mode
 
+25/07/25
+- Editting the bowtie2 fly alignment script to use the new trimmed reads and to run in array mode
+- Finished generating the multiqc for the merged 10bp clipped reads; the results are similar to the previous runs
+- the A/T bias as well as the non-random binding of proteins leads to a non-uniform distribution of bases in the reads
+- Running the bowtie2 alignment script on the HPC server
