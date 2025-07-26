@@ -12,17 +12,36 @@
 # Load configuration (defines $DATA_DIR , etc.)
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
 
-# Define the folder
-FOLDER="$DROS_ALIGN_DIR"  # Change to HUMAN_ALIGN_DIR for human alignments
+# ARGUMENTS
+# if the first argument is "human", use the human alignments directory
+if [[ "$1" == "human" ]]; then
+    # Define the folder
+    FOLDER="$HUMAN_ALIGN_BOWTIE_DIR"  # Change to HUMAN_ALIGN_DIR for human alignments
+elif [[ "$1" == "drosophila" ]]; then
+    # Define the folder
+    FOLDER="$DROS_ALIGN_BOWTIE_DIR"  # Change to DROS_ALIGN_DIR for Drosophila melanogaster alignments
+else
+    # if nothing is supplied, exit with an error
+    echo "Error: Please specify 'human' or 'drosophila' as the first argument."
+    exit 1
+fi
 
+# Check if the folder exists
+if [[ ! -d "$FOLDER" ]]; then
+    echo "Error: The specified folder '$FOLDER' does not exist."
+    exit 1
+fi
+
+# Go to the specified folder
 cd "$FOLDER" 
 
-
-# Uncomment the following lines if you want to run FastQC before MultiQC
-# echo "Running fastqc in directory: $PWD"
-# # run the fastqc command
-# fastqc -t 6 -o "$FOLDER" *.fq.gz
-# echo "FastQC completed in directory: $PWD"
+# if second argument is "fastqc", run fastqc
+if [[ "$2" == "fastqc" ]]; then
+    echo "Running fastqc in directory: $PWD"
+    # run the fastqc command
+    fastqc -t 6 -o "$FOLDER" *.fq.gz
+    echo "FastQC completed in directory: $PWD"
+fi
 
 echo "-----------------------------------------------------"
 
@@ -31,3 +50,5 @@ echo "Running MultiQC in directory: $PWD"
 # run the multiqc command
 multiqc .
 echo "MultiQC completed in directory: $PWD"
+echo "-----------------------------------------------------"
+echo "-----------------------------------------------------"

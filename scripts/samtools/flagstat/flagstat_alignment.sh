@@ -17,7 +17,7 @@ echo "Starting flagstat alignment script for $SLURM_ARRAY_TASK_ID"
 echo "---------------------------------------------------------------------------------"
 
 # Define paths
-SPECIES="drosophila"  # Change to "drosophila" for Drosophila melanogaster
+SPECIES="human"  # Change to "drosophila" for Drosophila melanogaster
 if [[ "$SPECIES" == "drosophila" ]]; then
     RESULTS_DIR="$DROS_ALIGN_DIR"
 else
@@ -29,7 +29,8 @@ echo "--------------------------------------------------------------------------
 
 # Define output file
 OUTPUT_FILE="${RESULTS_DIR}/alignment_summary.txt"
-BAM_FILES=("${RESULTS_DIR}"/*.bam)
+BOWTIE_FOLDER="${RESULTS_DIR}/bowtie2_alignments"
+BAM_FILES=("${BOWTIE_FOLDER}"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 TMP_DIR="${RESULTS_DIR}/tmp"
 
@@ -76,6 +77,8 @@ if [[ -f $BAM_FILE ]]; then
     stats=$(samtools flagstat "$BAM_FILE")
     final_output="$intro"$'\n'"$stats"$'\n'"-------------------------------------------------------"$'\n'
     write_with_lock "$final_output"  # Write the stats to the output file
+    # Save the stats to a separate file
+    echo "$stats" > "${BOWTIE_FOLDER}/flagstat_${name}.txt"
     echo "Alignment stats for $name saved."
 else
     echo "Warning: No BAM files found in $RESULTS_DIR" 

@@ -22,8 +22,8 @@ RES_DIR="$PROJ_DIR/results"
 BLAST_DIR="$RES_DIR/BLAST_results"
 DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
-DROS_ALIGN_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
-HUMAN_ALIGN_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
+DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
+HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
 
 # Reference genomes
 HUMAN_REF="$REF_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"

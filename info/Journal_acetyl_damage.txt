@@ -154,3 +154,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Running the human alignment now
 - Need to assess the alignment rates usign the samtools flagstat command
 - Updated the alignment assessment flagstat script to use the new config file and to run in array mode
+
+26/07/25
+- Running the flagstat script for the human alignments and the drosophila alignments
+- Runnign the multiqc on the alignment results
