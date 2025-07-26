@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 #SBATCH --job-name=dupli_rem
 #SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/dupli_rem-%j.out
 #SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/dupli_rem-%j.err
@@ -9,46 +9,53 @@
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
-# Load Conda environment
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
+# Load the workflow configuration
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
 
-# Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
+# get the arguments for species
+if [[ "$1" == "human" ]]; then
+    DIR="$HUMAN_ALIGN_BOWTIE_DIR"
+elif [[ "$1" == "drosophila" ]]; then
+    DIR="$DROS_ALIGN_BOWTIE_DIR"
+else
+    echo "Error: Please specify 'human' or 'drosophila' as the first argument."
+    exit 1
+fi
+
+# get the dir bam files
+
 
 # Loop over the BAM files in the directory
-for INPUT_BAM in "$DIR"/*00?_tagged.bam; do
-    if [[ -f "$INPUT_BAM" ]]; then
-        echo "Processing: $INPUT_BAM"
+# for INPUT_BAM in "$DIR"/*00?_tagged.bam; do
+#     if [[ -f "$INPUT_BAM" ]]; then
+#         echo "Processing: $INPUT_BAM"
 
-        BASE=$(basename "$INPUT_BAM" .bam)
+#         BASE=$(basename "$INPUT_BAM" .bam)
 
-        NAME_SORTED_BAM="${DIR}/sortd/${BASE}_name_sorted.bam"
-        FIXMATE_BAM="${DIR}/fixmate/${BASE}_fixmate.bam"
-        POS_SORTED_BAM="${DIR}/sortd/${BASE}_pos_sorted.bam"
-        DEDUP_BAM="${DIR}/dedup/${BASE}_dedup.bam"
-        DEDUP_INDEX="${DIR}/dedup/${BASE}_dedup.bam.bai"
+#         NAME_SORTED_BAM="${DIR}/sortd/${BASE}_name_sorted.bam"
+#         FIXMATE_BAM="${DIR}/fixmate/${BASE}_fixmate.bam"
+#         POS_SORTED_BAM="${DIR}/sortd/${BASE}_pos_sorted.bam"
+#         DEDUP_BAM="${DIR}/dedup/${BASE}_dedup.bam"
+#         DEDUP_INDEX="${DIR}/dedup/${BASE}_dedup.bam.bai"
 
-        # Create directories if they do not exist
-        mkdir -p "${DIR}/sortd"
-        mkdir -p "${DIR}/fixmate"
-        mkdir -p "${DIR}/dedup"
+#         # Create directories if they do not exist
+#         mkdir -p "${DIR}/sortd" "${DIR}/fixmate" "${DIR}/dedup"
 
-        echo "Sorting the input BAM by read name..."
-        samtools collate -@ 8 -o "$NAME_SORTED_BAM" "$INPUT_BAM"
+#         echo "Sorting the input BAM by read name..."
+#         samtools collate -@ 8 -o "$NAME_SORTED_BAM" "$INPUT_BAM"
 
-        echo "Fixing mate information..."
-        samtools fixmate -m -@ 8 "$NAME_SORTED_BAM" "$FIXMATE_BAM"
+#         echo "Fixing mate information..."
+#         samtools fixmate -m -@ 8 "$NAME_SORTED_BAM" "$FIXMATE_BAM"
 
-        echo "Sorting by coordinate..."
-        samtools sort -@ 8 -o "$POS_SORTED_BAM" "$FIXMATE_BAM"
+#         echo "Sorting by coordinate..."
+#         samtools sort -@ 8 -o "$POS_SORTED_BAM" "$FIXMATE_BAM"
 
-        echo "Removing duplicates..."
-        samtools markdup -r -@ 8 "$POS_SORTED_BAM" "$DEDUP_BAM"
+#         echo "Removing duplicates..."
+#         samtools markdup -r -@ 8 "$POS_SORTED_BAM" "$DEDUP_BAM"
 
-        echo "Indexing deduplicated BAM..."
-        samtools index "$DEDUP_BAM" "$DEDUP_INDEX"
+#         echo "Indexing deduplicated BAM..."
+#         samtools index "$DEDUP_BAM" "$DEDUP_INDEX"
 
-        echo "Duplicate removal completed successfully. \n"
-    fi
-done
+#         echo "Duplicate removal completed successfully. \n"
+#     fi
+# done
