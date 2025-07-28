@@ -24,6 +24,7 @@ DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
 DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
 HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
+TEMP_DIR="$RES_DIR/temp"
 
 # Reference genomes
 HUMAN_REF="$REF_DIR/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
@@ -32,7 +33,9 @@ DROS_INDEX="$REF_DIR/BDGP6"
 HUMAN_INDEX="$REF_DIR/GRCh38"
 
 # Create necessary directories
-mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" "$HUMAN_ALIGN_DIR"
+mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" \
+    "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" \
+    "$HUMAN_ALIGN_DIR" "$TEMP_DIR"
 
 # BLAST read subsample #
 SAMPLE_SIZE=5000

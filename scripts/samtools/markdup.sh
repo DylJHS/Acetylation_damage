@@ -5,8 +5,8 @@
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -14,10 +14,10 @@
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
 
 # get the arguments for species
-if [[ "$1" == "human" ]]; then
+if [[ "$1" == "-human" ]]; then
     BAM_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
     OUTPUT_PATH="$HUMAN_ALIGN_DIR"
-elif [[ "$1" == "drosophila" ]]; then
+elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
     OUTPUT_PATH="$DROS_ALIGN_DIR"
 else
@@ -30,33 +30,34 @@ OUTPUT_DIR="${OUTPUT_PATH}"
 BAM_LIST=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 
-echo "Processing: $BAM_FILE"
-
 BASE=$(basename "$BAM_FILE" .bam)
 
-NAME_SORTED_BAM="${OUTPUT_DIR}/sortd/${BASE}_name_sorted.bam"
-FIXMATE_BAM="${OUTPUT_DIR}/fixmate/${BASE}_fixmate.bam"
-POS_SORTED_BAM="${OUTPUT_DIR}/sortd/${BASE}_pos_sorted.bam"
+echo "Processing: $BAM_FILE"
+echo "-----------------------------------------------------------"
+
 DEDUP_BAM="${OUTPUT_DIR}/dedup/${BASE}_dedup.bam"
-DEDUP_INDEX="${OUTPUT_DIR}/dedup/${BASE}_dedup.bam.bai"
 
 # Create directories if they do not exist
-mkdir -p "${OUTPUT_DIR}/sortd" "${OUTPUT_DIR}/fixmate" "${OUTPUT_DIR}/dedup"
+mkdir -p "${OUTPUT_DIR}/dedup"
 
-echo "Sorting the input BAM by read name..."
-samtools collate -@ 4 -o "$NAME_SORTED_BAM" "$BAM_FILE"
+if [[ "$2" == "-r" ]]; then
+    echo "Removing duplicates..."
+    echo "-----------------------------------------------------------"
+    samtools collate -@ 8 -O -u  -T "${TEMP_DIR}/collate_${BASE}" "$BAM_FILE" | \
+        samtools fixmate -m -@ 8 -u - - | \
+        samtools sort -@ 8 -u - | \
+        samtools markdup -r -@ 8 - "$DEDUP_BAM"
+else
+    echo "Marking duplicates without removal..."
+    echo "-----------------------------------------------------------"
+    samtools collate -@ 8 -O -u -T "${TEMP_DIR}/collate_${BASE}" "$BAM_FILE" | \
+        samtools fixmate -m -@ 8 -u - - | \
+        samtools sort -@ 8 -u - | \
+        samtools markdup -@ 8 - "$DEDUP_BAM"
+fi
 
-echo "Fixing mate information..."
-samtools fixmate -m -@ 4 "$NAME_SORTED_BAM" "$FIXMATE_BAM"
+echo "Finalizing BAM file..."
+echo "-----------------------------------------------------------"
 
-echo "Sorting by coordinate..."
-samtools sort -@ 4 -o "$POS_SORTED_BAM" "$FIXMATE_BAM"
-
-echo "Removing duplicates..."
-samtools markdup -r -@ 4 "$POS_SORTED_BAM" "$DEDUP_BAM"
-
-echo "Indexing deduplicated BAM..."
-samtools index "$DEDUP_BAM" "$DEDUP_INDEX"
-
-echo -e "Duplicate removal completed successfully. \n"
-
+echo "Removing temporary files..."
+rm -f ${TEMP_DIR}/*_${BASE}*
