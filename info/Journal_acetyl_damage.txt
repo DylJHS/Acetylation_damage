@@ -159,3 +159,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Running the flagstat script for the human alignments and the drosophila alignments
 - Runnign the multiqc on the alignment results
 - Editting the duplicate removal samtools markdup script to use the new config file and to run in array mode
+
+28/07/25
+- Running the samtools markdup script to remove the duplicates from the human and drosophila
+- will run the multiqc on the deduplicated results
