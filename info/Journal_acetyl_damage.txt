@@ -161,9 +161,13 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Editting the duplicate removal samtools markdup script to use the new config file and to run in array mode
 
 28/07/25
-- Running the samtools markdup script to remove the duplicates from the human and drosophila
+- Running the samtools markdup script to remove the duplicates from the drosophila
 - will run the multiqc on the deduplicated results
 - Updating the files on the hpc server due to storage issues
 - trying to save the smaller files while keeping the initial raw files as well as all scripts to be able to reproduce the results
 - saving the raw fastq files as well as the trimmed fastq files by lane but not the merged files (will need to be regenerated if needed using the concat_fastq.sh script)
 - will be saving the fastqc and multiqc reports for the merged files though
+
+29/07/25
+- Running the samtools markdup script on the human alignments
+- Cleared out a lot of the data from the HPC server to make space for the new files

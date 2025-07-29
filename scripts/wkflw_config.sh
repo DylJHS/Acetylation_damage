@@ -24,6 +24,8 @@ DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
 DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
 HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
+DROS_DEDUP_DIR="$DROS_ALIGN_DIR/dedup"
+HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/dedup"
 TEMP_DIR="$RES_DIR/temp"
 
 # Reference genomes
@@ -35,7 +37,8 @@ HUMAN_INDEX="$REF_DIR/GRCh38"
 # Create necessary directories
 mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" \
     "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" \
-    "$HUMAN_ALIGN_DIR" "$TEMP_DIR"
+    "$HUMAN_ALIGN_DIR" "$TEMP_DIR" "$DROS_DEDUP_DIR" \
+    "$HUMAN_DEDUP_DIR"
 
 # BLAST read subsample #
 SAMPLE_SIZE=5000

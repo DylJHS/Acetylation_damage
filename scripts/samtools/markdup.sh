@@ -16,41 +16,39 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 # get the arguments for species
 if [[ "$1" == "-human" ]]; then
     BAM_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
-    OUTPUT_PATH="$HUMAN_ALIGN_DIR"
+    DEDUP_PATH="$HUMAN_DEDUP_DIR"
 elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
-    OUTPUT_PATH="$DROS_ALIGN_DIR"
+    DEDUP_PATH="$DROS_DEDUP_DIR"
 else
     echo "Error: Please specify 'human' or 'drosophila' as the first argument."
     exit 1
 fi
 
-OUTPUT_DIR="${OUTPUT_PATH}"
-
 BAM_LIST=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 
 BASE=$(basename "$BAM_FILE" .bam)
+DEDUP_BAM="${DEDUP_PATH}/${BASE}_dedup.bam"
+TEMP_FLDER="${TEMP_DIR}/${BASE}"
 
 echo "Processing: $BAM_FILE"
 echo "-----------------------------------------------------------"
 
-DEDUP_BAM="${OUTPUT_DIR}/dedup/${BASE}_dedup.bam"
-
 # Create directories if they do not exist
-mkdir -p "${OUTPUT_DIR}/dedup"
+mkdir -p "${TEMP_FLDER}"
 
 if [[ "$2" == "-r" ]]; then
     echo "Removing duplicates..."
     echo "-----------------------------------------------------------"
-    samtools collate -@ 8 -O -u  -T "${TEMP_DIR}/collate_${BASE}" "$BAM_FILE" | \
+    samtools collate -@ 8 -O -u  -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
         samtools fixmate -m -@ 8 -u - - | \
         samtools sort -@ 8 -u - | \
         samtools markdup -r -@ 8 - "$DEDUP_BAM"
 else
     echo "Marking duplicates without removal..."
     echo "-----------------------------------------------------------"
-    samtools collate -@ 8 -O -u -T "${TEMP_DIR}/collate_${BASE}" "$BAM_FILE" | \
+    samtools collate -@ 8 -O -u -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
         samtools fixmate -m -@ 8 -u - - | \
         samtools sort -@ 8 -u - | \
         samtools markdup -@ 8 - "$DEDUP_BAM"
@@ -60,4 +58,4 @@ echo "Finalizing BAM file..."
 echo "-----------------------------------------------------------"
 
 echo "Removing temporary files..."
-rm -f ${TEMP_DIR}/*_${BASE}*
+rm -rf ${TEMP_FLDER}

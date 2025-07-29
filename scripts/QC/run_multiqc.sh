@@ -14,15 +14,24 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 
 # ARGUMENTS
 # if the first argument is "human", use the human alignments directory
-if [[ "$1" == "human" ]]; then
+if [[ "$1" == "-human" ]]; then
     # Define the folder
+    if [[ "$2" == "-bowtie" ]]; then
+        FOLDER="$HUMAN_ALIGN_BOWTIE_DIR"  # Change to HUMAN_ALIGN_DIR for human alignments
+    elif [[ "$2" == "-dedup" ]]; then
+        FOLDER="$HUMAN_DEDUP_DIR"  # Change to HUMAN_DEDUP_DIR for deduplicated human alignments
+    fi
     FOLDER="$HUMAN_ALIGN_BOWTIE_DIR"  # Change to HUMAN_ALIGN_DIR for human alignments
-elif [[ "$1" == "drosophila" ]]; then
+elif [[ "$1" == "-drosophila" ]]; then
     # Define the folder
-    FOLDER="$DROS_ALIGN_BOWTIE_DIR"  # Change to DROS_ALIGN_DIR for Drosophila melanogaster alignments
+    if [[ "$2" == "-bowtie" ]]; then
+        FOLDER="$DROS_ALIGN_BOWTIE_DIR"  # Change to DROS_ALIGN_DIR for drosophila alignments
+    elif [[ "$2" == "-dedup" ]]; then
+        FOLDER="$DROS_DEDUP_DIR"  # Change to DROS_DEDUP_DIR for deduplicated drosophila alignments
+    fi
 else
-    # if nothing is supplied, exit with an error
-    echo "Error: Please specify 'human' or 'drosophila' as the first argument."
+    echo "Usage: $0 -human|-drosophila [-bowtie|-dedup]"
+    echo "Please specify either -human or -drosophila followed by -bowtie or -dedup if needed."
     exit 1
 fi
 
@@ -36,7 +45,7 @@ fi
 cd "$FOLDER" 
 
 # if second argument is "fastqc", run fastqc
-if [[ "$2" == "fastqc" ]]; then
+if [[ "$3" == "-fastqc" ]]; then
     echo "Running fastqc in directory: $PWD"
     # run the fastqc command
     fastqc -t 6 -o "$FOLDER" *.fq.gz

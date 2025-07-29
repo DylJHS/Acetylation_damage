@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=flagstat_alignment
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat_alignment-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat_alignment-%j.err
+#SBATCH --job-name=flagstat
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5  # Adjust based on the number of BAM files
@@ -17,33 +17,40 @@ echo "Starting flagstat alignment script for $SLURM_ARRAY_TASK_ID"
 echo "---------------------------------------------------------------------------------"
 
 # Define paths
-SPECIES="human"  # Change to "drosophila" for Drosophila melanogaster
-if [[ "$SPECIES" == "drosophila" ]]; then
+if [[ "$1" == "-drosophila" ]]; then
     RESULTS_DIR="$DROS_ALIGN_DIR"
-else
+    if [[ "$2" == "-bowtie" ]]; then
+        BAM_FLDR="$DROS_ALIGN_BOWTIE_DIR"
+    elif [[ "$2" == "-dedup" ]]; then
+        BAM_FLDR="$DROS_DEDUP_DIR"
+    fi
+elif [[ "$1" == "-human" ]]; then
     RESULTS_DIR="$HUMAN_ALIGN_DIR"
+    if [[ "$2" == "-bowtie" ]]; then
+        BAM_FLDR="$HUMAN_ALIGN_BOWTIE_DIR"
+    elif [[ "$2" == "-dedup" ]]; then
+        BAM_FLDR="$HUMAN_DEDUP_DIR"
+    fi
 fi
 
-echo "Running for species: $SPECIES"
+if [[ "$2" == "-dedup" ]]; then
+    OUTPUT_FILE="$RESULTS_DIR/flagstat_dedup_align_summary.txt"
+elif [[ "$2" == "-bowtie" ]]; then
+    OUTPUT_FILE="$RESULTS_DIR/flagstat_bowtie_align_summary.txt"
+fi
+
+echo "Running $2 for species: $1"
 echo "---------------------------------------------------------------------------------"
 
 # Define output file
-OUTPUT_FILE="${RESULTS_DIR}/alignment_summary.txt"
-BOWTIE_FOLDER="${RESULTS_DIR}/bowtie2_alignments"
-BAM_FILES=("${BOWTIE_FOLDER}"/*.bam)
-BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
-TMP_DIR="${RESULTS_DIR}/tmp"
 
-# Create the lock directory if it doesn't exist
-if [[ ! -d "$TMP_DIR" ]]; then
-    mkdir -p "$TMP_DIR"
-    echo "Created temporary directory: $TMP_DIR"
-fi
+BAM_FILES=("${BAM_FLDR}"/*.bam)
+BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 
 # Define the lock function 
 write_with_lock() {
     local msg="$1"
-    local tmp_lock="${TMP_DIR}/lock_${SLURM_JOB_ID}.lock"
+    local tmp_lock="${TEMP_DIR}/lock_${SLURM_JOB_ID}.lock"
 
     # Wait until we can create the lock
     while ! mkdir "$tmp_lock" 2>/dev/null; do
@@ -78,9 +85,12 @@ if [[ -f $BAM_FILE ]]; then
     final_output="$intro"$'\n'"$stats"$'\n'"-------------------------------------------------------"$'\n'
     write_with_lock "$final_output"  # Write the stats to the output file
     # Save the stats to a separate file
-    echo "$stats" > "${BOWTIE_FOLDER}/flagstat_${name}.txt"
+    echo "$stats" > "${BAM_FLDR}/flagstat_${name}.txt"
     echo "Alignment stats for $name saved."
 else
     echo "Warning: No BAM files found in $RESULTS_DIR" 
     write_with_lock "Warning: No BAM files found in $RESULTS_DIR"
 fi
+echo "---------------------------------------------------------------------------------"
+echo "Flagstat alignment script for $SLURM_ARRAY_TASK_ID completed."
+echo "---------------------------------------------------------------------------------"
