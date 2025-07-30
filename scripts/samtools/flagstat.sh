@@ -33,13 +33,9 @@ elif [[ "$1" == "-human" ]]; then
     fi
 fi
 
-if [[ "$2" == "-dedup" ]]; then
-    OUTPUT_FILE="$RESULTS_DIR/flagstat_dedup_align_summary.txt"
-elif [[ "$2" == "-bowtie" ]]; then
-    OUTPUT_FILE="$RESULTS_DIR/flagstat_bowtie_align_summary.txt"
-fi
+OUTPUT_FILE="$RESULTS_DIR/${1#-}_flagstat_${2#-}_align_summary.txt"
 
-echo "Running $2 for species: $1"
+echo "Running ${2#-} for species: ${1#-}"
 echo "---------------------------------------------------------------------------------"
 
 # Define output file
@@ -77,7 +73,7 @@ if [[ $SLURM_ARRAY_TASK_ID -eq 0 ]]; then
 fi  
 
 # Loop through BAM files and save stats
-if [[ -f $BAM_FILE ]]; then
+if [[ -e $BAM_FILE ]]; then
     name=$(basename "$BAM_FILE")
     echo "Processing: $name"
     intro="Processing BAM file: $name"
