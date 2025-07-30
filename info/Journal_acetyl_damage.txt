@@ -177,3 +177,18 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Results from the dros dedup alignments show that the deduplication was successful but with a near complete reduction in the number of reads
 - Rerunning the markdup on the human alignments due to issue with temp files
 - Rerunning the markdup for both the human and drosophila alignments with stat output files
+- Moved the tagged files to the tagged folder in the data dir for the original files
+- Need to run the flagstat on the tagged files to assess the alignment rates
+- Stopped the markdup scripts 
+- Need to run the markdup scripts one after the other for either species so there is no conflict with the temp files
+- Have all the human bowtie alignment flagstat files 
+- Do not have the drosophila bowtie alignment flagstat files
+- Need to run the flagstat script on the tagged files for drosophila
+- Rerunning the flagstat script on the drosophila bowtie alignments
+- Rerunning the markdup script on the drosophila bowtie alignments
+- Will need to rerun the markdup script on the human bowtie alignments once the drosophila is done
+- Looking at the flagstat results from the tagged files which are meant to be aligned to the drosophila genome
+    it looks like they are able to get 100% mapped with at least 28M reads; very different from my results;
+    missing the flagstat file for JAN-007, so will rerun
+- Lost the JAN-004 human bowtie aligned bam file 
+- Going to run the markdup on the tagged files 

@@ -29,6 +29,9 @@ elif [[ "$1" == "-drosophila" ]]; then
     elif [[ "$2" == "-dedup" ]]; then
         FOLDER="$DROS_DEDUP_DIR"  # Change to DROS_DEDUP_DIR for deduplicated drosophila alignments
     fi
+elif [[ "$1" == "-tagged" ]]; then
+    # Define the folder
+    FOLDER="$TAGGED_BAM_ORI_DIR"  # Change to TAGGED_BAM_ORI_DIR for tagged BAM files
 else
     echo "Usage: $0 -human|-drosophila [-bowtie|-dedup]"
     echo "Please specify either -human or -drosophila followed by -bowtie or -dedup if needed."
@@ -41,15 +44,18 @@ if [[ ! -d "$FOLDER" ]]; then
     exit 1
 fi
 
-# Go to the specified folder
-cd "$FOLDER" 
-
 # if second argument is "fastqc", run fastqc
 if [[ "$3" == "-fastqc" ]]; then
+    # Go to the specified folder
+    cd "$FOLDER" 
     echo "Running fastqc in directory: $PWD"
     # run the fastqc command
     fastqc -t 6 -o "$FOLDER" *.fq.gz
     echo "FastQC completed in directory: $PWD"
+else
+    echo "-----------------------------------------------------"
+    echo "No FastQC analysis requested. Skipping FastQC step."
+    cd "$FOLDER/flagstat_results"
 fi
 
 echo "-----------------------------------------------------"
@@ -58,6 +64,6 @@ echo "Running MultiQC in directory: $PWD"
 
 # run the multiqc command
 multiqc .
-echo "MultiQC completed in directory: $PWD"
 echo "-----------------------------------------------------"
+echo "MultiQC completed in directory: $PWD"
 echo "-----------------------------------------------------"

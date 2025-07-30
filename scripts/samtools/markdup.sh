@@ -20,10 +20,14 @@ if [[ "$1" == "-human" ]]; then
 elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
     DEDUP_PATH="$DROS_DEDUP_DIR"
+elif [[ "$1" == "-tagged" ]]; then
+    BAM_DIR="$TAGGED_BAM_ORI_DIR"
+    DEDUP_PATH="$TAGGED_DEDUP_DIR"
 else
     echo "Error: Please specify 'human' or 'drosophila' as the first argument."
     exit 1
 fi
+
 echo "Processing ${1#-} BAM files..."
 echo "-----------------------------------------------------------"
 
@@ -32,7 +36,7 @@ BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 
 BASE=$(basename "$BAM_FILE" .bam)
 DEDUP_BAM="${DEDUP_PATH}/${BASE}_dedup.bam"
-DEDUP_STATS="${DEDUP_PATH}/deduped_stats"
+DEDUP_STATS="${DEDUP_PATH}/deduped_stats/dedupd_stat_${BASE}.txt"
 TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}"
 
 echo "Processing: $BASE"

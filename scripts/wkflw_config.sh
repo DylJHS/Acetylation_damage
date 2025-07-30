@@ -16,18 +16,28 @@ FASTA_DIR="$DATA_DIR/FASTA_subsets"
 REF_DIR="$PROJ_DIR/data/ref_genomes"
 TRIMMED_MERG_DIR="$DATA_DIR/trimmed_merged_fastq"
 TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
+TAGGED_BAM_ORI_DIR="$DATA_DIR/tagged_bam_files"
 
 # Results
 RES_DIR="$PROJ_DIR/results"
+
 BLAST_DIR="$RES_DIR/BLAST_results"
+
 DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
+TAGGED_ALIGN_DIR="$RES_DIR/tagged_alignments"
+
 DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
 HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
+
 DROS_DEDUP_DIR="$DROS_ALIGN_DIR/deduped_alignments"
 HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/deduped_alignments"
+TAGGED_DEDUP_DIR="$TAGGED_ALIGN_DIR/deduped_alignments"
+
 DROS_DEDUP_STATS="$DROS_DEDUP_DIR/deduped_stats"
 HUMAN_DEDUP_STATS="$HUMAN_DEDUP_DIR/deduped_stats"
+TAGGED_DEDUP_STATS="$TAGGED_DEDUP_DIR/deduped_stats"
+
 TEMP_DIR="$RES_DIR/temp"
 
 # Reference genomes
@@ -40,7 +50,8 @@ HUMAN_INDEX="$REF_DIR/GRCh38"
 mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" \
     "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" \
     "$HUMAN_ALIGN_DIR" "$TEMP_DIR" "$DROS_DEDUP_DIR" \
-    "$HUMAN_DEDUP_DIR" "$DROS_DEDUP_STATS" "$HUMAN_DEDUP_STATS"
+    "$HUMAN_DEDUP_DIR" "$DROS_DEDUP_STATS" "$HUMAN_DEDUP_STATS" \
+    "$TAGGED_ALIGN_DIR" "$TAGGED_DEDUP_DIR" "$TAGGED_DEDUP_STATS"
 
 # BLAST read subsample #
 SAMPLE_SIZE=5000
