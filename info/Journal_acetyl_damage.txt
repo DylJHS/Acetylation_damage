@@ -176,3 +176,4 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Running the multiqc on the deduplicated results for the drosophila deduplicated files
 - Results from the dros dedup alignments show that the deduplication was successful but with a near complete reduction in the number of reads
 - Rerunning the markdup on the human alignments due to issue with temp files
+- Rerunning the markdup for both the human and drosophila alignments with stat output files

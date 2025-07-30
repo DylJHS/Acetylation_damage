@@ -11,7 +11,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load Conda environment
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/BLAST/BLAST_wkflw_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/workflow_config.sh
 
 # SCC folders
 SCC_FOLDERS=("$DATA_DIR"/bulkChIC-UMC-JAN-*)

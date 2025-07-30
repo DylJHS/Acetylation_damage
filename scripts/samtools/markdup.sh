@@ -33,9 +33,7 @@ BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 BASE=$(basename "$BAM_FILE" .bam)
 DEDUP_BAM="${DEDUP_PATH}/${BASE}_dedup.bam"
 DEDUP_STATS="${DEDUP_PATH}/deduped_stats"
-TEMP_FLDER="${TEMP_DIR}/${BASE}_${$1#-}"
-
-mkdir -p "${DEDUP_STATS}"
+TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}"
 
 echo "Processing: $BASE"
 echo "-----------------------------------------------------------"

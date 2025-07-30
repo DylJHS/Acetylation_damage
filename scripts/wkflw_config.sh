@@ -26,6 +26,8 @@ DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
 HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
 DROS_DEDUP_DIR="$DROS_ALIGN_DIR/deduped_alignments"
 HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/deduped_alignments"
+DROS_DEDUP_STATS="$DROS_DEDUP_DIR/deduped_stats"
+HUMAN_DEDUP_STATS="$HUMAN_DEDUP_DIR/deduped_stats"
 TEMP_DIR="$RES_DIR/temp"
 
 # Reference genomes
@@ -38,7 +40,7 @@ HUMAN_INDEX="$REF_DIR/GRCh38"
 mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" \
     "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" \
     "$HUMAN_ALIGN_DIR" "$TEMP_DIR" "$DROS_DEDUP_DIR" \
-    "$HUMAN_DEDUP_DIR"
+    "$HUMAN_DEDUP_DIR" "$DROS_DEDUP_STATS" "$HUMAN_DEDUP_STATS"
 
 # BLAST read subsample #
 SAMPLE_SIZE=5000
