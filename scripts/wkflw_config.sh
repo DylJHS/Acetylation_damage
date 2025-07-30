@@ -24,8 +24,8 @@ DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
 HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
 DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
 HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
-DROS_DEDUP_DIR="$DROS_ALIGN_DIR/dedup"
-HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/dedup"
+DROS_DEDUP_DIR="$DROS_ALIGN_DIR/deduped_alignments"
+HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/deduped_alignments"
 TEMP_DIR="$RES_DIR/temp"
 
 # Reference genomes

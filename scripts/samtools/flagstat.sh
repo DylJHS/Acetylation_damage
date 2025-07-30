@@ -33,7 +33,10 @@ elif [[ "$1" == "-human" ]]; then
     fi
 fi
 
-OUTPUT_FILE="$RESULTS_DIR/${1#-}_flagstat_${2#-}_align_summary.txt"
+FLAGSTAT_FLDR="$BAM_FLDR/flagstat_results"
+OUTPUT_FILE="$FLAGSTAT_FLDR/${1#-}_flagstat_${2#-}_align_summary.txt"
+
+mkdir -p "$FLAGSTAT_FLDR"
 
 echo "Running ${2#-} for species: ${1#-}"
 echo "---------------------------------------------------------------------------------"
@@ -81,7 +84,7 @@ if [[ -e $BAM_FILE ]]; then
     final_output="$intro"$'\n'"$stats"$'\n'"-------------------------------------------------------"$'\n'
     write_with_lock "$final_output"  # Write the stats to the output file
     # Save the stats to a separate file
-    echo "$stats" > "${BAM_FLDR}/flagstat_${name}.txt"
+    echo "$stats" > "${FLAGSTAT_FLDR}/flagstat_${name}.txt"
     echo "Alignment stats for $name saved."
 else
     echo "Warning: No BAM files found in $RESULTS_DIR" 
