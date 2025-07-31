@@ -13,7 +13,7 @@ echo "-----------------------------------------------------------------------"
 echo "Starting Bowtie2 alignment at $(date)"
 
 # Load configuration (defines $DATA_DIR , etc.)
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
 
 # Define the files and directories
 FILE_SET=("$TRIMMED_MERG_DIR"/*_merged_R1.fq.gz)

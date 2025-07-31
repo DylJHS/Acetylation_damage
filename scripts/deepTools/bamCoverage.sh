@@ -40,11 +40,12 @@ if [[ "$2" == "-bedgraph" ]]; then
     OUTPUT_FILE="${OUTPUT_PATH}/${FILE_NAME}.bedgraph"
 elif [[ "$2" == "-bigwig" ]]; then
     OUTPUT_FILE="${OUTPUT_PATH}/${FILE_NAME}.bw"
-
+else
+    echo "Error: Please specigy valid output format -bedgraph or -bigwig."
 fi
 
 # Run bamCoverage
-echo "Running bamCoverage for $BAM_FILE..."
+echo "Running bamCoverage for $FILE_NAME..."
 
 bamCoverage -b "$BAM_FILE" \
     --outFileName "$OUTPUT_FILE" \
@@ -55,3 +56,4 @@ bamCoverage -b "$BAM_FILE" \
     --ignoreForNormalization chrX \
     --extendReads
 
+echo "bamCoverage finished"

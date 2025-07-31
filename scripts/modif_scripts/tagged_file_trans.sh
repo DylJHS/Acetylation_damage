@@ -12,7 +12,7 @@
 # Transform the names of the taggged bam files and save them to the same directory
 
 # Load Conda environment
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
 
 FODLERS=("$DATA_DIR"/bulkChIC*)
 TAGGED_FLDR="$DATA_DIR/tagged_bam_files"

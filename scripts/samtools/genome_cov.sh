@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=flagstat
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.err
+#SBATCH --job-name=genomecov
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/genomecov-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/genomecov-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5  # Adjust based on the number of BAM files
@@ -19,26 +19,8 @@ echo "--------------------------------------------------------------------------
 
 # Define paths
 if [[ "$1" == "-drosophila" ]]; then
-    RESULTS_DIR="$DROS_ALIGN_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$DROS_ALIGN_BOWTIE_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$DROS_DEDUP_DIR"
-    fi
+    
 elif [[ "$1" == "-human" ]]; then
-    RESULTS_DIR="$HUMAN_ALIGN_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$HUMAN_ALIGN_BOWTIE_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$HUMAN_DEDUP_DIR"
-    fi
-elif [[ "$1" == "-tagged" ]]; then
-    RESULTS_DIR="$TAGGED_BAM_ORI_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$RESULTS_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$TAGGED_DEDUP_DIR"
-    fi
 else
     echo "Error: Invalid species or alignment type specified."
     exit 1
