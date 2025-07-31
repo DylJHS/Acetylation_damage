@@ -10,21 +10,29 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load Conda environment
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/deeptools_env
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/deeptools_env_config.sh
 
 # Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
-OUTPUT_DIR="${DIR}/fingerprints"
-mkdir -p "$OUTPUT_DIR"
-
-
-OUTPUT_PNG="${DIR}/fingerprints/fingerprint.png"
+# Define paths
+if [[ "$1" == "-drosophila" ]]; then
+    RESULTS_DIR="$DROS_DEDUP_DIR"
+elif [[ "$1" == "-human" ]]; then
+    RESULTS_DIR="$HUMAN_DEDUP_DIR"
+elif [[ "$1" == "-tagged" ]]; then
+    RESULTS_DIR="$TAGGED_DEDUP_DIR"
+else
+    echo "Error: Invalid alignment type specified."
+    exit 1
+fi
 
 echo "Generating fingerprint plot..."
-plotFingerprint -b /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged/dedup/*.bam \
-    --labels "control_003" "control_005" "H3K9ac_006" "H3K9ac_007" "H3K9ac_008" \
+plotFingerprint \
+    -b "${RESULTS_DIR}"/*.bam \
+    --smartLabels \
     --minMappingQuality 30 \
-    --outRawCounts "${DIR}/fingerprints/out_fingerprint.txt" \
+    --outRawCounts "${RESULTS_DIR}/fingerprints/out_fingerprint.txt" \
+    -bs 10 \
     --skipZeros \
-    --plotFile "$OUTPUT_PNG" 
+    -v \
+    -r chr2L:
+    --plotFile "${RESULTS_DIR}/fingerprint.png" 

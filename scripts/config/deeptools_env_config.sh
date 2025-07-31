@@ -17,7 +17,7 @@ TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
 TAGGED_BAM_ORI_DIR="$DATA_DIR/tagged_bam_files"
 
 # Results
-RES_DIR="$PROJ_DIR/results"
+RES_DIR="$PROJ_DIR/results" # Main results folder
 
 BLAST_DIR="$RES_DIR/BLAST_results"
 

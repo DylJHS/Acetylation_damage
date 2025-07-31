@@ -12,6 +12,7 @@
 
 # Load the workflow configuration
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/wkflw_config.sh
+
 echo "---------------------------------------------------------------------------------"
 echo "Starting flagstat alignment script for $SLURM_ARRAY_TASK_ID"
 echo "---------------------------------------------------------------------------------"
