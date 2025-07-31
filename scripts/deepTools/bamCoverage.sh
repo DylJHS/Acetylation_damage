@@ -10,8 +10,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load Conda environment
-source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/conda.sh
-conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/deeptools_env
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/deeptools_env_config.sh
 
 # Define the species
 # SPECIES="human"
@@ -44,7 +43,7 @@ for INPUT_BAM in "$DIR"/dedup/*00[0-9]*_dedup.bam; do
             bamCoverage -b "$INPUT_BAM" \
                 --outFileName "$OUTPUT_BAM" \
                 --outFileFormat bigwig \
-                --binSize 10 \
+                --binSize 50 \
                 --normalizeUsing RPGC \
                 --effectiveGenomeSize 142573017 \
                 --ignoreForNormalization chrX \
@@ -53,7 +52,7 @@ for INPUT_BAM in "$DIR"/dedup/*00[0-9]*_dedup.bam; do
             bamCoverage -b "$INPUT_BAM" \
                 --outFileName "$OUTPUT_BAM" \
                 --outFileFormat bigwig \
-                --binSize 10 \
+                --binSize 50 \
                 --normalizeUsing RPGC \
                 --effectiveGenomeSize 2913022398 \
                 --ignoreForNormalization chrX \

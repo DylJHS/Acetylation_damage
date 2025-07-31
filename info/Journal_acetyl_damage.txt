@@ -203,4 +203,4 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - the script is info/SCC_ChIC_Snakefile.txt (https://github.com/BuysDB/SingleCellMultiOmics/blob/master/singlecellmultiomics/snakemake_workflows/chic/Snakefile)
 - Going to just use the final bam files delivered by the core since their results seem to be better
 - Editted the bowtie2 script to match the SCMO script's alignment setup
-
+- Can't rerun the bowtie at teh moment due to having moved the files
