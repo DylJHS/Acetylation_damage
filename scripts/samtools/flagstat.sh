@@ -35,8 +35,8 @@ elif [[ "$1" == "-tagged" ]]; then
     RESULTS_DIR="$TAGGED_BAM_ORI_DIR"
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$RESULTS_DIR"
-    # elif [[ "$2" == "-dedup" ]]; then
-    #     BAM_FLDR="$TAGGED_BAM_ORI_DIR/deduped_alignments"
+    elif [[ "$2" == "-dedup" ]]; then
+        BAM_FLDR="$TAGGED_DEDUP_DIR"
     fi
 else
     echo "Error: Invalid species or alignment type specified."

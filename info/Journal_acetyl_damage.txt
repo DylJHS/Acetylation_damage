@@ -192,3 +192,15 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
     missing the flagstat file for JAN-007, so will rerun
 - Lost the JAN-004 human bowtie aligned bam file 
 - Going to run the markdup on the tagged files 
+- Ran the markdup on the tagged files
+- Ran the flagstat on the deduplicated tagged files which still left around 80% of most reads
+- Not close to the results that we achieved on the raw fastqs
+- The trimming is likely causing a better alignement or just leaving more reads behind
+- Need to read the documentation for the processing of the data 
+
+31/07/25
+- the Core uses the chic snakemake pipeline to process the data (but the specific config file for our data was not supplied)
+- the script is info/SCC_ChIC_Snakefile.txt (https://github.com/BuysDB/SingleCellMultiOmics/blob/master/singlecellmultiomics/snakemake_workflows/chic/Snakefile)
+- Going to just use the final bam files delivered by the core since their results seem to be better
+- Editted the bowtie2 script to match the SCMO script's alignment setup
+

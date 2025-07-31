@@ -31,7 +31,11 @@ elif [[ "$1" == "-drosophila" ]]; then
     fi
 elif [[ "$1" == "-tagged" ]]; then
     # Define the folder
-    FOLDER="$TAGGED_BAM_ORI_DIR"  # Change to TAGGED_BAM_ORI_DIR for tagged BAM files
+    if [[ "$2" == "-bowtie" ]]; then
+        FOLDER="$TAGGED_BAM_ORI_DIR"  # Change to TAGGED_BAM_DIR for tagged BAM files
+    elif [[ "$2" == "-dedup" ]]; then
+        FOLDER="$TAGGED_DEDUP_DIR"  # Change to TAGGED_BAM_DEDUP_DIR for deduplicated tagged BAM files
+    fi
 else
     echo "Usage: $0 -human|-drosophila [-bowtie|-dedup]"
     echo "Please specify either -human or -drosophila followed by -bowtie or -dedup if needed."
@@ -40,6 +44,7 @@ fi
 
 # Check if the folder exists
 if [[ ! -d "$FOLDER" ]]; then
+    echo "-----------------------------------------------------"
     echo "Error: The specified folder '$FOLDER' does not exist."
     exit 1
 fi
@@ -48,22 +53,25 @@ fi
 if [[ "$3" == "-fastqc" ]]; then
     # Go to the specified folder
     cd "$FOLDER" 
+    echo "-----------------------------------------------------"
     echo "Running fastqc in directory: $PWD"
     # run the fastqc command
     fastqc -t 6 -o "$FOLDER" *.fq.gz
-    echo "FastQC completed in directory: $PWD"
+    echo "-----------------------------------------------------"
+    echo "FastQC completed."
+elif [[ "$2" == "-dedup" && "$3" == "-stats" ]]; then
+    # Go to the specified folder
+    cd "$FOLDER/deduped_stats"
 else
     echo "-----------------------------------------------------"
     echo "No FastQC analysis requested. Skipping FastQC step."
     cd "$FOLDER/flagstat_results"
 fi
 
-echo "-----------------------------------------------------"
-
-echo "Running MultiQC in directory: $PWD"
-
 # run the multiqc command
+echo "-----------------------------------------------------"
+echo "Running multiqc in directory: $PWD"
 multiqc .
 echo "-----------------------------------------------------"
-echo "MultiQC completed in directory: $PWD"
+echo "MultiQC completed."
 echo "-----------------------------------------------------"
