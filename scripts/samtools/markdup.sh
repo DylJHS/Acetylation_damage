@@ -45,21 +45,24 @@ echo "-----------------------------------------------------------"
 # Create directories if they do not exist
 mkdir -p "${TEMP_FLDER}"
 
+# Set duplicate removal mode based on second argument
+REMOVE_FLAG=""
 if [[ "$2" == "-r" ]]; then
     echo "Removing duplicates..."
-    echo "-----------------------------------------------------------"
-    samtools collate -@ 8 -O -u  -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
-        samtools fixmate -m -@ 8 -u - - | \
-        samtools sort -@ 8 -u -T "${TEMP_FLDER}/sort_${BASE}" - | \
-        samtools markdup -@ 8 -r -f "${DEDUP_STATS}" -T "${TEMP_FLDER}/mrkd_${BASE}" - "$DEDUP_BAM"
+    REMOVE_FLAG="-r"
 else
     echo "Marking duplicates without removal..."
-    echo "-----------------------------------------------------------"
-    samtools collate -@ 8 -O -u -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
-        samtools fixmate -m -@ 8 -u - - | \
-        samtools sort -@ 8 -u -T "${TEMP_FLDER}/sort_${BASE}" - | \
-        samtools markdup -@ 8 -f "${DEDUP_STATS}" -T "${TEMP_FLDER}/mrkd_${BASE}" - "$DEDUP_BAM"
 fi
+echo "-----------------------------------------------------------"
+
+# Run pipeline
+samtools collate -@ 8 -O -u -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
+    samtools fixmate -m -@ 8 -u - - | \
+    samtools sort -@ 8 -u -T "${TEMP_FLDER}/sort_${BASE}" - | \
+    samtools markdup -@ 8 $REMOVE_FLAG -f "${DEDUP_STATS}" -T "${TEMP_FLDER}/mrkd_${BASE}" - "$DEDUP_BAM"
+
+# Index the resulting BAM
+samtools index -@ 8 "$DEDUP_BAM"
 
 echo "Finalizing BAM file..."
 echo "-----------------------------------------------------------"

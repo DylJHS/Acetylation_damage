@@ -205,3 +205,4 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Editted the bowtie2 script to match the SCMO script's alignment setup
 - Can't rerun the bowtie at teh moment due to having moved the files
 - going to run the fingerplotting on the data to see the level of background noise
+- slight difference in the deduped vs original tagged bam files
