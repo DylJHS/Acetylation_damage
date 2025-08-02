@@ -4,7 +4,6 @@
 #SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/genomecov-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
-#SBATCH --array=0-5  # Adjust based on the number of BAM files
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=16G
 #SBATCH --mail-type=all
@@ -14,16 +13,17 @@
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
 
 echo "---------------------------------------------------------------------------------"
-echo "Starting flagstat alignment script for $SLURM_ARRAY_TASK_ID"
+echo "Starting genomecov alignment script"
 echo "---------------------------------------------------------------------------------"
 
-# Define paths
-if [[ "$1" == "-drosophila" ]]; then
-    
-elif [[ "$1" == "-human" ]]; then
-else
-    echo "Error: Invalid species or alignment type specified."
-    exit 1
+# Define 
+SPECIES="${1#-}"
+if [[ "${SPECIES}" == "drosophila" ]]; then
+    REFERENCE_DIR="${REF_DIR}/drosophila"
+    REFERENCE_GEN="${REFERENCE_DIR}/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa/Drosophila_melanogaster.BDGP6.46.dna.toplevel.fa"
+elif [[ "${SPECIES}" == "human" ]]; then
+    REFERENCE_DIR="${REF_DIR}/human"
+    REFERENCE_GEN="${REFERENCE_DIR}/Homo_sapiens.GRCh38.dna.toplevel.fa/Homo_sapiens.GRCh38.dna.toplevel.fa"
 fi
 
 FLAGSTAT_FLDR="$BAM_FLDR/flagstat_results"

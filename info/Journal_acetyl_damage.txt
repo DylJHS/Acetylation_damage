@@ -206,3 +206,15 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Can't rerun the bowtie at teh moment due to having moved the files
 - going to run the fingerplotting on the data to see the level of background noise
 - slight difference in the deduped vs original tagged bam files
+
+01/08/25
+- The bulk and scChIC seq that The Single cell core offer are actually based on the Cut&Run (Skene and Henikoff, 2017) more so than the ChIC method (Schmid et al., 2004)
+- Planning to run the SEACR for the peak calling of the Cut&Run files since it is more sensitive to low background noise that is common in that type of analysis (as opposed to MACS2)
+- Need the index bam files (.bam.bai) files which i do not have for most of the deduplicated files
+- Incorporated the samtools index to the end of the markdup script (markdup.sh) so that the indexed bam files are added as well 
+- Can also just run samtools index on its own now to add the indeces to the folders
+- need to transfer the JAN-004 human bowtie aligned bam file to the HPC results section if its in the Janssen project folder
+- Created the bam indexing script (bam_indexing.sh) to index the bams by looping over the different folders (tagged, human and drosophila)
+
+02/08/25
+- Ran the bam but seem to not have the results for the tagged bams, will rerun\

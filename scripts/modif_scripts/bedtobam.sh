@@ -4,7 +4,6 @@
 #SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bamtobed-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
-#SBATCH --array=0-5
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=10G
 #SBATCH --mail-type=all
