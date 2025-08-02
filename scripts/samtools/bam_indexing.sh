@@ -20,7 +20,7 @@ for SPECIES in "tagged" "drosophila"; do
     if [[ $SPECIES == "drosophila" ]]; then
         BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
         DEDUP_PATH="$DROS_DEDUP_DIR"
-    elif [[ "$1" == "-human" ]]; then
+    elif [[ "$SPECIES" == "human" ]]; then
         BAM_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
         DEDUP_PATH="$HUMAN_DEDUP_DIR"
     elif [[ $SPECIES == "tagged" ]]; then
