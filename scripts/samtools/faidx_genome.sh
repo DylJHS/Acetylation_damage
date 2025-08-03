@@ -29,7 +29,7 @@ for SPECIES in "human" "drosophila"; do
     echo "Processing $REFERENCE reference genome"
     echo "-----------------------------------------------------------"
 
-    samtools faidx "${REFERENCE}".fa -o "${OUTPUT}"
+    samtools faidx "${REFERENCE}" -o "${OUTPUT}"
     cut -f1,2 "${OUTPUT}" > "${OUTPUT_DIR}/${SPECIES}.genome"
 
     echo "Done and saved to: ${OUTPUT_DIR}/${SPECIES}.genome " 

@@ -217,4 +217,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Created the bam indexing script (bam_indexing.sh) to index the bams by looping over the different folders (tagged, human and drosophila)
 
 02/08/25
-- Ran the bam but seem to not have the results for the tagged bams, will rerun\
+- Ran the bam indexing script but seem to not have the results for the tagged bams, will rerun
+- Reran and generated the tagged and drososphila bai files (already present for the human bams)
+- created script to generate the genome file that needs to be used by the genomecov function (faidx_genome.sh) 
+- Running the faidx script revealed that the human genome fasta file is missing many chr records
+- Downloading a new genome assembly for the human genome
+- Transfered the new assembly (Homo_sapiens.GRCh38.dna.primary_assembly.fa) to the ref_genomes folder
+- Will build new ref genome later
