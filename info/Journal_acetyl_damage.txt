@@ -127,6 +127,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Issues running trim galore due to bug when using multiple cores 
 - Removing cores to see if it resolves the issue
 - Could also be due to how the script runs. Once in single mode and then in paired mode
+- After meeting with Aniek need to: 
+	- Check the break site for repair at th ISC locus
+	- look for deletion (1bp) at the break site (within the integration site)
+	- Look at the reads at the break site 
 
 23/07/25
 - Changing the trim_fastq_galore.sh script to only run the trim command 
@@ -224,3 +228,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Downloading a new genome assembly for the human genome
 - Transfered the new assembly (Homo_sapiens.GRCh38.dna.primary_assembly.fa) to the ref_genomes folder
 - Will build new ref genome later
+- Seem to have the correct genome assembly for the drosophila genome
+
+04/08/25
+- 
