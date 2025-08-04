@@ -53,12 +53,6 @@ The script then generates a summary report that includes these statistics.
 NAME: run_blast_wkflw.sh
 
 Script Description:
-
-
-
-
-NAME: BLAST_wkflw_config.sh
-
-Script Description:
-
+This script orchestrates the execution of the BLAST workflow, including the 
+generation of random FASTA subsets, BLASTn queries, and summarization of results.
 

@@ -24,7 +24,16 @@ for SPECIES in "human" "drosophila"; do
         OUTPUT_DIR="${HUMAN_REF}"
     fi
     
+    #  REFERENCE="${REFERENCE_DIR}/${SPECIES}.fa"
     OUTPUT="${OUTPUT_DIR}/${SPECIES}.fai"
+
+    # Check if the reference file is compressed
+    if [[ ${REFERENCE} == "*.gz" ]]; then
+        echo "$SPECIES reference file is compressed. Unzipping..."
+        gunzip "${REFERENCE}"
+        REFERENCE="${REFERENCE%.gz}"
+    fi
+
     echo "-----------------------------------------------------------"
     echo "Processing $REFERENCE reference genome"
     echo "-----------------------------------------------------------"

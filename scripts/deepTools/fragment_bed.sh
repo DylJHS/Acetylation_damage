@@ -51,5 +51,5 @@ cut -f 1,2,6 | \
 sort -k1,1 -k2,2n -k3,3n | \
 bedtools genomecov -bg -i - -g $my_genome > $output_file.fragments.bedgraph
 
-echo -e "Finished generating the fragment coverage and saved to: \n\t\t $output_file"
+echo -e "Finished generating the fragment coverage and saved to: \n\t $output_file"
 echo "-----------------------------------------------------------"

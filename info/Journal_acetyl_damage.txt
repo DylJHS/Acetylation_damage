@@ -231,4 +231,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Seem to have the correct genome assembly for the drosophila genome
 
 04/08/25
-- 
+- Created the fragment_bed.sh script to convert the paired-end BAMs to fragment bedgraphs
+- Running now for the first time
+- Generated the fragment bedgraphs for the tagged bam files
+- Running the bamCoverage.sh script to generate the bigwig files for the tagged bam files 
+- Downlaoding the new reference genomes that i need to use from the get go
