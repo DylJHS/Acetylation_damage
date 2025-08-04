@@ -236,3 +236,5 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Generated the fragment bedgraphs for the tagged bam files
 - Running the bamCoverage.sh script to generate the bigwig files for the tagged bam files 
 - Downlaoding the new reference genomes that i need to use from the get go
+- Editted the config file structure and content 
+- Rerunnig the gneome indexing script (bowtie_index.sh) 

@@ -8,4 +8,4 @@ conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env
 export LD_LIBRARY_PATH="/hpc/shared/onco_janssen/dhaynessimmons/envs/genomics_env/lib:$LD_LIBRARY_PATH"
 
 # Load shared config
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/project_paths.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/shared_config.sh
