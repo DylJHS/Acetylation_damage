@@ -35,7 +35,6 @@ echo "Running ${2#-} for : ${1#-}"
 echo "---------------------------------------------------------------------------------"
 
 # Define output file
-
 BAM_FILES=("${BAM_FLDR}"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 name=$(basename "$BAM_FILE")
