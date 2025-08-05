@@ -28,19 +28,25 @@ else
     exit 1
 fi
 
+output_file="${DEDUP_BAM_DIR}/duplicate_check.txt"
 
 for bam in $BAM_DIR/*.bam; do
     base=$(basename $bam .bam)
     dedup_bam="${DEDUP_BAM_DIR}/${base}_dedup.bam"
 
-    echo "Processing: $base"
-    echo "-----------------------------------------------------------"
+    if [ ! -f $dedup_bam ]; then
+        echo "$dedup_bam does not exist"
+        continue
+    fi
 
-    echo " Checking for duplicate reads..."
-    echo "for pre duplicate reads:"
-    samtools view -c $bam
-    echo "for post duplicate reads:"
-    samtools view -c $dedup_bam
+    echo "Processing: $base" >> $output_file
+    echo "-----------------------------------------------------------" >> $output_file
 
-    echo "-----------------------------------------------------------"
+    echo " Checking for:" >> $output_file
+    echo "for pre duplicate reads:" >> $output_file
+    samtools view -c $bam >> $output_file
+    echo "for post duplicate reads:" >> $output_file
+    samtools view -c $dedup_bam >> $output_file
+
+    echo -e "----------------------------------------------------------- \n\n" >> $output_file
 done

@@ -33,7 +33,7 @@ elif [[ "$1" == "-human" ]]; then
         BAM_FLDR="$HUMAN_DEDUP_DIR"
     fi
 elif [[ "$1" == "-tagged" ]]; then
-    RESULTS_DIR="$TAGGED_BAM_ORI_DIR"
+    RESULTS_DIR="$TAGGED_ALIGNMENT_DIR"
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$RESULTS_DIR"
     elif [[ "$2" == "-dedup" ]]; then
@@ -49,7 +49,7 @@ OUTPUT_FILE="$BAM_FLDR/${1#-}_flagstat_${2#-}_align_summary.txt"
 
 mkdir -p "$FLAGSTAT_FLDR"
 
-echo "Running ${2#-} for : ${1#-}"
+echo "Running ${2#-} for: ${1#-} in folder $(basename "$BAM_FLDR")"
 echo "---------------------------------------------------------------------------------"
 
 # Define output file
