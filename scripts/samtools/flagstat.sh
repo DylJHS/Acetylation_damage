@@ -22,30 +22,36 @@ if [[ "$1" == "-drosophila" ]]; then
     RESULTS_DIR="$DROS_ALIGN_DIR"
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$DROS_ALIGN_BOWTIE_DIR"
+        PAR_DIR="$DROS_ALIGN_BOWTIE_DIR"
     elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$DROS_DEDUP_DIR"
+        BAM_FLDR="$DROS_DEDUP_BAM_DIR"
+        PAR_DIR="$DROS_DEDUP_DIR"
     fi
 elif [[ "$1" == "-human" ]]; then
     RESULTS_DIR="$HUMAN_ALIGN_DIR"
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$HUMAN_ALIGN_BOWTIE_DIR"
+        PAR_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
     elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$HUMAN_DEDUP_DIR"
+        BAM_FLDR="$HUMAN_DEDUP_BAM_DIR"
+        PAR_DIR="$HUMAN_DEDUP_DIR"
     fi
 elif [[ "$1" == "-tagged" ]]; then
     RESULTS_DIR="$TAGGED_ALIGNMENT_DIR"
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$RESULTS_DIR"
+        PAR_DIR="$TAGGED_ALIGNMENT_DIR"
     elif [[ "$2" == "-dedup" ]]; then
         BAM_FLDR="$TAGGED_DEDUP_BAM_DIR"
+        PAR_DIR="$TAGGED_DEDUP_BAM_DIR"
     fi
 else
     echo "Error: Invalid species or alignment type specified."
     exit 1
 fi
 
-FLAGSTAT_FLDR="$BAM_FLDR/flagstat_results"
-OUTPUT_FILE="$BAM_FLDR/${1#-}_flagstat_${2#-}_align_summary.txt"
+FLAGSTAT_FLDR="$PAR_DIR/flagstat_results"
+OUTPUT_FILE="$FLAGSTAT_FLDR/${1#-}_flagstat_${2#-}_align_summary.txt"
 
 mkdir -p "$FLAGSTAT_FLDR"
 

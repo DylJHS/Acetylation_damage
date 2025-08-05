@@ -9,7 +9,6 @@ FASTA_DIR="$DATA_DIR/FASTA_subsets"
 REF_DIR="$PROJ_DIR/data/ref_genomes"
 TRIMMED_MERG_DIR="$DATA_DIR/trimmed_merged_fastq"
 TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
-TAGGED_BAM_ORI_DIR="$DATA_DIR/tagged_bam_files"
 
 # Results
 RES_DIR="$PROJ_DIR/results" # Main results folder

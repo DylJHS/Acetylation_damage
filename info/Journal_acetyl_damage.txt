@@ -244,3 +244,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Rerunning the faidx script for the drosophila genome
 - Modifications to flagtat_summary_array (previously genome_cov.sh)
 - Rerunning the fragment_bed.sh script for the tagged bam files
+- Rerunning the markdup script (with removal) for the tagged bam files since the duplicates were still present in the flagstat results
+- Reran the flagstat script for the tagged bam files
+- About 2M reads are left after the deduplication for each tagged bam file
+
+
+
+Next:
+- need to re-algn the human bowtie alignments using the new reference genome
+

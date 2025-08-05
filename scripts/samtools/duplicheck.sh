@@ -16,19 +16,28 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 # get the arguments for species
 if [[ "$1" == "-human" ]]; then
     BAM_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
-    DEDUP_BAM_DIR="$HUMAN_DEDUP_DIR"
+    DEDUP_BAM_DIR="$HUMAN_DEDUP_BAM_DIR"
 elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
-    DEDUP_BAM_DIR="$DROS_DEDUP_DIR"
+    DEDUP_BAM_DIR="$DROS_DEDUP_BAM_DIR"
 elif [[ "$1" == "-tagged" ]]; then
     BAM_DIR="$TAGGED_ALIGNMENT_DIR"
-    DEDUP_BAM_DIR="$TAGGED_DEDUP_DIR"
+    DEDUP_BAM_DIR="$TAGGED_DEDUP_BAM_DIR"
 else
     echo "Error: Please specify 'human' or 'drosophila' as the first argument."
     exit 1
 fi
+echo -e "\n------------------------------------------------------"
+echo -e "Running duplicate check for: ${1#-}"
 
-output_file="${DEDUP_BAM_DIR}/duplicate_check.txt"
+output_file="${DEDUP_BAM_DIR}/../duplicate_check.txt"
+if [ -f $output_file ]; then
+echo "Removing old duplicate check file: $output_file"
+    rm $output_file
+fi
+
+echo "-----------------------------------------------------------"
+echo "Saving duplicate check to: $output_file"
 
 for bam in $BAM_DIR/*.bam; do
     base=$(basename $bam .bam)
@@ -42,7 +51,7 @@ for bam in $BAM_DIR/*.bam; do
     echo "Processing: $base" >> $output_file
     echo "-----------------------------------------------------------" >> $output_file
 
-    echo " Checking for:" >> $output_file
+    echo "Checking for:" >> $output_file
     echo "for pre duplicate reads:" >> $output_file
     samtools view -c $bam >> $output_file
     echo "for post duplicate reads:" >> $output_file
@@ -50,3 +59,5 @@ for bam in $BAM_DIR/*.bam; do
 
     echo -e "----------------------------------------------------------- \n\n" >> $output_file
 done
+
+echo -e "Finished checking for duplicates and saved to: \n\t $output_file"
