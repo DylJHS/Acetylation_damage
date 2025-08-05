@@ -5,9 +5,10 @@ File names:
 SCC-bulkChIC-UMC-JAN-003: C 1:100
 SCC-bulkChIC-UMC-JAN-004: C 1:500
 SCC-bulkChIC-UMC-JAN-005: C 1:1000
+
 SCC-bulkChIC-UMC-JAN-006: Hsp 1:100
 SCC-bulkChIC-UMC-JAN-007: Hsp 1:500
 SCC-bulkChIC-UMC-JAN-008: Hsp 1:1000
 
-Integration site:  
+Induction site:  
 2L (40F6) - 22,245,311

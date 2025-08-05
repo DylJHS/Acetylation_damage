@@ -36,7 +36,7 @@ fi
 
 BAM_FILES=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
-FILE_NAME=$(basename "${BAM_FILE}")
+FILE_NAME=$(basename "${BAM_FILE}" ".bam")
 
 if [[ "$2" == "-bedgraph" ]]; then
     OUTPUT_FILE="${BED_DIR}/${FILE_NAME}_coverage.bedgraph"
