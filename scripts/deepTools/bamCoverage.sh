@@ -16,12 +16,18 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 # get the arguments for species
 if [[ "$1" == "-human" ]]; then
     BAM_DIR="$HUMAN_DEDUP_DIR"
+    BED_DIR="$HUMAN_DEDUP_BEDGRAPH"
+    BIGWIG_DIR="$HUMAN_DEDUP_BIGWIG"
     effectivegsize=2913022398
 elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_DEDUP_DIR"
+    BED_DIR="$DROS_DEDUP_BEDGRAPH"
+    BIGWIG_DIR="$DROS_DEDUP_BIGWIG"
     effectivegsize=142573017
 elif [[ "$1" == "-tagged" ]]; then
     BAM_DIR="$TAGGED_ALIGNMENT_DIR"
+    BED_DIR="$TAGGED_DEDUP_BEDGRAPH"
+    BIGWIG_DIR="$TAGGED_DEDUP_BIGWIG"
     effectivegsize=142573017
 else
     echo "Error: Please specify 'human' or 'drosophila' as the first argument."
@@ -32,14 +38,10 @@ BAM_FILES=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 FILE_NAME=$(basename "${BAM_FILE}")
 
-# Create the folder if it does not exist
-OUTPUT_PATH="${BAM_DIR}/coverage"
-mkdir -p "${OUTPUT_PATH}"
-
 if [[ "$2" == "-bedgraph" ]]; then
-    OUTPUT_FILE="${OUTPUT_PATH}/${FILE_NAME}.bedgraph"
+    OUTPUT_FILE="${BED_DIR}/${FILE_NAME}_coverage.bedgraph"
 elif [[ "$2" == "-bigwig" ]]; then
-    OUTPUT_FILE="${OUTPUT_PATH}/${FILE_NAME}.bw"
+    OUTPUT_FILE="${BIGWIG_DIR}/${FILE_NAME}_coverage.bw"
 else
     echo "Error: Please specigy valid output format -bedgraph or -bigwig."
 fi

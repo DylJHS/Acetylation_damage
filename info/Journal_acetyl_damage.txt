@@ -238,3 +238,9 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Downlaoding the new reference genomes that i need to use from the get go
 - Editted the config file structure and content 
 - Rerunnig the gneome indexing script (bowtie_index.sh) 
+
+05/08/25
+- Edits to the config file and to the faidx script for the unzipping of .gz files
+- Rerunning the faidx script for the drosophila genome
+- Modifications to flagtat_summary_array (previously genome_cov.sh)
+- Rerunning the fragment_bed.sh script for the tagged bam files

@@ -20,9 +20,9 @@ for file in ${HUMAN_GEN_FA} ${DROS_GEN_FA}; do
     fi
 
     if [[ ${file} == ${HUMAN_GEN_FA} ]]; then
-        prefix="human"
+        prefix="${DROS_INDEX}/human"
     elif [[ ${file} == ${DROS_GEN_FA} ]]; then
-        prefix="drosophila"
+        prefix="${DROS_INDEX}/drosophila"
     fi
 
     # Run Bowtie2 index build

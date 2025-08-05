@@ -28,7 +28,7 @@ for SPECIES in "human" "drosophila"; do
     OUTPUT="${OUTPUT_DIR}/${SPECIES}.fai"
 
     # Check if the reference file is compressed
-    if [[ ${REFERENCE} == "*.gz" ]]; then
+    if [[ ${REFERENCE} == *.gz ]]; then
         echo "$SPECIES reference file is compressed. Unzipping..."
         gunzip "${REFERENCE}"
         REFERENCE="${REFERENCE%.gz}"
