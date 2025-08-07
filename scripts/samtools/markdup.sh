@@ -39,7 +39,7 @@ BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
 
 BASE=$(basename "$BAM_FILE" .bam)
 DEDUP_BAM="${DEDUP_BAM_DIR}/${BASE}_dedup.bam"
-DEDUP_STATS="${DEDUP_STATS_DIR}/dedupd_stat_${BASE}.txt"
+DEDUP_STATS="${DEDUP_STATS_DIR}/dedupd_stat_${BASE}.metrics.txt"
 TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}"
 
 echo "Processing: $BASE"

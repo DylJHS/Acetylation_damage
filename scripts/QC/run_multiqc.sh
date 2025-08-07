@@ -5,7 +5,7 @@
 #SBATCH --time=18:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=32G
+#SBATCH --mem=16G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -32,7 +32,7 @@ elif [[ "$1" == "-drosophila" ]]; then
 elif [[ "$1" == "-tagged" ]]; then
     # Define the folder
     if [[ "$2" == "-bowtie" ]]; then
-        FOLDER="$TAGGED_BAM_ORI_DIR"  # Change to TAGGED_BAM_DIR for tagged BAM files
+        FOLDER="$TAGGED_ALIGNMENT_DIR"  # Change to TAGGED_BAM_DIR for tagged BAM files
     elif [[ "$2" == "-dedup" ]]; then
         FOLDER="$TAGGED_DEDUP_DIR"  # Change to TAGGED_BAM_DEDUP_DIR for deduplicated tagged BAM files
     fi

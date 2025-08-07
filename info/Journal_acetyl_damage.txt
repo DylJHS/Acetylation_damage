@@ -248,8 +248,13 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Reran the flagstat script for the tagged bam files
 - About 2M reads are left after the deduplication for each tagged bam file
 
-
+07/08/25
+- 
 
 Next:
-- need to re-algn the human bowtie alignments using the new reference genome
+- Need to run SEACR for the peak calling
+- maybe a diff binding analysis 
+- need to re-align the fatqs using the new human ref genome
+- need to look at the DRwhite locus for deletions/insertions
+
 
