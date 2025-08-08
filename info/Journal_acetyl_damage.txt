@@ -116,7 +116,6 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Higher R1 read duplication than R2 for all fastq files; might be normal due to the cutting process of the Mnase
 - MultiQC report duplicate rates are likely higher than the actual duplicate rates due to how they only assess the first 50 bp of the reads 
 
-
 22/07/25
 - Trimming the reads
 - Trimmed reads added to the trimmed_fastq folder in the data dir 
@@ -140,7 +139,6 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - results from the trimming and subsequent qc did not show significant improvements
 - Rerunning the trim galore script with clip argument on the first 6bp 
 - stringency set to 3 for better trimming
-
 
 24/07/25
 - PA-MNase has a bias for A/T rich regions of the genome
@@ -249,12 +247,14 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - About 2M reads are left after the deduplication for each tagged bam file
 
 07/08/25
-- 
+- Looking at the flagstat results from teh tagged dedup bams, can see that there are 
+    a lot fewer reads thata re mapped correctly from the samples
+- The samples tend to have 600k-900k reads mapped correctly with only two samples 
+    having 2M reads with highly accurate mapping
+
 
 Next:
-- Need to run SEACR for the peak calling
-- maybe a diff binding analysis 
+- Need to look run the SEACR on each sample individually to assess teh peaks that show up 
+- maybe a diff binding analysis with DiffBind (control bam is optional)
 - need to re-align the fatqs using the new human ref genome
 - need to look at the DRwhite locus for deletions/insertions
-
-

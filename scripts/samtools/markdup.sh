@@ -34,13 +34,25 @@ fi
 echo "Processing ${1#-} BAM files..."
 echo "-----------------------------------------------------------"
 
+# Define input files
 BAM_LIST=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
-
 BASE=$(basename "$BAM_FILE" .bam)
-DEDUP_BAM="${DEDUP_BAM_DIR}/${BASE}_dedup.bam"
-DEDUP_STATS="${DEDUP_STATS_DIR}/dedupd_stat_${BASE}.metrics.txt"
-TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}"
+
+# Set duplicate removal mode based on second argument
+REMOVE_FLAG=""
+if [[ "$2" == "-r" ]]; then
+    echo "Removing duplicates..."
+    REMOVE_FLAG="-r"
+else
+    echo "Marking duplicates without removal..."
+fi
+echo "-----------------------------------------------------------"
+
+# Define output files
+DEDUP_BAM="${DEDUP_BAM_DIR}/${BASE}_dedup${REMOVE_FLAG}.bam"
+DEDUP_STATS="${DEDUP_STATS_DIR}/dedupd_stat_${BASE}${REMOVE_FLAG}.metrics.txt"
+TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}_${REMOVE_FLAG}"
 
 echo "Processing: $BASE"
 echo "-----------------------------------------------------------"
@@ -53,16 +65,6 @@ echo "-----------------------------------------------------------"
 rm -f "${TEMP_FLDER}"/collate_"${BASE}".*.bam
 rm -f "${TEMP_FLDER}"/sort_"${BASE}".*.bam
 rm -f "${TEMP_FLDER}"/mrkd_"${BASE}".*.bam
-
-# Set duplicate removal mode based on second argument
-REMOVE_FLAG=""
-if [[ "$2" == "-r" ]]; then
-    echo "Removing duplicates..."
-    REMOVE_FLAG="-r"
-else
-    echo "Marking duplicates without removal..."
-fi
-echo "-----------------------------------------------------------"
 
 # Run pipeline
 samtools collate -@ 8 -O -u -T "${TEMP_FLDER}/collate_${BASE}" "$BAM_FILE" | \
