@@ -44,16 +44,21 @@ REMOVE_FLAG=""
 if [[ "$2" == "-r" ]]; then
     echo "Removing duplicates..."
     REMOVE_FLAG="-r"
-    FOLDER="removed"
+    DEDUP_FOLDER="${DEDUP_BAM_DIR}/removed"
+    DEDUP_STATS="${DEDUP_STATS_DIR}/removed"
 else
     echo "Marking duplicates without removal..."
-    FOLDER="marked"
+    DEDUP_FOLDER="${DEDUP_BAM_DIR}/marked"
+    DEDUP_STATS="${DEDUP_STATS_DIR}/marked"
 fi
 echo "-----------------------------------------------------------"
 
+# Create the folders if they don't exist
+mkdir -p "${DEDUP_FOLDER}" "${DEDUP_STATS}"
+
 # Define output files
-DEDUP_BAM="${DEDUP_BAM_DIR}/${FOLDER}/${BASE}_dedup${REMOVE_FLAG}.bam"
-DEDUP_STATS="${DEDUP_STATS_DIR}/${FOLDER}/dedupd_stat_${BASE}${REMOVE_FLAG}.metrics.txt"
+DEDUP_BAM="${DEDUP_FOLDER}/${BASE}_dedup${REMOVE_FLAG}.bam"
+DEDUP_STATS="${DEDUP_STATS}/dedupd_stat_${BASE}${REMOVE_FLAG}.metrics.txt"
 TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}_${REMOVE_FLAG}"
 
 echo "Processing: $BASE"
