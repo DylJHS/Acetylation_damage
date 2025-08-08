@@ -252,9 +252,16 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - The samples tend to have 600k-900k reads mapped correctly with only two samples 
     having 2M reads with highly accurate mapping
 
+08/08/25
+- Edit to the markdup script for named output files
+- Rerunning the markdup script for the tagged bam files without removal
+
 
 Next:
 - Need to look run the SEACR on each sample individually to assess teh peaks that show up 
-- maybe a diff binding analysis with DiffBind (control bam is optional)
+- SEACR parameters to be used 
+    - peak threshold n=0.05 (top 5% of peaks)
+-  Using the non-DSB control as a background in SEACR would incorrectly treat real H3K9ac signal as noise, suppressing true peaks and inflating false negatives.
+- maybe run a diff binding analysis with DiffBind (control bam is optional)
 - need to re-align the fatqs using the new human ref genome
 - need to look at the DRwhite locus for deletions/insertions

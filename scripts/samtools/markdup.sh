@@ -16,15 +16,15 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/s
 # get the arguments for species
 if [[ "$1" == "-human" ]]; then
     BAM_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
-    DEDUP_BAM_DIR="$HUMAN_DEDUP_DIR"
+    DEDUP_BAM_DIR="$HUMAN_DEDUP_BAM_DIR"
     DEDUP_STATS_DIR="$HUMAN_DEDUP_STATS"
 elif [[ "$1" == "-drosophila" ]]; then
     BAM_DIR="$DROS_ALIGN_BOWTIE_DIR"
-    DEDUP_BAM_DIR="$DROS_DEDUP_DIR"
+    DEDUP_BAM_DIR="$DROS_DEDUP_BAM_DIR"
     DEDUP_STATS_DIR="$DROS_DEDUP_STATS"
 elif [[ "$1" == "-tagged" ]]; then
     BAM_DIR="$TAGGED_ALIGNMENT_DIR"
-    DEDUP_BAM_DIR="$TAGGED_DEDUP_DIR"
+    DEDUP_BAM_DIR="$TAGGED_DEDUP_BAM_DIR"
     DEDUP_STATS_DIR="$TAGGED_DEDUP_STATS"
 else
     echo "Error: Please specify 'human' or 'drosophila' as the first argument."
@@ -44,14 +44,16 @@ REMOVE_FLAG=""
 if [[ "$2" == "-r" ]]; then
     echo "Removing duplicates..."
     REMOVE_FLAG="-r"
+    FOLDER="removed"
 else
     echo "Marking duplicates without removal..."
+    FOLDER="marked"
 fi
 echo "-----------------------------------------------------------"
 
 # Define output files
-DEDUP_BAM="${DEDUP_BAM_DIR}/${BASE}_dedup${REMOVE_FLAG}.bam"
-DEDUP_STATS="${DEDUP_STATS_DIR}/dedupd_stat_${BASE}${REMOVE_FLAG}.metrics.txt"
+DEDUP_BAM="${DEDUP_BAM_DIR}/${FOLDER}/${BASE}_dedup${REMOVE_FLAG}.bam"
+DEDUP_STATS="${DEDUP_STATS_DIR}/${FOLDER}/dedupd_stat_${BASE}${REMOVE_FLAG}.metrics.txt"
 TEMP_FLDER="${TEMP_DIR}/${BASE}_${1#-}_${REMOVE_FLAG}"
 
 echo "Processing: $BASE"
