@@ -74,8 +74,6 @@ DROS_DEDUP_BEDGRAPH="$DROS_DEDUP_DIR/bedgraph"
 HUMAN_DEDUP_BEDGRAPH="$HUMAN_DEDUP_DIR/bedgraph"
 TAGGED_DEDUP_BEDGRAPH="$TAGGED_DEDUP_DIR/bedgraph"
 
-
-
 # Reference genomes
 HUMAN_REF="$REF_DIR/human"
 HUMAN_GEN_FA="$HUMAN_REF/Homo_sapiens.GRCh38.dna.primary_assembly.fa"

@@ -30,43 +30,36 @@ mkdir -p "$DROS_ALIGN_DIR" "$HUMAN_ALIGN_DIR" "$TAGGED_ALIGN_DIR" \
     "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" \
     "$BLAST_DIR" "$TEMP_DIR"
 
-for type in "DROS" "HUMAN" "TAGGED"; do
+for align_type in "DROS" "HUMAN" "TAGGED"; do
 
-    # Original alignment folders
-    eval "{type}_ALIGN_BOWTIE_DIR=\"${type}_ALIGN_DIR/bowtie2_alignments\""
+    # Base folders
+    eval "${align_type}_ALIGN_BOWTIE_DIR=\"\${${align_type}_ALIGN_DIR}/aligned_bams\""
+    eval "${align_type}_DEDUP_DIR=\"\${${align_type}_ALIGN_DIR}/deduped_alignments\""
+    eval "${align_type}_DEDUP_BAM_DIR=\"\${${align_type}_DEDUP_DIR}/bams\""
+    eval "${align_type}_DEDUP_STATS=\"\${${align_type}_DEDUP_DIR}/deduped_stats\""
+    eval "${align_type}_DEDUP_BIGWIG=\"\${${align_type}_DEDUP_DIR}/bigwig\""
+    eval "${align_type}_DEDUP_BEDGRAPH=\"\${${align_type}_DEDUP_DIR}/bedgraph\""
 
-    # Deduplicated alignment folders
-    eval "{type}_DEDUP_DIR=\"${type}_ALIGN_DIR/deduped_alignments\""
+    for dedup_type in "REM" "MARK"; do
+        if [[ "$dedup_type" == "REM" ]]; then
+            tag="removed"
+        else
+            tag="marked"
+        fi
 
-    # Deduplicated alignment bam folders
-    eval "{type}_DEDUP_BAM_DIR=\"${type}_DEDUP_DIR/bams\""
+        # Define dedup subpaths
+        eval "${align_type}_DEDUP_${dedup_type}_BAMS=\"\${${align_type}_DEDUP_BAM_DIR}/${tag}\""
+        eval "${align_type}_DEDUP_STATS_${dedup_type}=\"\${${align_type}_DEDUP_STATS}/${tag}\""
+        eval "${align_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${align_type}_DEDUP_BIGWIG}/${tag}\""
+        eval "${align_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${align_type}_DEDUP_BEDGRAPH}/${tag}\""
 
-    # Removed deduplicated alignment bam folders
-    eval "{type}_DEDUP_REM_BAMS=\"${type}_DEDUP_BAM_DIR/removed\""
-
-    # Marked deduplicated alignment bam folders
-    eval "{type}_DEDUP_MARK_BAMS=\"${type}_DEDUP_BAM_DIR/marked\""
-
-    # Deduplicated alignment stats
-    eval "{type}_DEDUP_STATS=\"${type}_DEDUP_DIR/deduped_stats\""
-
-    # Removed deduplicated alignment stats
-    eval "{type}_DEDUP_STATS_REM=\"${type}_DEDUP_STATS/removed\""
-
-    # Marked deduplicated alignment stats
-    eval "{type}_DEDUP_STATS_MARK=\"${type}_DEDUP_STATS/marked\""
-
-    # Deduplicated alignment bigwigs
-    eval "{type}_DEDUP_BIGWIG=\"${type}_DEDUP_DIR/bigwig\""
-
-    # Deduplicated alignment bedgraphs
-    eval "{type}_DEDUP_BEDGRAPH=\"${type}_DEDUP_DIR/bedgraph\""
-
-    # Create necessary directories
-    eval "mkdir -p \
-        \${${type}_ALIGN_BOWTIE_DIR} \${${type}_DEDUP_BAM_DIR} \${${type}_DEDUP_REM_BAMS} \
-        \${${type}_DEDUP_MARK_BAMS} \${${type}_DEDUP_STATS_REM} \${${type}_DEDUP_STATS_MARK} \
-        \${${type}_DEDUP_BIGWIG} \${${type}_DEDUP_BEDGRAPH}"
+        # Create the folders
+        eval "mkdir -p \
+            \${${align_type}_DEDUP_${dedup_type}_BAMS} \
+            \${${align_type}_DEDUP_STATS_${dedup_type}} \
+            \${${align_type}_DEDUP_BIGWIG_${dedup_type}} \
+            \${${align_type}_DEDUP_BEDGRAPH_${dedup_type}}"
+    done
 done
 
 # Reference genomes
