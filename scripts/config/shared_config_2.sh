@@ -30,14 +30,21 @@ for alignment_type in "DROS" "HUMAN" "TAGGED"; do
     fi
 
     # Alignment folders
-    eval "${alignment_type}_ALIGN_DIR=\"\${RES_DIR}/${alignment_type_tag}_alignments\""
+    eval "${alignment_type}_ALIGNMENT_DIR=\"\${RES_DIR}/${alignment_type_tag}_alignments\""
 
     # Original alignment folders
-    eval "${alignment_type}_ALIGNMENT_DIR=\"\${${alignment_type}_ALIGN_DIR}/aligned_bams\""
-    eval "${alignment_type}_ALIGN_DIR_BAMS=\"\${${alignment_type}_ALIGNMENT_DIR}/bams\""
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/aligned_bams\""
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR_BAMS=\"\${${alignment_type}_RAW_ALIGNMENT_DIR}/bams\""
 
     # Deduplicated alignment folders
-    eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGN_DIR}/deduped_alignments\""
+    eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/deduped_alignments\""
+
+    # Create the main alignment folders
+    eval "mkdir -p \
+        \${${alignment_type}_ALIGNMENT_DIR} \
+        \${${alignment_type}_RAW_ALIGNMENT_DIR} \
+        \${${alignment_type}_RAW_ALIGNMENT_DIR_BAMS} \
+        \${${alignment_type}_DEDUP_DIR}"
 
     for dedup_type in "REM" "MARK"; do
         if [[ "$dedup_type" == "REM" ]]; then

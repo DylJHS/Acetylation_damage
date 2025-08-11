@@ -19,9 +19,9 @@ echo "--------------------------------------------------------------------------
 
 # Define paths
 if [[ "$1" == "-drosophila" ]]; then
-    RESULTS_DIR="$DROS_ALIGN_DIR"
+    RESULTS_DIR="$DROS_ALIGNMENT_DIR"
 elif [[ "$1" == "-human" ]]; then
-    RESULTS_DIR="$HUMAN_ALIGN_DIR"
+    RESULTS_DIR="$HUMAN_ALIGNMENT_DIR"
 elif [[ "$1" == "-tagged" ]]; then
     RESULTS_DIR="$TAGGED_ALIGNMENT_DIR"
 else
@@ -33,11 +33,11 @@ if [[ "$2" == "-raw" ]]; then
     BAM_FLDR="$RESULTS_DIR"/aligned_bams/bams
     FLAGSTAT_FLDR="$RESULTS_DIR"/aligned_bams/flagstat_results
 elif [[ "$2" == "-dedup" && "$3" == "-r" ]]; then
-    BAM_FLDR="$RESULTS_DIR"/dedup_bams/removed/bams
-    FLAGSTAT_FLDR="$RESULTS_DIR"/dedup_bams/removed/flagstat_results
+    BAM_FLDR="$RESULTS_DIR"/deduped_alignments/removed/bams
+    FLAGSTAT_FLDR="$RESULTS_DIR"/deduped_alignments/removed/flagstat_results
 elif [[ "$2" == "-dedup" && "$3" == "-m" ]]; then
-    BAM_FLDR="$RESULTS_DIR"/dedup_bams/marked/bams
-    FLAGSTAT_FLDR="$RESULTS_DIR"/dedup_bams/marked/flagstat_results
+    BAM_FLDR="$RESULTS_DIR"/deduped_alignments/marked/bams
+    FLAGSTAT_FLDR="$RESULTS_DIR"/deduped_alignments/marked/flagstat_results
 else
     echo "Error: Invalid duplication or deduplication type specified."
     exit 1
@@ -47,7 +47,7 @@ mkdir -p "$FLAGSTAT_FLDR"
 # Define output file
 OUTPUT_FILE="$FLAGSTAT_FLDR/${1#-}_flagstat_${2#-}_${3#-}_align_summary.txt"
 
-echo "Running ${2#-} ${3#-} flagstat for: ${1#-} in folder $(basename "$BAM_FLDR")"
+echo -e "Running ${2#-} ${3#-} flagstat for ${1#-} in folder: \n\t $BAM_FLDR"
 echo "---------------------------------------------------------------------------------"
 
 # Define input file
