@@ -20,6 +20,7 @@ TEMP_DIR="$RES_DIR/temp"
 BLAST_DIR="$RES_DIR/BLAST_results"
 
 for alignment_type in "DROS" "HUMAN" "TAGGED"; do
+    echo "creating the alignment type folder"
     if [[ "$alignment_type" == "DROS" ]]; then
         alignment_type_tag="drosophila"
     elif [[ "$alignment_type" == "HUMAN" ]]; then
@@ -33,6 +34,7 @@ for alignment_type in "DROS" "HUMAN" "TAGGED"; do
 
     # Original alignment folders
     eval "${alignment_type}_ALIGNMENT_DIR=\"\${${alignment_type}_ALIGN_DIR}/aligned_bams\""
+    eval "${alignment_type}_ALIGN_DIR_BAMS=\"\${${alignment_type}_ALIGNMENT_DIR}/bams\""
 
     # Deduplicated alignment folders
     eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGN_DIR}/deduped_alignments\""
@@ -45,20 +47,20 @@ for alignment_type in "DROS" "HUMAN" "TAGGED"; do
         fi
 
         # Dedup subfolder base
-        eval "${align_type}_DEDUP_${dedup_type}_DIR=\"\${${align_type}_DEDUP_DIR}/${tag}\""
+        eval "${alignment_type}_DEDUP_${dedup_type}_DIR=\"\${${alignment_type}_DEDUP_DIR}/${dedup_type_tag}\""
 
         # Define subfolders within each dedup mode
-        eval "${align_type}_DEDUP_${dedup_type}_BAMS=\"\${${align_type}_DEDUP_${dedup_type}_DIR}/bams\""
-        eval "${align_type}_DEDUP_STATS_${dedup_type}=\"\${${align_type}_DEDUP_${dedup_type}_DIR}/deduped_stats\""
-        eval "${align_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${align_type}_DEDUP_${dedup_type}_DIR}/bigwig\""
-        eval "${align_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${align_type}_DEDUP_${dedup_type}_DIR}/bedgraph\""
+        eval "${alignment_type}_DEDUP_${dedup_type}_BAMS=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bams\""
+        eval "${alignment_type}_DEDUP_STATS_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/deduped_stats\""
+        eval "${alignment_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bigwig\""
+        eval "${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bedgraph\""
 
         # Create the folders
         eval "mkdir -p \
-            \${${align_type}_DEDUP_${dedup_type}_BAMS} \
-            \${${align_type}_DEDUP_STATS_${dedup_type}} \
-            \${${align_type}_DEDUP_BIGWIG_${dedup_type}} \
-            \${${align_type}_DEDUP_BEDGRAPH_${dedup_type}}"
+            \${${alignment_type}_DEDUP_${dedup_type}_BAMS} \
+            \${${alignment_type}_DEDUP_STATS_${dedup_type}} \
+            \${${alignment_type}_DEDUP_BIGWIG_${dedup_type}} \
+            \${${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}}"
 
     done
 done

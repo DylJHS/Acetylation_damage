@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --array=0-5  # Adjust based on the number of BAM files
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=16G
+#SBATCH --mem=5G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -20,46 +20,37 @@ echo "--------------------------------------------------------------------------
 # Define paths
 if [[ "$1" == "-drosophila" ]]; then
     RESULTS_DIR="$DROS_ALIGN_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$DROS_ALIGN_BOWTIE_DIR"
-        PAR_DIR="$DROS_ALIGN_BOWTIE_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$DROS_DEDUP_BAM_DIR"
-        PAR_DIR="$DROS_DEDUP_DIR"
-    fi
 elif [[ "$1" == "-human" ]]; then
     RESULTS_DIR="$HUMAN_ALIGN_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$HUMAN_ALIGN_BOWTIE_DIR"
-        PAR_DIR="$HUMAN_ALIGN_BOWTIE_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
-        BAM_FLDR="$HUMAN_DEDUP_BAM_DIR"
-        PAR_DIR="$HUMAN_DEDUP_DIR"
-    fi
 elif [[ "$1" == "-tagged" ]]; then
     RESULTS_DIR="$TAGGED_ALIGNMENT_DIR"
-    if [[ "$2" == "-bowtie" ]]; then
-        BAM_FLDR="$RESULTS_DIR"
-        PAR_DIR="$TAGGED_ALIGNMENT_DIR"
-    elif [[ "$2" == "-dedup -r" ]]; then
-        BAM_FLDR="$TAGGED_DEDUP_BAM_DIR"
-        PAR_DIR="$TAGGED_DEDUP_BAM_DIR"
-    fi
 else
     echo "Error: Invalid species or alignment type specified."
     exit 1
 fi
 
-FLAGSTAT_FLDR="$PAR_DIR/flagstat_results"
-OUTPUT_FILE="$FLAGSTAT_FLDR/${1#-}_flagstat_${2#-}_align_summary.txt"
-
+if [[ "$2" == "-raw" ]]; then
+    BAM_FLDR="$RESULTS_DIR"/aligned_bams/bams
+    FLAGSTAT_FLDR="$RESULTS_DIR"/aligned_bams/flagstat_results
+elif [[ "$2" == "-dedup" && "$3" == "-r" ]]; then
+    BAM_FLDR="$RESULTS_DIR"/dedup_bams/removed/bams
+    FLAGSTAT_FLDR="$RESULTS_DIR"/dedup_bams/removed/flagstat_results
+elif [[ "$2" == "-dedup" && "$3" == "-m" ]]; then
+    BAM_FLDR="$RESULTS_DIR"/dedup_bams/marked/bams
+    FLAGSTAT_FLDR="$RESULTS_DIR"/dedup_bams/marked/flagstat_results
+else
+    echo "Error: Invalid duplication or deduplication type specified."
+    exit 1
+fi
 mkdir -p "$FLAGSTAT_FLDR"
 
-echo "Running ${2#-} for: ${1#-} in folder $(basename "$BAM_FLDR")"
+# Define output file
+OUTPUT_FILE="$FLAGSTAT_FLDR/${1#-}_flagstat_${2#-}_${3#-}_align_summary.txt"
+
+echo "Running ${2#-} ${3#-} flagstat for: ${1#-} in folder $(basename "$BAM_FLDR")"
 echo "---------------------------------------------------------------------------------"
 
-# Define output file
-
+# Define input file
 BAM_FILES=("${BAM_FLDR}"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 name=$(basename "$BAM_FILE")

@@ -259,7 +259,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 11/08/25
 - added loop over the "marked" "removed" subfolder names to create those folders easier to the "shared_config_2.sh" file
-
+- downloaded SEACR from the github and added it to deeptools environment
+- 
 
 
 Next:
