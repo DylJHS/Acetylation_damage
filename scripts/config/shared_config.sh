@@ -25,8 +25,8 @@ HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
 TAGGED_ALIGN_DIR="$RES_DIR/tagged_alignments"
 
 # Original alignment folders
-DROS_ALIGN_BOWTIE_DIR="$DROS_ALIGN_DIR/bowtie2_alignments"
-HUMAN_ALIGN_BOWTIE_DIR="$HUMAN_ALIGN_DIR/bowtie2_alignments"
+DROS_ALIGNMENT_DIR="$DROS_ALIGN_DIR/aligned_bams"
+HUMAN_ALIGNMENT_DIR="$HUMAN_ALIGN_DIR/aligned_bams"
 TAGGED_ALIGNMENT_DIR="$TAGGED_ALIGN_DIR/aligned_bams"
 
 # Deduplicated alignment folders

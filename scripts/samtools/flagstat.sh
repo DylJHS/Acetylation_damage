@@ -41,7 +41,7 @@ elif [[ "$1" == "-tagged" ]]; then
     if [[ "$2" == "-bowtie" ]]; then
         BAM_FLDR="$RESULTS_DIR"
         PAR_DIR="$TAGGED_ALIGNMENT_DIR"
-    elif [[ "$2" == "-dedup" ]]; then
+    elif [[ "$2" == "-dedup -r" ]]; then
         BAM_FLDR="$TAGGED_DEDUP_BAM_DIR"
         PAR_DIR="$TAGGED_DEDUP_BAM_DIR"
     fi
