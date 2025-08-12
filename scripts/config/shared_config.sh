@@ -1,4 +1,5 @@
 #!/bin/bash
+echo -e "initiliasing the shared config file ""shared_config_2.sh"" \n"
 
 # Project root
 PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage"
@@ -19,60 +20,57 @@ TEMP_DIR="$RES_DIR/temp"
 # BLAST folders
 BLAST_DIR="$RES_DIR/BLAST_results"
 
-# Alignment folders
-DROS_ALIGN_DIR="$RES_DIR/fly_alignments"
-HUMAN_ALIGN_DIR="$RES_DIR/human_alignments"
-TAGGED_ALIGN_DIR="$RES_DIR/tagged_alignments"
+for alignment_type in "DROS" "HUMAN" "TAGGED"; do
+    if [[ "$alignment_type" == "DROS" ]]; then
+        alignment_type_tag="drosophila"
+    elif [[ "$alignment_type" == "HUMAN" ]]; then
+        alignment_type_tag="human"
+    else
+        alignment_type_tag="tagged"
+    fi
 
-# Original alignment folders
-DROS_ALIGNMENT_DIR="$DROS_ALIGN_DIR/aligned_bams"
-HUMAN_ALIGNMENT_DIR="$HUMAN_ALIGN_DIR/aligned_bams"
-TAGGED_ALIGNMENT_DIR="$TAGGED_ALIGN_DIR/aligned_bams"
+    # Alignment folders
+    eval "${alignment_type}_ALIGNMENT_DIR=\"\${RES_DIR}/${alignment_type_tag}_alignments\""
 
-# Deduplicated alignment folders
-DROS_DEDUP_DIR="$DROS_ALIGN_DIR/deduped_alignments"
-HUMAN_DEDUP_DIR="$HUMAN_ALIGN_DIR/deduped_alignments"
-TAGGED_DEDUP_DIR="$TAGGED_ALIGN_DIR/deduped_alignments"
+    # Original alignment folders
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/aligned_bams\""
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR_BAMS=\"\${${alignment_type}_RAW_ALIGNMENT_DIR}/bams\""
 
-# Deduplicated alignment bam folders
-DROS_DEDUP_BAM_DIR="$DROS_DEDUP_DIR/bams"
-HUMAN_DEDUP_BAM_DIR="$HUMAN_DEDUP_DIR/bams"
-TAGGED_DEDUP_BAM_DIR="$TAGGED_DEDUP_DIR/bams"
+    # Deduplicated alignment folders
+    eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/deduped_alignments\""
 
-# Removed deduplicated alignment bam folders
-DROS_DEDUP_REM_BAMS="$DROS_DEDUP_BAM_DIR/removed"
-HUMAN_DEDUP_REM_BAMS="$HUMAN_DEDUP_BAM_DIR/removed"
-TAGGED_DEDUP_REM_BAMS="$TAGGED_DEDUP_BAM_DIR/removed"
+    # Create the main alignment folders
+    eval "mkdir -p \
+        \${${alignment_type}_ALIGNMENT_DIR} \
+        \${${alignment_type}_RAW_ALIGNMENT_DIR} \
+        \${${alignment_type}_RAW_ALIGNMENT_DIR_BAMS} \
+        \${${alignment_type}_DEDUP_DIR}"
 
-# Marked deduplicated alignment bam folders
-DROS_DEDUP_MARK_BAMS="$DROS_DEDUP_BAM_DIR/marked"
-HUMAN_DEDUP_MARK_BAMS="$HUMAN_DEDUP_BAM_DIR/marked"
-TAGGED_DEDUP_MARK_BAMS="$TAGGED_DEDUP_BAM_DIR/marked"
+    for dedup_type in "REM" "MARK"; do
+        if [[ "$dedup_type" == "REM" ]]; then
+            dedup_type_tag="removed"
+        else
+            dedup_type_tag="marked"
+        fi
 
-# Deduplicated alignment stats
-DROS_DEDUP_STATS="$DROS_DEDUP_DIR/deduped_stats"
-HUMAN_DEDUP_STATS="$HUMAN_DEDUP_DIR/deduped_stats"
-TAGGED_DEDUP_STATS="$TAGGED_DEDUP_DIR/deduped_stats"
+        # Dedup subfolder base
+        eval "${alignment_type}_DEDUP_${dedup_type}_DIR=\"\${${alignment_type}_DEDUP_DIR}/${dedup_type_tag}\""
 
-# Removed deduplicated alignment stats
-DROS_DEDUP_STATS_REM="$DROS_DEDUP_STATS/removed"
-HUMAN_DEDUP_STATS_REM="$HUMAN_DEDUP_STATS/removed"
-TAGGED_DEDUP_STATS_REM="$TAGGED_DEDUP_STATS/removed"
+        # Define subfolders within each dedup mode
+        eval "${alignment_type}_DEDUP_${dedup_type}_BAMS=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bams\""
+        eval "${alignment_type}_DEDUP_STATS_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/deduped_stats\""
+        eval "${alignment_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bigwig\""
+        eval "${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bedgraph\""
 
-# Marked deduplicated alignment stats
-DROS_DEDUP_STATS_MARK="$DROS_DEDUP_STATS/marked"
-HUMAN_DEDUP_STATS_MARK="$HUMAN_DEDUP_STATS/marked"
-TAGGED_DEDUP_STATS_MARK="$TAGGED_DEDUP_STATS/marked"
+        # Create the folders
+        eval "mkdir -p \
+            \${${alignment_type}_DEDUP_${dedup_type}_BAMS} \
+            \${${alignment_type}_DEDUP_STATS_${dedup_type}} \
+            \${${alignment_type}_DEDUP_BIGWIG_${dedup_type}} \
+            \${${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}}"
 
-# Deduplicated alignment bigwigs
-DROS_DEDUP_BIGWIG="$DROS_DEDUP_DIR/bigwig"
-HUMAN_DEDUP_BIGWIG="$HUMAN_DEDUP_DIR/bigwig"
-TAGGED_DEDUP_BIGWIG="$TAGGED_DEDUP_DIR/bigwig"
-
-# Deduplicated alignment bedgraphs
-DROS_DEDUP_BEDGRAPH="$DROS_DEDUP_DIR/bedgraph"
-HUMAN_DEDUP_BEDGRAPH="$HUMAN_DEDUP_DIR/bedgraph"
-TAGGED_DEDUP_BEDGRAPH="$TAGGED_DEDUP_DIR/bedgraph"
+    done
+done
 
 # Reference genomes
 HUMAN_REF="$REF_DIR/human"
@@ -81,20 +79,6 @@ DROS_REF="$REF_DIR/drosophila"
 DROS_GEN_FA="$DROS_REF/dmel-all-chromosome-current.fasta.gz"
 DROS_INDEX="$DROS_REF/dmel_index"
 HUMAN_INDEX="$HUMAN_REF/human_index"
-
-# Create necessary directories
-mkdir -p "$FASTA_DIR" "$BLAST_DIR/human" "$BLAST_DIR/drosophila" \
-    "$TRIMMED_MERG_DIR" "$TRIMMED_DIR" "$DROS_ALIGN_DIR" \
-    "$HUMAN_ALIGN_DIR" "$TEMP_DIR" "$DROS_DEDUP_DIR" \
-    "$HUMAN_DEDUP_DIR" "$DROS_DEDUP_STATS" "$HUMAN_DEDUP_STATS" \
-    "$TAGGED_ALIGN_DIR" "$TAGGED_DEDUP_DIR" "$TAGGED_DEDUP_STATS" \
-    "$DROS_DEDUP_BIGWIG" "$HUMAN_DEDUP_BIGWIG" "$TAGGED_DEDUP_BIGWIG" \
-    "$DROS_DEDUP_BEDGRAPH" "$HUMAN_DEDUP_BEDGRAPH" "$TAGGED_DEDUP_BEDGRAPH" \
-    "$DROS_DEDUP_BAM_DIR" "$HUMAN_DEDUP_BAM_DIR" "$TAGGED_DEDUP_BAM_DIR" \
-    "$DROS_DEDUP_REM_BAMS" "$HUMAN_DEDUP_REM_BAMS" "$TAGGED_DEDUP_REM_BAMS" \
-    "$DROS_DEDUP_STATS_REM" "$HUMAN_DEDUP_STATS_REM" "$TAGGED_DEDUP_STATS_REM" \
-    "$DROS_DEDUP_MARK_BAMS" "$HUMAN_DEDUP_MARK_BAMS" "$TAGGED_DEDUP_MARK_BAMS" \
-    "$DROS_DEDUP_STATS_MARK" "$HUMAN_DEDUP_STATS_MARK" "$TAGGED_DEDUP_STATS_MARK"
 
 # BLAST read subsample #
 SAMPLE_SIZE=5000

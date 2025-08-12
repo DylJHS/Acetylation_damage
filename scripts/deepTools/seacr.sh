@@ -39,20 +39,29 @@ else
     exit 1
 fi
 
+echo "running the on the files in folder: $FRAG_BEDS"
+echo "---------------------------------------------------------------------------------"
+
 # Create the output folder
 SEACR_RES_DIR="$FRAG_BEDS/../seacr_results"
 mkdir -p "$SEACR_RES_DIR"
 
 # Set the fragment for the current job
 fragments=("${FRAG_BEDS}"/*.fragments.bedgraph)
-fragment="${fragments[$SLURM_ARRAY_TASK_ID]}"
+if [[ ${#fragments[@]} -eq 0 ]]; then
+    echo "No .fragments.bedgraph files found in: $FRAG_BEDS"
+    exit 1
+else
+    fragment="${fragments[$SLURM_ARRAY_TASK_ID]}"
+fi
 
-output_prefix="${SEACR_RES_DIR}/(basename "$fragment" .fragments.bedgraph)_"
+output_prefix="${SEACR_RES_DIR}/$(basename "$fragment" .fragments.bedgraph)_"
 
 
 # Run the SEACR analysis
-echo "Runnign the SEACR analysis using frament: $fragment"
+echo "Runnign the SEACR analysis using fragment: $fragment"
 echo "---------------------------------------------------------------------------------"
 SEACR_1.3.sh $fragment 0.05 non stringent output_prefix
+echo "---------------------------------------------------------------------------------"
 echo "Finished running the SEACR analysis" 
 echo "---------------------------------------------------------------------------------"

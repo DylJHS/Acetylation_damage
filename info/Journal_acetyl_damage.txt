@@ -262,6 +262,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - downloaded SEACR from the github and added it to deeptools environment
 - rerunning the flagstat script for the marked deduplicated tagged bam files
 
+12/08/25
+- Running SEACR on the removed deduplicated tagged bam files
 
 Next:
 - Need to look run the SEACR on each sample individually to assess the peaks that show up 
