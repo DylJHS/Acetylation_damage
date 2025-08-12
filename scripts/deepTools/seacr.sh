@@ -11,7 +11,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load the workflow configuration
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/deeptools_env_config.sh
 
 echo "---------------------------------------------------------------------------------"
 echo "Starting SEACR script for $SLURM_ARRAY_TASK_ID"
@@ -54,5 +54,5 @@ output_prefix="${SEACR_RES_DIR}/(basename "$fragment" .fragments.bedgraph)_"
 echo "Runnign the SEACR analysis using frament: $fragment"
 echo "---------------------------------------------------------------------------------"
 SEACR_1.3.sh $fragment 0.05 non stringent output_prefix
-eccho "Finished running the SEACR analysis" 
+echo "Finished running the SEACR analysis" 
 echo "---------------------------------------------------------------------------------"
