@@ -45,11 +45,19 @@ fi
 # Get the bam and the bed peak file
 BAM_FILES=("${BAM_FLDR}"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
-base_name=$(basename "$BAM_FILE" .bam)
+if [[ "$2" == "-r" ]]; then 
+    base_name=$(basename "$BAM_FILE" -r.bam)
+else 
+    base_name=$(basename "$BAM_FILE" .bam)
+fi
+
 peak_file="${FRAG_BEDS}/${base_name}.fragments.bedgraph"
 
+echo -e "trying to find the peak file: \n$peak_file \n and the bam file: \n$BAM_FILE"
+echo "-------------------------------------------------------------------------------"
+
 # Create the output file
-frip_file="${FRAG_BEDS}/../bedgraph/${base_name}_frip.bed"
+frip_file="${FRAG_BEDS}/../bedgraph/${base_name}_frip.txt"
 
 # Check that they both exist
 if [[ ! -e "$BAM_FILE" || ! -e "$peak_file" ]]; then
@@ -58,8 +66,11 @@ if [[ ! -e "$BAM_FILE" || ! -e "$peak_file" ]]; then
 fi
 
 # Run bedtools intersect 
-echo "Running bedtools intersect for $BAM_FILE and $peak_file"
+echo -e "Running bedtools intersect for: \n$BAM_FILE \nand with peak file: \n$peak_file"
 echo "------------------------------------------------------------------------------"
 
+bedtools intersect -a "$BAM_FILE" -b "$peak_file" -c > "$frip_file"
+echo "Finished running bedtools intersect" 
+echo "------------------------------------------------------------------------------"
 
-
+# Calculate FRIP

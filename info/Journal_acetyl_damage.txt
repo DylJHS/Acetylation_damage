@@ -264,6 +264,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 12/08/25
 - Running SEACR on the removed deduplicated tagged bam files
+- Created the frip script but still missing the output files generation correctly
 
 Next:
 - Need to look run the SEACR on each sample individually to assess the peaks that show up 
