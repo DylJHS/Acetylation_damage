@@ -1,4 +1,5 @@
 #!/bin/bash
+echo -e "initiliasing the shared config file ""shared_config_2.sh"" \n"
 
 # Project root
 PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage"
@@ -20,7 +21,6 @@ TEMP_DIR="$RES_DIR/temp"
 BLAST_DIR="$RES_DIR/BLAST_results"
 
 for alignment_type in "DROS" "HUMAN" "TAGGED"; do
-    echo "creating the alignment type folder"
     if [[ "$alignment_type" == "DROS" ]]; then
         alignment_type_tag="drosophila"
     elif [[ "$alignment_type" == "HUMAN" ]]; then
