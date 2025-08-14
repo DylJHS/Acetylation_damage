@@ -57,7 +57,7 @@ echo -e "trying to find the peak file: \n$peak_file \n and the bam file: \n$BAM_
 echo "-------------------------------------------------------------------------------"
 
 # Create the output file
-frip_file="${FRAG_BEDS}/../bedgraph/${base_name}_frip.txt"
+peaks_in="${FRAG_BEDS}/../bedgraph/${base_name}_frip.txt"
 
 # Check that they both exist
 if [[ ! -e "$BAM_FILE" || ! -e "$peak_file" ]]; then
@@ -65,12 +65,20 @@ if [[ ! -e "$BAM_FILE" || ! -e "$peak_file" ]]; then
     exit 1
 fi
 
-# Run bedtools intersect 
-echo -e "Running bedtools intersect for: \n$BAM_FILE \nand with peak file: \n$peak_file"
+# convert the paired end bam to bed in bedpe format
+echo "Conversion of the BAM file to BED format" 
 echo "------------------------------------------------------------------------------"
+bedtools bamtobed -i "$BAM_FILE" -bedpe | \
+awk '$1==$4 {
+    s = ()}
 
-bedtools intersect -a "$BAM_FILE" -b "$peak_file" -c > "$frip_file"
-echo "Finished running bedtools intersect" 
-echo "------------------------------------------------------------------------------"
+
+# # Run bedtools intersect 
+# echo -e "Running bedtools intersect for: \n$BAM_FILE \nand with peak file: \n$peak_file"
+# echo "------------------------------------------------------------------------------"
+
+# bedtools intersect -a "$BAM_FILE" -b "$peak_file" -bed > "$peaks_in"
+# echo "Finished running bedtools intersect" 
+# echo "------------------------------------------------------------------------------"
 
 # Calculate FRIP

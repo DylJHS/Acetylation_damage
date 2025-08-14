@@ -58,7 +58,7 @@ fi
 output_prefix="${SEACR_RES_DIR}/$(basename "$fragment" .fragments.bedgraph)_"
 
 
-# Run the SEACR analysis
+# Run the SEACR analysis with settigns of non relaxed and 0.05 FDR
 echo "Running the SEACR analysis using fragment: $(basename "$fragment" .fragments.bedgraph)"
 echo "---------------------------------------------------------------------------------"
 SEACR_1.3.sh $fragment 0.05 non relaxed $output_prefix
