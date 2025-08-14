@@ -268,7 +268,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 14/08/25
 - Going to try to run the nf-cutandrun pipeline first and then see if individual sections of the pipeline need to be refined based on our experimental setup
-
+- Merging the fastq files before trimming (creating new concat script concat_fastq.sh)
 
 Next:
 - Need to look run the SEACR on each sample individually to assess the peaks that show up 
