@@ -5,11 +5,9 @@ echo -e "initiliasing the shared config file ""shared_config_2.sh"" \n"
 PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage"
 
 # Data
-DATA_DIR="$PROJ_DIR/data/SCC-bulkChIC-2"
-FASTA_DIR="$DATA_DIR/FASTA_subsets"
-REF_DIR="$PROJ_DIR/data/ref_genomes"
-TRIMMED_MERG_DIR="$DATA_DIR/trimmed_merged_fastq"
-TRIMMED_DIR="$DATA_DIR/trimmed_lane_fastq"
+DATA_DIR="$PROJ_DIR/data"
+REF_DIR="$DATA_DIR/ref_genomes"
+
 
 # Results
 RES_DIR="$PROJ_DIR/results" # Main results folder
