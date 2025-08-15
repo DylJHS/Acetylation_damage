@@ -3,7 +3,7 @@ library(dplyr)
 library(stats)
 
 # import the txt file and convert to data frame
-data <- read.delim("fly_acetylation_damage/push_results/integration_counts.txt", header = FALSE)
+data <- read.delim("Dros_H3K9ac_bulkChIC_Analysis/push_results/integration_counts.txt", header = FALSE)
 
 col_names <- (c(
   "sample", "total_reads", "chr", 

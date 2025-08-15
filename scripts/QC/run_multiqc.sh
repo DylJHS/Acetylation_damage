@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=run_multiqc
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/run_multiqc-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/run_multiqc-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/run_multiqc-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/run_multiqc-%j.err
 #SBATCH --time=18:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
@@ -10,7 +10,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load configuration (defines $DATA_DIR , etc.)
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/genomics_env_config.sh
 
 # ARGUMENTS
 # if the first argument is "human", use the human alignments directory

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=cutandrun
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/cutandrun-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/cutandrun-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/cutandrun-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/cutandrun-%j.err
 #SBATCH --time=48:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
@@ -10,11 +10,11 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load the workflow configuration
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/nf_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/nf_env_config.sh
 
 nextflow run nf-core/cutandrun \
-  --input /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/data/SEND-bulkChIC-UMC-JAN-003-008-2/cut_run_samplesheet.csv \
-  --outdir /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/drosophila_alignments \
+  --input /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/SEND-bulkChIC-UMC-JAN-003-008-2/cut_run_samplesheet.csv \
+  --outdir /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/drosophila_alignments \
   --genome BDGP6 \
   --use_control false \
   --seacr_peak_threshold 0.05 \

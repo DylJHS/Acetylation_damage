@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=flagstat
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/flagstat-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/flagstat-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/flagstat-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5  # Adjust based on the number of BAM files
@@ -11,7 +11,7 @@
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
 # Load the workflow configuration
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/genomics_env_config.sh
 
 echo "---------------------------------------------------------------------------------"
 echo "Starting flagstat alignment script for $SLURM_ARRAY_TASK_ID"

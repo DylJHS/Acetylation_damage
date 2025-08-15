@@ -5,4 +5,4 @@ source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/con
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/env_nf 
 
 # Load shared config
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/shared_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/shared_config.sh

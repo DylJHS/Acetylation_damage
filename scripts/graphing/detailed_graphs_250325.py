@@ -6,7 +6,7 @@ import numpy as np
 
 
 # Read the csv file
-df = pd.read_csv('/home/djhs/wsl_projects/fly_acetylation_damage/data/Detailed_Alignment_and_BLAST_Stats (1).csv')
+df = pd.read_csv('/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysisnalysis/data/Detailed_Alignment_and_BLAST_Stats (1).csv')
 
 # Print the details about the dataframe
 print(df.info())
@@ -43,7 +43,7 @@ df_combined = pd.concat([df_fly, df_human])
 print(df_combined, '\n')
 
 # Export the combined dataframe to a csv file
-df_combined.to_csv('/home/djhs/wsl_projects/fly_acetylation_damage/data/combined_alignment_stats.csv', index=False)
+df_combined.to_csv('/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysis/data/combined_alignment_stats.csv', index=False)
 
 # Modify the column names
 df_combined['Sample'] = df_combined['Sample'].apply(lambda x: ('-').join(x.split('-')[-2:]))
@@ -85,4 +85,4 @@ g.fig.subplots_adjust(top=0.9, wspace=0.1, hspace=0.3)
 g.fig.suptitle("Alignment Stats by Sample", fontsize=18, fontweight='bold')
 
 # Save the full figure
-# g.savefig('/home/djhs/wsl_projects/fly_acetylation_damage/figures/alignment_full_stats_faceted.png')
+# g.savefig('/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysis/figures/alignment_full_stats_faceted.png')

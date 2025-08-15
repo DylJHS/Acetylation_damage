@@ -1,4 +1,4 @@
-fly_acetylation_damage
+Dros_H3K9ac_bulkChIC_Analysis
 
 
 ## 1. Prepare Resources

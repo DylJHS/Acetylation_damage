@@ -64,7 +64,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 10/07/25
 - Downloaded the newly run data from SCC 
-- stored in: P:\Janssen\chet_repair\dhaynessimmons\raw_data\fly_acetylation_damage\SCC-bulkChIC-UMC-JULY.tar.gz
+- stored in: P:\Janssen\chet_repair\dhaynessimmons\raw_data\Dros_H3K9ac_bulkChIC_Analysis\SCC-bulkChIC-UMC-JULY.tar.gz
 
 11/07/25
 - Unzipping the folders in the Projects dir 
@@ -74,7 +74,7 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Need to check the data
 
 14/07/25
-- Going over the fly_acetylation_damage scripts and noticed that they need better descriptions and titles (comments are good though)
+- Going over the Dros_H3K9ac_bulkChIC_Analysis scripts and noticed that they need better descriptions and titles (comments are good though)
 - Looking first at the BLAST scripts since those are the ones that will be used first
 - Combing the BLAST scripts into a single bash script for the hpc server
 - The increase in the read depth means that more lanes were used instead of just one

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=bamtobed
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bamtobed-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bamtobed-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/bamtobed-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/bamtobed-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
@@ -11,7 +11,7 @@
 
 # Load Conda or module environment with samtools, bedtools, UCSC
 
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/deeptools_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/deeptools_env_config.sh
 
 # Parse species flag  (-human / -drosophila / -tagged)
 if   [[ "$1" == "-human" ]]; then

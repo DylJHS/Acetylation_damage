@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=bowtie2-align
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bowtie2-align-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/bowtie2-align-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/bowtie2-align-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/bowtie2-align-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5
@@ -13,7 +13,7 @@ echo "-----------------------------------------------------------------------"
 echo "Starting Bowtie2 alignment at $(date)"
 
 # Load configuration (defines $DATA_DIR , etc.)
-source /hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/scripts/config/genomics_env_config.sh
+source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/genomics_env_config.sh
 
 # Define the files and directories
 FILE_SET=("$TRIMMED_MERG_DIR"/*_merged_R1.fq.gz)

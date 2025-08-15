@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=integration_test
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/inter_test-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/logs/inter_test-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/inter_test-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/inter_test-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -14,7 +14,7 @@ source /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/etc/profile.d/con
 conda activate /hpc/shared/onco_janssen/dhaynessimmons/envs/miniconda3/envs/deeptools_env
 
 # Define the paths
-DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage/results/fly_alignments/tagged"
+DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/fly_alignments/tagged"
 
 # Define integration window (dm6 coordinates) 600bp wide window
 echo -e "2L\t22245250\t22245350\tint_site" > integration.bed

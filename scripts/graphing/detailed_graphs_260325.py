@@ -7,7 +7,7 @@ import datetime as dt
 
 
 # Read the csv file
-df = pd.read_csv('/home/djhs/wsl_projects/fly_acetylation_damage/data/tables/Detailed_Alignment_and_BLAST_Stats_with_mapping.csv')
+df = pd.read_csv('/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysis/data/tables/Detailed_Alignment_and_BLAST_Stats_with_mapping.csv')
 
 # Today's date
 today = dt.datetime.today().strftime('%Y-%m-%d')
@@ -71,7 +71,7 @@ print(
 )
 
 # Export the combined dataframe to a csv file
-# df_combined.to_csv('/home/djhs/wsl_projects/fly_acetylation_damage/data/combined_alignment_stats.csv', index=False)
+# df_combined.to_csv('/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysis/data/combined_alignment_stats.csv', index=False)
 
 # Modify the column names
 df_combined['Sample'] = df_combined['Sample'].apply(lambda x: ('-').join(x.split('-')[-2:]))
@@ -144,4 +144,4 @@ g.fig.suptitle("Alignment Stats by Sample", fontsize=18, fontweight='bold')
 plt.show()
 
 # Save the full figure
-g.savefig(f'/home/djhs/wsl_projects/fly_acetylation_damage/figures/alignment_full_stats_faceted_{today}.png')
+g.savefig(f'/home/djhs/wsl_projects/Dros_H3K9ac_bulkChIC_Analysis/figures/alignment_full_stats_faceted_{today}.png')

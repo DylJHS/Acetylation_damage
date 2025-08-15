@@ -2,7 +2,7 @@
 echo -e "initiliasing the shared config file ""shared_config_2.sh"" \n"
 
 # Project root
-PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/fly_acetylation_damage"
+PROJ_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis"
 
 # Data
 DATA_DIR="$PROJ_DIR/data"
