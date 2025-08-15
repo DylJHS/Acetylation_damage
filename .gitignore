@@ -2,20 +2,17 @@ data/
 figures/
 results/
 logs/
-<<<<<<< HEAD
 references/
+work/
 
 # Ignore files
 .gitignore
-=======
-
 
 #ignore other files
 .ignore
 *.err
 *.out
-
->>>>>>> f3c6a53098993ffab76628e49ebb536cc36cf45c
+*.nextflow*
 
 # Ignore image files
 *.jpg
