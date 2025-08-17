@@ -4,6 +4,7 @@ results/
 logs/
 references/
 work/
+containers/
 
 # Ignore files
 .gitignore

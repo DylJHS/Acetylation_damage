@@ -12,10 +12,30 @@
 # Load the workflow configuration
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/nf_env_config.sh
 
+# Put all Nextflow state under project space
+export NXF_HOME=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/.nextflow_home
+export NXF_WORK=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/work
+# (NXF_WORK is respected by newer Nextflow; also pass -work-dir as belt & braces)
+
+# Logs
+export NXF_LOG_FILE=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/nextflow-${SLURM_JOB_ID}.log
+
+# Containers: cover both Apptainer and Singularity names
+export APPTAINER_CACHEDIR=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/containers
+export APPTAINER_CACHE_DIR="$APPTAINER_CACHEDIR"
+export SINGULARITY_CACHEDIR="$APPTAINER_CACHEDIR"
+
+# Temp for everything that honours TMPDIR
+export TMP="$TEMP_DIR"
+export TEMP="$TEMP_DIR"
+
+# (Optional but helpful) Keep Java temp off $HOME as well
+export JAVA_TOOL_OPTIONS="-Djava.io.tmpdir=$TEMP_DIR"
+
 nextflow run nf-core/cutandrun \
-  --input /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/SEND-bulkChIC-UMC-JAN-003-008-2/cut_run_samplesheet.csv \
-  --outdir /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/drosophila_alignments \
-  --genome BDGP6 \
+  --input /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/SEND-bulkChIC-UMC-JAN-003-008-2/human_cut_run_samplesheet.csv \
+  --outdir /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/human_alignments \
+  --genome GRCh38 \
   --use_control false \
   --seacr_peak_threshold 0.05 \
   --seacr_norm non --seacr_stringent relaxed \

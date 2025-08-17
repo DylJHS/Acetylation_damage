@@ -5,7 +5,7 @@
 #SBATCH --time=18:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
+#SBATCH --mem=5G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -36,6 +36,8 @@ elif [[ "$1" == "-tagged" ]]; then
     elif [[ "$2" == "-dedup" ]]; then
         FOLDER="$TAGGED_DEDUP_DIR"  # Change to TAGGED_BAM_DEDUP_DIR for deduplicated tagged BAM files
     fi
+elif [[ "$1" == "-m" ]]; then
+    FOLDER="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/$2"  # Use the second argument as the folder path
 else
     echo "Usage: $0 -human|-drosophila [-bowtie|-dedup]"
     echo "Please specify either -human or -drosophila followed by -bowtie or -dedup if needed."
@@ -65,7 +67,7 @@ elif [[ "$2" == "-dedup" && "$3" == "-stats" ]]; then
 else
     echo "-----------------------------------------------------"
     echo "No FastQC analysis requested. Skipping FastQC step."
-    cd "$FOLDER/flagstat_results"
+    cd "$FOLDER"
 fi
 
 # run the multiqc command
