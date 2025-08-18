@@ -290,7 +290,13 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - since the SMCO tagged alignments have already been deduped removing the folders 
 - going back to using the tagged alignment files since i understand them better now
 - Rerunning several of the processes: 
-    - 
+    - checked the deduplication rates 
+    - generated the bigwig files
+    - peak calling with SEACR
+    - Generated the frip scores for each sample
+    - Generated the IGV snapshots at different window sizes
+    
+
 - Created the FRIP scoring script (frip.sh)
 - Ran the FRIP script for the tagged bam files to obtain the FRIP scores for each sample in the frip_results folder
 
