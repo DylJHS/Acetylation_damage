@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=seacr
-#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/seacr-%j.out
-#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/seacr-%j.err
+#SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/seacr/seacr/seacr-%j.out
+#SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/seacr/seacr-%j.err
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --array=0-5  # Adjust based on the number of BAM files
@@ -18,28 +18,9 @@ echo "Starting SEACR script for $SLURM_ARRAY_TASK_ID"
 echo "---------------------------------------------------------------------------------"
 
 # Define paths
-if [[ "$1" == "-drosophila" ]]; then
-    RESULTS_DIR="$DROS_ALIGNMENT_DIR"
-elif [[ "$1" == "-human" ]]; then
-    RESULTS_DIR="$HUMAN_ALIGNMENT_DIR"
-elif [[ "$1" == "-tagged" ]]; then
-    RESULTS_DIR="$TAGGED_ALIGNMENT_DIR"
-else
-    echo "Error: Invalid species or alignment type specified."
-    exit 1
-fi
+FRAG_BEDS="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/${1}"
 
-# Has to be run on deduped alignments
-if [[ "$2" == "-r" ]]; then
-    FRAG_BEDS="$RESULTS_DIR"/deduped_alignments/removed/fragments
-elif [[ "$2" == "-m" ]]; then
-    FRAG_BEDS="$RESULTS_DIR"/deduped_alignments/marked/fragments
-else
-    echo "Error: Invalid deduplication type specified."
-    exit 1
-fi
-
-echo "running the on the files in folder: $FRAG_BEDS"
+echo "running the analysis on the files in folder: $FRAG_BEDS"
 echo "---------------------------------------------------------------------------------"
 
 # Create the output folder

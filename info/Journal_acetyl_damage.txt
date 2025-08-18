@@ -288,6 +288,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - the tagged bams (SCMO produced) are of a higher alignmment rate
 - Reading up on the SCMO scripts that are run for the ChIC pipeline (snakemake chic and bamtagmultiome.py) 
 - since the SMCO tagged alignments have already been deduped removing the folders 
+- going back to using the tagged alignment files since i understand them better now
+- Rerunning several of the processes: 
+    - 
+- Created the FRIP scoring script (frip.sh)
+- Ran the FRIP script for the tagged bam files to obtain the FRIP scores for each sample in the frip_results folder
+
 
 
 
