@@ -2,7 +2,7 @@
 #SBATCH --job-name=cutandrun
 #SBATCH --output=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/cutandrun-%j.out
 #SBATCH --error=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/cutandrun-%j.err
-#SBATCH --time=48:00:00
+#SBATCH --time=92:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=100G

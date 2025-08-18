@@ -13,34 +13,26 @@
 # Load Conda environment
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/deeptools_env_config.sh
 
-# Get the arguments for species
-if [[ "$1" == "-human" ]]; then
-    DEDUP_PATH="$HUMAN_DEDUP_DIR"
-    my_genome="${HUMAN_REF}/human.genome"
-elif [[ "$1" == "-drosophila" ]]; then
-    DEDUP_PATH="$DROS_DEDUP_DIR"
-    my_genome="${DROS_REF}/drosophila.genome"
-elif [[ "$1" == "-tagged" ]]; then
-    DEDUP_PATH="$TAGGED_DEDUP_DIR"
-    my_genome="${DROS_REF}/drosophila.genome"
-else
-    echo "Error: Please specify 'human' or 'drosophila' as the first argument."
-    exit 1
+# Set directories based on the alignment type
+BAM_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/${1}"
+BAM_FILES=("$BAM_DIR"/*.bam)
+BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
+name=$(basename "$BAM_FILE" .bam)
+
+# Create the output folder
+OUTPUT_FLD="${BAM_DIR}/../fragments"
+mkdir -p $OUTPUT_FLD
+output_file="$OUTPUT_FLD/$name"
+
+# Determine the genome based on the alignment type
+if [[ "$BAM_DIR" == *drosophila* || "$BAM_DIR" == *tagged* ]]; then
+    my_genome=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/ref_genomes/drosophila/drosophila.genome
+elif [[ "$BAM_DIR" == *human* ]]; then 
+    my_genome=/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/ref_genomes/human/human.genome
 fi
 
 echo "Processing ${1#-} BAM files..."
 echo "-----------------------------------------------------------"
-
-# Get the list of the 
-BAM_LIST=("$DEDUP_PATH"/*.bam)
-BAM_FILE="${BAM_LIST[$SLURM_ARRAY_TASK_ID]}"
-name=$(basename "$BAM_FILE" .bam)
-
-# Create the output folder
-OUTPUT_FLD="${DEDUP_PATH}/fragments"
-mkdir -p $OUTPUT_FLD
-
-output_file="$OUTPUT_FLD/$name"
 
 echo "Generating the fragment coverage for $name"
 echo "-----------------------------------------------------------"

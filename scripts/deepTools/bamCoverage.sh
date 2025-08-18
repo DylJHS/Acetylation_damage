@@ -13,34 +13,23 @@
 # Load Conda environment
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/deeptools_env_config.sh
 
-# get the arguments for species
-if [[ "$1" == "-human" ]]; then
-    BAM_DIR="$HUMAN_DEDUP_DIR"
-    BED_DIR="$HUMAN_DEDUP_BEDGRAPH"
-    BIGWIG_DIR="$HUMAN_DEDUP_BIGWIG"
-    effectivegsize=2913022398
-elif [[ "$1" == "-drosophila" ]]; then
-    BAM_DIR="$DROS_DEDUP_DIR"
-    BED_DIR="$DROS_DEDUP_BEDGRAPH"
-    BIGWIG_DIR="$DROS_DEDUP_BIGWIG"
-    effectivegsize=142573017
-elif [[ "$1" == "-tagged" ]]; then
-    BAM_DIR="$TAGGED_ALIGNMENT_DIR"
-    BED_DIR="$TAGGED_DEDUP_BEDGRAPH"
-    BIGWIG_DIR="$TAGGED_DEDUP_BIGWIG"
-    effectivegsize=142573017
-else
-    echo "Error: Please specify 'human' or 'drosophila' as the first argument."
-    exit 1
-fi
-
+# Set directories based on the alignment type
+BAM_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/${2}"
 BAM_FILES=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 FILE_NAME=$(basename "${BAM_FILE}" ".bam")
 
-if [[ "$2" == "-bedgraph" ]]; then
+if [[ "$BAM_DIR" == *drosophila* || "$BAM_DIR" == *tagged* ]]; then
+    effectivegsize=142573017
+elif [[ "$BAM_DIR" == *human* ]]; then 
+    effectivegsize=2913022398
+fi
+
+if [[ "$1" == "-bedgraph" ]]; then
+    BED_DIR="${BAM_DIR}/../bed"
     OUTPUT_FILE="${BED_DIR}/${FILE_NAME}_coverage.bedgraph"
-elif [[ "$2" == "-bigwig" ]]; then
+elif [[ "$1" == "-bigwig" ]]; then
+    BIGWIG_DIR="${BAM_DIR}/../bigwig"
     OUTPUT_FILE="${BIGWIG_DIR}/${FILE_NAME}_coverage.bw"
 else
     echo "Error: Please specigy valid output format -bedgraph or -bigwig."
@@ -51,11 +40,13 @@ echo "Running bamCoverage for $FILE_NAME..."
 
 bamCoverage -b "$BAM_FILE" \
     --outFileName "$OUTPUT_FILE" \
-    --outFileFormat "${2#-}" \
-    --binSize 50 \
+    --outFileFormat "${1#-}" \
+    --binSize 25 \
     --normalizeUsing RPGC \
     --effectiveGenomeSize "${effectivegsize}" \
     --ignoreForNormalization chrX \
+    --ignoreDuplicates \
+    --centerReads \
     --extendReads
 
 echo "bamCoverage finished"

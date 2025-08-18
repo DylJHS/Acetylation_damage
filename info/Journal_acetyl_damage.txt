@@ -275,6 +275,21 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - the prior runs of the nf-cutandrun were not successful due to resource limits  
 - rerunning the nf-cutandrun pipeline
 
+16/08/25
+- Rerunning the nf-cutandrun with the human data 
+
+17/08/25
+- The bowtie2 alignment tasks take too long in the nf-core cutandrun pipeline 
+- Need to find a way to parallelise the alignment portion of the job
+
+18/08/25
+- looking at the results from the nf-cutandrun from the drosophila data
+- the alignments are very low (<2%)
+- the tagged bams (SCMO produced) are of a higher alignmment rate
+- Reading up on the SCMO scripts that are run for the ChIC pipeline (snakemake chic and bamtagmultiome.py) 
+- since the SMCO tagged alignments have already been deduped removing the folders 
+
+
 
 Next:
 - Need to look run the SEACR on each sample individually to assess the peaks that show up 

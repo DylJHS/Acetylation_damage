@@ -33,41 +33,45 @@ for alignment_type in "DROS" "HUMAN" "TAGGED"; do
     # Original alignment folders
     eval "${alignment_type}_RAW_ALIGNMENT_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/aligned_bams\""
     eval "${alignment_type}_RAW_ALIGNMENT_DIR_BAMS=\"\${${alignment_type}_RAW_ALIGNMENT_DIR}/bams\""
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR_BED=\"\${${alignment_type}_RAW_ALIGNMENT_DIR}/bed\""
+    eval "${alignment_type}_RAW_ALIGNMENT_DIR_BIGWIG=\"\${${alignment_type}_RAW_ALIGNMENT_DIR}/bigwig\""
 
-    # Deduplicated alignment folders
-    eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/deduped_alignments\""
+
+    # # Deduplicated alignment folders
+    # eval "${alignment_type}_DEDUP_DIR=\"\${${alignment_type}_ALIGNMENT_DIR}/deduped_alignments\""
 
     # Create the main alignment folders
     eval "mkdir -p \
         \${${alignment_type}_ALIGNMENT_DIR} \
         \${${alignment_type}_RAW_ALIGNMENT_DIR} \
         \${${alignment_type}_RAW_ALIGNMENT_DIR_BAMS} \
-        \${${alignment_type}_DEDUP_DIR}"
+        \${${alignment_type}_RAW_ALIGNMENT_DIR_BED} \
+        \${${alignment_type}_RAW_ALIGNMENT_DIR_BIGWIG}"
+    
+    # for dedup_type in "REM" "MARK"; do
+    #     if [[ "$dedup_type" == "REM" ]]; then
+    #         dedup_type_tag="removed"
+    #     else
+    #         dedup_type_tag="marked"
+    #     fi
 
-    for dedup_type in "REM" "MARK"; do
-        if [[ "$dedup_type" == "REM" ]]; then
-            dedup_type_tag="removed"
-        else
-            dedup_type_tag="marked"
-        fi
+    #     # Dedup subfolder base
+    #     eval "${alignment_type}_DEDUP_${dedup_type}_DIR=\"\${${alignment_type}_DEDUP_DIR}/${dedup_type_tag}\""
 
-        # Dedup subfolder base
-        eval "${alignment_type}_DEDUP_${dedup_type}_DIR=\"\${${alignment_type}_DEDUP_DIR}/${dedup_type_tag}\""
+    #     # Define subfolders within each dedup mode
+    #     eval "${alignment_type}_DEDUP_${dedup_type}_BAMS=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bams\""
+    #     eval "${alignment_type}_DEDUP_STATS_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/deduped_stats\""
+    #     eval "${alignment_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bigwig\""
+    #     eval "${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bedgraph\""
 
-        # Define subfolders within each dedup mode
-        eval "${alignment_type}_DEDUP_${dedup_type}_BAMS=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bams\""
-        eval "${alignment_type}_DEDUP_STATS_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/deduped_stats\""
-        eval "${alignment_type}_DEDUP_BIGWIG_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bigwig\""
-        eval "${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}=\"\${${alignment_type}_DEDUP_${dedup_type}_DIR}/bedgraph\""
+    #     # Create the folders
+    #     eval "mkdir -p \
+    #         \${${alignment_type}_DEDUP_${dedup_type}_BAMS} \
+    #         \${${alignment_type}_DEDUP_STATS_${dedup_type}} \
+    #         \${${alignment_type}_DEDUP_BIGWIG_${dedup_type}} \
+    #         \${${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}}"
 
-        # Create the folders
-        eval "mkdir -p \
-            \${${alignment_type}_DEDUP_${dedup_type}_BAMS} \
-            \${${alignment_type}_DEDUP_STATS_${dedup_type}} \
-            \${${alignment_type}_DEDUP_BIGWIG_${dedup_type}} \
-            \${${alignment_type}_DEDUP_BEDGRAPH_${dedup_type}}"
-
-    done
+    # done
 done
 
 # Reference genomes
