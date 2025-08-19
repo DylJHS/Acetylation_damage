@@ -12,10 +12,6 @@
 # Load the workflow configuration
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/deeptools_env_config.sh
 
-echo "---------------------------------------------------------------------------------"
-echo "Starting FRIP analysis script for $SLURM_ARRAY_TASK_ID"
-echo "---------------------------------------------------------------------------------"
-
 FOLDER="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/${1}"
 
 # Get the bam and the bed peak file
@@ -29,10 +25,13 @@ if [[ -f "$output_file" ]]; then
     rm "$output_file"
 fi
 
+# For each BAM file, we will compute the FRIP score
 for bam_file in "${BAM_FILES[@]}"; do
     echo "Processing BAM file: $bam_file"
     echo "-------------------------------------------------------------------------------"
     base_name=$(basename "$bam_file" .bam)
+
+    # Get the corresponding peak file for the BAM file
     peak_file="${SEACR_BEDS}/${base_name}_.relaxed.bed"
 
     TEMP="${TEMP_DIR}/${base_name}"
