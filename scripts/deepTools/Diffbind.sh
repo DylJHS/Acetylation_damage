@@ -17,4 +17,4 @@ echo "Running DiffBind analysis script ..."
 # Run the DiffBind analysis R script
 Rscript /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/deepTools/run_diffbind.R
 
-echo "DiffBind analysis completed successfully."
+echo "DiffBind analysis finished."

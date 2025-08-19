@@ -295,12 +295,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
     - peak calling with SEACR
     - Generated the frip scores for each sample
     - Generated the IGV snapshots at different window sizes
-    
-
 - Created the FRIP scoring script (frip.sh)
 - Ran the FRIP script for the tagged bam files to obtain the FRIP scores for each sample in the frip_results folder
 
-
+19/08/25
+- Writing the diffbinding script for the tagged bam files (run_diffbind.r & Diffbind.sh)
+- Running the diffbinding script for the tagged bam files
 
 
 Next:
