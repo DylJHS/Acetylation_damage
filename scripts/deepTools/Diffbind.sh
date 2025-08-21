@@ -15,6 +15,9 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Ana
 echo "Running DiffBind analysis script ..." 
 
 # Run the DiffBind analysis R script
-Rscript /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/deepTools/run_diffbind.R
-
+if [[ "$1" == "-cofactor" ]]; then
+    Rscript /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/deepTools/run_diffbind_cofactor.R
+else
+    Rscript /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/deepTools/run_diffbind.R
+fi
 echo "DiffBind analysis finished."

@@ -301,6 +301,13 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 19/08/25
 - Writing the diffbinding script for the tagged bam files (run_diffbind.r & Diffbind.sh)
 - Running the diffbinding script for the tagged bam files
+- Generated the diffbinding results for the tagged bam files
+- Showed: 
+    - Significant differentially bound (DB) sites (MA plot)
+    - Increase in the DBs in the DSB induced samples vs the control (volcano plot)
+    - Differentially bound sites are distinct in the DSB induced samples vs the control (heatmap)
+
+21/08/25
 
 
 Next:
