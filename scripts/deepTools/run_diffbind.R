@@ -4,11 +4,14 @@ suppressPackageStartupMessages({
   library(rtracklayer)
 })
 
-outdir <- "/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/tagged_alignments/aligned_bams/diffbind"
-dir.create(outdir, showWarnings = FALSE, recursive = TRUE)
+#load in the Arguments
+args <- commandArgs(trailingOnly=TRUE)
+outdir <- args[1]
+sample_sheet <- args[2]
+cofactor <- args[3]
 
 # 1) load
-dbaObj <- dba(sampleSheet = file.path("/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/data/inputs/diffbind_samplesheet_3.csv"))
+dbaObj <- dba(sampleSheet = sample_sheet)
 
 # 2) count reads in consensus peaks
 dbaObj <- dba.count(dbaObj, summits = 50)  #2x50bp standard window
@@ -19,11 +22,34 @@ rownames(libsizes) <- info$SampleID
 cat("\nLibrary sizes: \n")
 print(libsizes)
 
-# 3) model: ~ Conc + Condition 
-dbaObj <- dba.contrast(
-  dbaObj,
-  reorderMeta=list(Condition="Hsp")
+# 3) Normalise the data
+norm <- dba.normalize(dbaObj)
+cat("\nNormalised library sizes: \n")
+print(dba.show(dbaObj))
+
+normlibsizes <- cbind(
+  FullLibSize=norm$lib.sizes, 
+  NormFactor=norm$norm.factors, 
+  NormLibSize=round(norm$lib.sizes * norm$norm.factors)
 )
+rownames(normlibsizes) <- info$SampleID
+cat("\nNormalised library sizes: \n")
+print(normlibsizes)
+
+# 4) model: ~ cofactor + Condition 
+if (cofactor != "") {
+  design_formula <- paste("~", cofactor, "+ Condition", sep = "")
+  dbaObj <- dba.contrast(
+    dbaObj,
+    design =  design_formula
+    reorderMeta=list(Condition="Hsp")
+  )
+} else {
+  dbaObj <- dba.contrast(
+    dbaObj,
+    reorderMeta=list(Condition="Hsp")
+  )
+}
 
 cat("\nContrasts design: \n")
 print(dbaObj)
