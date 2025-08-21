@@ -292,9 +292,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Rerunning several of the processes: 
     - checked the deduplication rates 
     - generated the bigwig files
-    - peak calling with SEACR
+    - peak calling with SEACR (relaxed mode, 0,05 FDR, no control)
     - Generated the frip scores for each sample
     - Generated the IGV snapshots at different window sizes
+- For SEACR using the non-DSB control as a background in SEACR would incorrectly treat real H3K9ac signal as noise, suppressing true peaks and inflating false negatives.
 - Created the FRIP scoring script (frip.sh)
 - Ran the FRIP script for the tagged bam files to obtain the FRIP scores for each sample in the frip_results folder
 
@@ -308,14 +309,10 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
     - Differentially bound sites are distinct in the DSB induced samples vs the control (heatmap)
 
 21/08/25
+- Editted the diffbinding scripts (R and bash) to use flags for outdir, samplesheet and cofactor
 
 
 Next:
-- Need to look run the SEACR on each sample individually to assess the peaks that show up 
-- SEACR parameters to be used 
-    - peak threshold n=0.05 (top 5% of peaks)
--  Using the non-DSB control as a background in SEACR would incorrectly treat real H3K9ac signal as noise, suppressing true peaks and inflating false negatives.
-- run the fragment bedgraph generation script using the marked deduplicated tagged bam files
-- maybe run a diff binding analysis with DiffBind (control bam is optional)
+- Look at the differentially bound sites for the tagged bam files
 - need to re-align the fatqs using the new human ref genome
 - need to look at the DRwhite locus for deletions/insertions
