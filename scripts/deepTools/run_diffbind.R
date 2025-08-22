@@ -41,7 +41,7 @@ if (cofactor != "") {
   design_formula <- paste("~", cofactor, "+ Condition", sep = "")
   dbaObj <- dba.contrast(
     dbaObj,
-    design =  design_formula
+    design =  design_formula,
     reorderMeta=list(Condition="Hsp")
   )
 } else {

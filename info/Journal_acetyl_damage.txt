@@ -310,7 +310,8 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 
 21/08/25
 - Editted the diffbinding scripts (R and bash) to use flags for outdir, samplesheet and cofactor
-
+- Writing a R script to convert the bed files to a bigwig restricted to the significantly differentially expressed regions
+- Rerunning the diffbinding script for the tagged bam files since the last run failed
 
 Next:
 - Look at the differentially bound sites for the tagged bam files

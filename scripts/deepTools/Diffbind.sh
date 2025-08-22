@@ -5,7 +5,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=5G
+#SBATCH --mem=32G
 #SBATCH --mail-type=all
 #SBATCH --mail-user=d.j.haynes-simmons@umcutrecht.nl
 
@@ -60,7 +60,7 @@ echo "Cofactor: $cofactor"
 echo "-------------------------------------------------------"
 
 # Run DiffBind
-R script /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/deepTools/run_diffbind.R \
+Rscript "${PROJ_DIR}"/scripts/deepTools/run_diffbind.R \
     "$outdir" \
     "$sample_sheet" \
     "$cofactor"
