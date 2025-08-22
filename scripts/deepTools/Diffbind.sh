@@ -23,15 +23,16 @@ echo "Job number: $job_num"
 sample_sheet="${PROJ_DIR}/data/inputs/diffbind_samplesheet_3.csv"
 cofactor=""
 summit=50
-folder_name="diffbind_$(date +%Y%m%d_%H%M%S)_${job_num}_summit${summit}_${cofactor}"
-outdir="${PROJ_DIR}/results/${folder_name}"
+folder_name="diffbind_$(date +%Y%m%d)_job${job_num}"
+outdir="${PROJ_DIR}/results/tagged_alignments/aligned_bams/diffbind/${folder_name}"
 mkdir -p "$outdir"
 
 # parse the args
 while [[ $# -gt 0 ]]; do
   case $1 in
     -o|--outdir)
-        outdir="${PROJ_DIR}/results/$2"
+        outdir="${PROJ_DIR}/results/$2/diffbind/${folder_name}"
+        mkdir -p "$outdir"
         shift 2
         ;;
     -s|--sample-sheet)
@@ -69,6 +70,7 @@ done
 echo "Output directory: $outdir"
 echo "Sample sheet: $sample_sheet"
 echo "Cofactor: $cofactor"
+echo "Summit size: $summit"
 echo "-------------------------------------------------------"
 
 # Run DiffBind

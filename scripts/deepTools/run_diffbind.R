@@ -15,7 +15,7 @@ summit <- args[4]
 dbaObj <- dba(sampleSheet = sample_sheet)
 
 # 2) count reads in consensus peaks
-dbaObj <- dba.count(dbaObj, summits = summit)  #2x50bp default window 
+dbaObj <- dba.count(dbaObj, summits = as.integer(summit))  #2x50bp default window 
 
 info <- dba.show(dbaObj)
 libsizes <- cbind(LibReads=info$Reads, FRIP=info$FRiP, PeakReads=round(info$Reads * info$FRiP))
