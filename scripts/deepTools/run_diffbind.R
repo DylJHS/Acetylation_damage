@@ -59,7 +59,8 @@ dbaObj <- dba.analyze(dbaObj, method = DBA_DESEQ2)
 
 # 5) report Condition effect (Hsp vs C)
 res <- dba.report(dbaObj, method = DBA_DESEQ2, th = 0.05, bCalled = TRUE)
-tbl <- as.data.frame(res)
+tbl <- as.data.frame(res) 
+tbl <- tbl[order(tbl$seqnames, tbl$start),]
 write.csv(tbl, file.path(outdir, "diffbind_Hsp_vs_C.csv"), row.names = FALSE)
 cat("\nSignificant peaks (FDR <= 0.05):\n")
 print(tbl)
