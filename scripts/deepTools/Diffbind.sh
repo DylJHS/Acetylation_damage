@@ -15,10 +15,17 @@ source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Ana
 echo "Running DiffBind analysis script ..." 
 echo "-------------------------------------------------------"
 
+# Get job number
+job_num=$SLURM_JOB_ID
+echo "Job number: $job_num"
+
 # Set defaut args
-outdir="${PROJ_DIR}/results/tagged_alignments/aligned_bams/diffbind"
 sample_sheet="${PROJ_DIR}/data/inputs/diffbind_samplesheet_3.csv"
 cofactor=""
+summit=50
+folder_name="diffbind_$(date +%Y%m%d_%H%M%S)_${job_num}_summit${summit}_${cofactor}"
+outdir="${PROJ_DIR}/results/${folder_name}"
+mkdir -p "$outdir"
 
 # parse the args
 while [[ $# -gt 0 ]]; do
@@ -35,11 +42,16 @@ while [[ $# -gt 0 ]]; do
         cofactor="$2"
         shift 2
         ;;
+    -p|--summits)
+        summit="$2"
+        shift 2
+        ;;
     -h|--help|--?)
         echo "Valid argumetns are:"
         echo "-o|--outdir <output directory> (default: ${outdir})"
         echo "-s|--sample-sheet <sample sheet> (default: ${sample_sheet})"
         echo "-c|--cofactor <cofactor> (default: ${cofactor})"
+        echo "-p|--summits <summit size> (default: ${summit})"
         exit 1
         ;;
     --)
@@ -63,7 +75,8 @@ echo "-------------------------------------------------------"
 Rscript "${PROJ_DIR}"/scripts/deepTools/run_diffbind.R \
     "$outdir" \
     "$sample_sheet" \
-    "$cofactor"
+    "$cofactor" \
+    "$summit" 
 
 # Check if the DiffBind script ran successfully
 if [[ $? -ne 0 ]]; then

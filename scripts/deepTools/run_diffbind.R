@@ -9,12 +9,13 @@ args <- commandArgs(trailingOnly=TRUE)
 outdir <- args[1]
 sample_sheet <- args[2]
 cofactor <- args[3]
+summit <- args[4]
 
 # 1) load
 dbaObj <- dba(sampleSheet = sample_sheet)
 
 # 2) count reads in consensus peaks
-dbaObj <- dba.count(dbaObj, summits = 50)  #2x50bp standard window
+dbaObj <- dba.count(dbaObj, summits = summit)  #2x50bp default window 
 
 info <- dba.show(dbaObj)
 libsizes <- cbind(LibReads=info$Reads, FRIP=info$FRiP, PeakReads=round(info$Reads * info$FRiP))

@@ -313,10 +313,12 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Writing a R script to convert the bed files to a bigwig restricted to the significantly differentially expressed regions
 - Rerunning the diffbinding script for the tagged bam files since the last run failed
 - Creating the bigwigs from the fragment bed files and restricting based on the diffbinding regions may not be best approach
-- Thinking of restricting the regions not on the bedgraph files but on bigwig files generated from the original bam files   
+- Creating a Diffbind results bed file and then comparing the regions identified in it to original bam derived bigwigs
+- Need to recreate the bigwigs
+- Rerunning the diffbinding script for the tagged bam files with increased summits parameter (summit = 100 => 200bp window & summits = 250 => 500bp window)
 
 Next:
-- Restrict the origianl bam generated bigwigs to the diffbinding regions
+- Need to recreate the bigwigs for the tagged bam files
 - might be useful to try different 'summits' settings for the diffbinding script to extend the consensus peaks
 
 - Look at the differentially bound sites for the tagged bam files
