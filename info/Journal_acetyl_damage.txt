@@ -314,12 +314,18 @@ The data strongly indicates contamination of the Drosophila sequencing samples w
 - Rerunning the diffbinding script for the tagged bam files since the last run failed
 - Creating the bigwigs from the fragment bed files and restricting based on the diffbinding regions may not be best approach
 - Creating a Diffbind results bed file and then comparing the regions identified in it to original bam derived bigwigs
-- Need to recreate the bigwigs
+- Need to recreate the original bam derived bigwigs
 - Rerunning the diffbinding script for the tagged bam files with increased summits parameter (summit = 100 => 200bp window & summits = 250 => 500bp window)
 
+25/08/25
+- Reran the generation fo the bigwig files for the tagged bam files
+- looked at them in IGV while displaying the bed track (Diffbind_DB_sites.bed) for the diffbinding regions (DB pval<0.05)
+- The regions do not say anything about the directtion of the difference (increase or decrease in H3K9ac in the DSB induced samples vs the control)
+- downloaded the WigToBigWig and WiggleTools
+-
+
 Next:
-- Need to recreate the bigwigs for the tagged bam files
-- might be useful to try different 'summits' settings for the diffbinding script to extend the consensus peaks
+- Need to generate the log diff coverage track between the mean of the DSB and Control samples using WiggleTools (mean) and WigToBigWig
 
 - Look at the differentially bound sites for the tagged bam files
 - need to re-align the fatqs using the new human ref genome

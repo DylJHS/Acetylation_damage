@@ -14,7 +14,7 @@
 source /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/scripts/config/deeptools_env_config.sh
 
 # Set directories based on the alignment type
-BAM_DIR="/hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/results/${2}"
+BAM_DIR="${TAGGED_RAW_ALIGNMENT_DIR_BAMS}"
 BAM_FILES=("$BAM_DIR"/*.bam)
 BAM_FILE="${BAM_FILES[$SLURM_ARRAY_TASK_ID]}"
 FILE_NAME=$(basename "${BAM_FILE}" ".bam")

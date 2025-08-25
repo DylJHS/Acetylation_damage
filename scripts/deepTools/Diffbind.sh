@@ -85,6 +85,8 @@ if [[ $? -ne 0 ]]; then
     echo "DiffBind analysis failed. Please check the logs for details."
     exit 1
 else
+    # copy the log file to the output directory
+    cp /hpc/shared/onco_janssen/dhaynessimmons/projects/Dros_H3K9ac_bulkChIC_Analysis/logs/diffbind-%j.out "${outdir}/diffbind.log"
     echo "DiffBind analysis completed successfully."
 fi
 
